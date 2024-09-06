@@ -1,0 +1,21 @@
+# TO DO
+
+## Chapitre 1 : Simulateur de traffic
+
+- [x] Documentation
+- [x] Définir un cas d'étude
+- [x] Définir quels sont les élements constitutifs d'une route
+- [x] Définir comment on modélisera notre simulateur
+- [x] Ecrire un résumé pour expliquer nos hypothéses et notre modèle
+- [ ] Traduire nos cas d'étude en code
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] Modifier les schémas pour avoir 100 m de chaque coté
+- [ ] Détailler le résumer pour que tout le monde comprennent
+ 
+## Chapitre 2 : Interface grafique
+
+## Chapitre 3 : Paramétrage des élements de la route pour optimisation 
+
+## Chapitre 4 : Déploiement de la solution
