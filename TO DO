@@ -7,8 +7,10 @@
 - [x] Définir quels sont les élements constitutifs d'une route
 - [x] Définir comment on modélisera notre simulateur
 - [x] Ecrire un résumé pour expliquer nos hypothéses et notre modèle
-- [ ] Traduire nos cas d'étude en code
-- [ ] 
+- [x] Traduire nos cas d'étude en code
+- [ ] Fonction mouvement
+- [ ] Coder les priorités
+- [x] Fonction intersection
 - [ ] Formule capacité
 - [ ] Etailler le résumé notament sur les différents élemetns schéma 4 directions
 - [ ] Modifier les schémas pour avoir 100 m de chaque coté
