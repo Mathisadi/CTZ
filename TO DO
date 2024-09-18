@@ -2,20 +2,42 @@
 
 ## Chapitre 1 : Simulateur de traffic
 
+POK-1
+
 - [x] Documentation
 - [x] Définir un cas d'étude
 - [x] Définir quels sont les élements constitutifs d'une route
 - [x] Définir comment on modélisera notre simulateur
 - [x] Ecrire un résumé pour expliquer nos hypothéses et notre modèle
 - [x] Traduire nos cas d'étude en code
-- [ ] Fonction mouvement
-- [ ] Coder les priorités
-- [x] Fonction intersection
 - [ ] Formule capacité
 - [ ] Etailler le résumé notament sur les différents élemetns schéma 4 directions
 - [ ] Modifier les schémas pour avoir 100 m de chaque coté
 - [ ] Détailler le résumer pour que tout le monde comprennent
- 
+- [ ] Tableau prioirté à droite
+- [ ] Reprendre à l'écrit toutes les question que je me suis posées
+  
+
+- [x] Faire tout le code pour des routes 1 voie
+- [x] Coder les priorités
+- [x] Fonction des feux rouges
+- [x] Fonction des départ
+- [x] Fonction des fin
+- [x] fonction des intersections **INUTILE**
+- [x] Fonction direction avec les probas
+- [x] Fonction intersection
+- [x] Rajouter les sécurités pour pas sortir du tableau
+- [x] Fonction mouvement
+- [x] Debuger
+
+- [ ] Faudra adapter à plusieurs voies
+- [ ] Passage piéton 
+- [ ] Focntion voie est libra car probleme si plusiseur intersection stack
+- [ ] Reprendre la fonction des chemins sur intersection pour pouvoir l'adapter à toure situation
+
+
+
+- 
 ## Chapitre 2 : Interface grafique
 
 ## Chapitre 3 : Paramétrage des élements de la route pour optimisation 
