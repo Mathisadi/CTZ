@@ -74,14 +74,6 @@ def update_feux_rouges(route, temps):
 
     return route
 
-
-def update_route():
-
-    update_direction()
-    update_départ()
-    update_feux_rouges()
-
-
 # TODO : Modifer la fonction pour prendre en compte toutes les intersection
 
 
