@@ -99,7 +99,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
             elif value == [1] and elm[0] == "Intersection":
                 ax.add_patch(
                     patches.Rectangle(
-                        (j, n_rows - 1 - i), 1, 1, fill=True, color="black"
+                        (j, n_rows - 1 - i), 1, 1, fill=True, color="Grey"
                     )
                 )
 
@@ -119,7 +119,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
                 # Ajouter la flèche (avec coordonnées de départ et direction)
                 ax.add_patch(
                     patches.FancyArrow(
-                        pos_a[0], pos_a[1], dx, dy, width=0.02, color="red"
+                        pos_a[0], pos_a[1], dx, dy, width=0.02, color="black"
                     )
                 )
 
@@ -233,7 +233,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
                     )
                 )
                 
-                couleur = "black" if value == [1] else "white"
+                couleur = "Grey" if value == [1] else "white"
                 
                 ax.add_patch(
                     patches.Circle((j + 1 / 2, n_rows - 1 - i + 1 / 2),
@@ -254,7 +254,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
                     j + 0.5,
                     n_rows - 1 - i + 0.5,
                     str(elm[0]) + " : " + str(value[0]),
-                    color="blue",
+                    color="black",
                     fontsize = 8,
                     ha="center",
                     va="center",
