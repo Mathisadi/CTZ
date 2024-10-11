@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.animation import FuncAnimation
 import numpy as np
+import time
 
 # Simulation
 
@@ -270,6 +271,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
     ax.grid(True)
     ax.set_aspect("equal", adjustable="box")
     ax.set_title("Simulation du traffic au temps : " + str(frame), pad = 20)
+
 
 
 # Fonction pour générer une animation en mettant à jour la matrice de trafic
