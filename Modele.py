@@ -6,6 +6,7 @@
 import copy
 import time
 import random
+from Variables import *
 
 # Modéle Traffic
 
@@ -74,7 +75,92 @@ def update_feux_rouges(route, temps):
 
     return route
 
+
 # TODO : Modifer la fonction pour prendre en compte toutes les intersection
+
+
+def dfs(route, pos_i, pos_j, visited, inter, compt):
+
+    n, m = len(route), len(route[0])
+    pile = [(pos_i, pos_j)]
+
+    while pile:
+        i, j = pile.pop()
+
+        visited[i][j] = True
+        inter[i][j] = compt
+
+        dir = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
+
+        for x, y in dir:
+            if (
+                0 <= x < n
+                and 0 <= y < m
+                and route[i][j] != 0
+                and route[x][y][0] == "Intersection"
+                and not visited[x][y]
+            ):
+                pile.append((x, y))
+
+    return visited, inter
+
+
+def trouve_intersection(route):
+    """Cette fonction à pour but de trouver les ensemble d'intersection et retourne une liste ou l'on voit clairement les intersections.
+
+    Args:
+        route (2D list): Liste des élements de notre route
+
+    Returns:
+        res (2D list): Map des intersections numérotées
+    """
+
+    compt = 1
+    inter = [[0 for _ in range(len(route[0]))] for _ in range(len(route))]
+    visited = [[False for _ in range(len(route[0]))] for _ in range(len(route))]
+
+    for i in range(len(route)):
+        for j in range(len(route[i])):
+            if (
+                not visited[i][j]
+                and route[i][j] != 0
+                and route[i][j][0] == "Intersection"
+            ):
+                visited, inter = dfs(route, i, j, visited, inter, compt)
+                compt += 1
+
+    return inter
+
+
+def direction_intersection(route):
+
+    n, m = len(route), len(route[0])
+    inter = trouve_intersection(route)
+    nbr_inter = max(max(row) for row in inter)
+
+    for i in range(1, max + 1):
+        
+        x, y = 0, 0
+        
+        # On trouve le coin haut gauche
+        while (x != n - 1 or y != m - 1) and inter[x][y] != i:
+            if x < n - 1:
+                x += 1
+            elif x == n - 1 and y != m - 1:
+                x = 0
+                y += 1
+            
+        # On trouve les dim de l'intersection
+       
+        dir = 0
+        
+        
+        
+        
+        
+
+        
+    return route
 
 
 def chemin_intersection(route, direction, pos_x, pos_y):
@@ -105,6 +191,8 @@ def chemin_intersection(route, direction, pos_x, pos_y):
 
 # TODO : Ajouter la condition des piétons
 # TODO : Généraliser cette fonction pour des routes à plusieurs voies
+# TODO : Prioirité à droite si on est sur une route
+# TODO : Reprendre architecture du projet
 
 
 def intentions(route, direction, traffic):

@@ -9,7 +9,6 @@ import time
 
 # Simulation
 
-
 def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
     ax.clear()  # Effacer l'axe pour le prochain frame
 
