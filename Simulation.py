@@ -216,7 +216,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
                         verticalalignment="center",
                         fontsize=10,
                         color="white",
-                        rotation=0,
+                      rotation=0,
                     )
 
             elif elm[0] == "Feu":
