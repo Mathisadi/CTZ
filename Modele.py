@@ -79,16 +79,20 @@ def update_feux_rouges(route, temps):
 # TODO : Modifer la fonction pour prendre en compte toutes les intersection
 
 
-def dfs(route, pos_i, pos_j, visited, inter, compt):
+def dfs(route, pos_i, pos_j, visited, inter):
 
     n, m = len(route), len(route[0])
     pile = [(pos_i, pos_j)]
+    r = []
 
     while pile:
         i, j = pile.pop()
 
+        if visited[i][j]:
+            continue
+
         visited[i][j] = True
-        inter[i][j] = compt
+        r.append((i, j))
 
         dir = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
 
@@ -101,6 +105,8 @@ def dfs(route, pos_i, pos_j, visited, inter, compt):
                 and not visited[x][y]
             ):
                 pile.append((x, y))
+
+    inter.append(r)
 
     return visited, inter
 
@@ -116,7 +122,7 @@ def trouve_intersection(route):
     """
 
     compt = 1
-    inter = [[0 for _ in range(len(route[0]))] for _ in range(len(route))]
+    inter = []
     visited = [[False for _ in range(len(route[0]))] for _ in range(len(route))]
 
     for i in range(len(route)):
@@ -126,10 +132,115 @@ def trouve_intersection(route):
                 and route[i][j] != 0
                 and route[i][j][0] == "Intersection"
             ):
-                visited, inter = dfs(route, i, j, visited, inter, compt)
-                compt += 1
+                visited, inter = dfs(route, i, j, visited, inter)
 
     return inter
+
+
+def trouve_direction_case(route, pos_i, pos_j):
+
+    if route[pos_i][pos_j] == 0:
+        raise AssertionError("L'élément choisi n'est pas une intersection")
+    elif route[pos_i][pos_j][0] != "Intersection":
+        raise AssertionError("L'élément choisi n'est pas une intersection")
+
+    n, m = len(route), len(route[0])
+    res = [False, False, False, False]
+    dir = [
+        (pos_i, pos_j - 1),
+        (pos_i + 1, pos_j),
+        (pos_i, pos_j + 1),
+        (pos_i - 1, pos_j),
+    ]
+
+    for index, (i, j) in enumerate(dir):
+
+        if route[i][j] != 0 and 0 <= i < n and 0 <= j < m:
+            if route[i][j][0] == "Fin":
+                res[index] = True
+            elif route[i][j][0] == "Intersection":
+                if route_etude[i][j][1][(index + 2) % 4] == True:
+                    res[(index + 2) % 4] = True
+            else:
+                if route[i][j][1] == index or route[i][j][1] == (index + 2) % 4:
+                    res[route[i][j][1]] = True
+
+    return res
+
+def initialisation_direction_intersection_antihoraire(route):
+
+    tab = trouve_intersection(route)
+
+    for inter in tab:
+
+        # On doit trouver la taille de l'intersection
+        min_i, min_j = inter[0]
+        max_i, max_j = inter[0]
+
+        for pos in inter:
+            min_i = min(min_i, pos[0])
+            min_j = min(min_j, pos[1])
+            max_i = max(max_i, pos[0])
+            max_j = max(max_j, pos[1])
+
+        # On doit trouver le coin droit min i et max j
+        coin_droit = (min_i, max_j)
+
+        # Une fois le coin droit trouver on ajoute les directions jusqu'à avoir tout visité
+        visited = []
+        compt = 0
+
+        while coin_droit not in visited and coin_droit in inter:
+
+            for pos in inter:
+                # Barre haute
+                if (
+                    pos[0] == min_i
+                    and min_j <= pos[1] <= max_j
+                    and pos[1] - 1 > 0
+                    and route[pos[0]][pos[1] - 1] != 0
+                ):
+                    route[pos[0]][pos[1]][1][0] = True
+                    visited.append(pos)
+                # Barre droite
+                if (
+                    pos[1] == max_j
+                    and min_j <= pos[1] <= max_j
+                    and pos[0] + 1 < len(route)
+                    and route[pos[0] + 1][pos[1]] != 0
+                ):
+                    route[pos[0]][pos[1]][1][3] = True
+                    visited.append(pos)
+                # Barre bas
+                if (
+                    pos[0] == max_i
+                    and min_j <= pos[1] <= max_j
+                    and pos[1] + 1 < len(route[0])
+                    and route[pos[0]][pos[1] + 1] != 0
+                ):
+                    route[pos[0]][pos[1]][1][2] = True
+                    visited.append(pos)
+                # Barre gauche
+                if (
+                    pos[1] == min_j
+                    and min_i <= pos[0] <= max_i
+                    and pos[0] - 1 > 0
+                    and route[pos[0] - 1][pos[1]] != 0
+                ):
+                    route[pos[0]][pos[1]][1][1] = True
+                    visited.append(pos)
+
+            # On repositionne le coin droit
+            min_i += 1
+            max_i -= 1
+            min_j += 1
+            max_j -= 1
+            
+            coin_droit = (min_i, max_j)
+    
+    return route
+
+print(initialisation_direction_intersection_antihoraire(route_etude))
 
 
 def direction_intersection(route):
@@ -139,9 +250,9 @@ def direction_intersection(route):
     nbr_inter = max(max(row) for row in inter)
 
     for i in range(1, max + 1):
-        
+
         x, y = 0, 0
-        
+
         # On trouve le coin haut gauche
         while (x != n - 1 or y != m - 1) and inter[x][y] != i:
             if x < n - 1:
@@ -149,17 +260,11 @@ def direction_intersection(route):
             elif x == n - 1 and y != m - 1:
                 x = 0
                 y += 1
-            
-        # On trouve les dim de l'intersection
-       
-        dir = 0
-        
-        
-        
-        
-        
 
-        
+        # Sens route = Anti horaire
+
+        dir = 0
+
     return route
 
 
