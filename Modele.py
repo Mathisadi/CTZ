@@ -7,26 +7,41 @@ import copy
 import time
 import random
 from Variables import *
+from collections import deque
 
 # Modéle Traffic
+
+# TODO : Commenter le code avec ChatGPT
 
 
 def update_direction(route, direction):
     """Cette fonction modifie les choix de trajet des utilisateurs de manière aléatoire afin de respecter les
-    probas observées sur le terrain
+    probabilités observées sur le terrain.
 
     Args:
-        route (2D list): Liste des élements de notre route
-        direction (2D list): Liste des préferences de direction des utilisateur pour chaque élement et la direction choisie
+        route (2D list): Liste en 2D représentant les éléments de la route. Chaque élément peut contenir des informations
+                         sur un emplacement, comme "Fin" (point de fin de route) ou "Intersection".
+        direction (2D list): Liste en 2D des préférences de direction pour chaque emplacement sur la route. Chaque entrée
+                             comprend une liste de probabilités pour chaque direction (0, 1, 2, 3) et une valeur actuelle de direction.
 
     Returns:
-        direction (2D list): Retourne la liste des direction modifiée
+        direction (2D list): Liste en 2D des directions mises à jour après modification aléatoire en fonction des probabilités.
     """
 
+    # Parcours de chaque élément de la route
     for i in range(len(route)):
         for j in range(len(route[i])):
+            # Vérifie que l'élément de la route est différent de zéro (par exemple, 0 pourrait représenter un espace vide)
             if route[i][j] != 0:
-                if route[i][j][0] != "Fin" and route[i][j][0] != "Intersection":
+                # Si l'élément n'est pas un point de fin ou une intersection, on modifie la direction
+                if (
+                    route[i][j][0] != "Fin"
+                    and route[i][j][0] != "Intersection"
+                    and route[i][j][0] != "Depart"
+                ):
+                    # Mise à jour aléatoire de la direction en fonction des poids fournis
+                    # direction[i][j][0] contient les probabilités pour chaque direction
+                    # k=1 signifie que l'on choisit une seule direction
                     direction[i][j][1] = random.choices(
                         [0, 1, 2, 3], weights=direction[i][j][0], k=1
                     )[0]
@@ -76,200 +91,245 @@ def update_feux_rouges(route, temps):
     return route
 
 
-# TODO : Modifer la fonction pour prendre en compte toutes les intersection
+# TODO : Refract code for compatibility bfs, grille ?
 
 
-def dfs(route, pos_i, pos_j, visited, inter):
+# Fonction BFS pour trouver le chemin le plus court
+def bfs(route, depart, arrivee):
+    # TODO : Mettre un poids pour tenir trier les parcours équivalents
+    # Départ et arrivée sont des intersections
+    if (
+        route[depart[0]][depart[1]] == 0
+        or route[depart[0]][depart[1]][0] != "Intersection"
+    ):
+        raise TypeError("Départ n'est pas une intersection")
+    if (
+        route[arrivee[0]][arrivee[1]] == 0
+        or route[arrivee[0]][arrivee[1]][0] != "Intersection"
+    ):
+        raise TypeError("Arrivee n'est pas une intersection")
 
-    n, m = len(route), len(route[0])
-    pile = [(pos_i, pos_j)]
-    r = []
+    n, m = len(route), len(route[0])  # Dimensions de la grille
+    file = deque([depart])  # File d'attente pour le BFS
+    visite = set()  # Ensemble pour marquer les cases visitées
+    visite.add(depart)  # Marquer le point de départ
+    parents = {depart: ("fin", "fin")}  # Pour reconstruire le chemin
+    res = []
 
-    while pile:
-        i, j = pile.pop()
+    # Directions avec déplacement associé
+    directions = {
+        3: (-1, 0),  # Haut
+        1: (1, 0),  # Bas
+        0: (0, -1),  # Gauche
+        2: (0, 1),  # Droite
+    }
 
-        if visited[i][j]:
-            continue
+    inverse_directions = {v: k for k, v in directions.items()}
 
-        visited[i][j] = True
-        r.append((i, j))
+    while file:
+        i, j = file.popleft()
 
-        dir = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
-
-        for x, y in dir:
-            if (
-                0 <= x < n
-                and 0 <= y < m
-                and route[i][j] != 0
-                and route[x][y][0] == "Intersection"
-                and not visited[x][y]
-            ):
-                pile.append((x, y))
-
-    inter.append(r)
-
-    return visited, inter
-
-
-def trouve_intersection(route):
-    """Cette fonction à pour but de trouver les ensemble d'intersection et retourne une liste ou l'on voit clairement les intersections.
-
-    Args:
-        route (2D list): Liste des élements de notre route
-
-    Returns:
-        res (2D list): Map des intersections numérotées
-    """
-
-    compt = 1
-    inter = []
-    visited = [[False for _ in range(len(route[0]))] for _ in range(len(route))]
-
-    for i in range(len(route)):
-        for j in range(len(route[i])):
-            if (
-                not visited[i][j]
-                and route[i][j] != 0
-                and route[i][j][0] == "Intersection"
-            ):
-                visited, inter = dfs(route, i, j, visited, inter)
-
-    return inter
-
-
-def trouve_direction_case(route, pos_i, pos_j):
-
-    if route[pos_i][pos_j] == 0:
-        raise AssertionError("L'élément choisi n'est pas une intersection")
-    elif route[pos_i][pos_j][0] != "Intersection":
-        raise AssertionError("L'élément choisi n'est pas une intersection")
-
-    n, m = len(route), len(route[0])
-    res = [False, False, False, False]
-    dir = [
-        (pos_i, pos_j - 1),
-        (pos_i + 1, pos_j),
-        (pos_i, pos_j + 1),
-        (pos_i - 1, pos_j),
-    ]
-
-    for index, (i, j) in enumerate(dir):
-
-        if route[i][j] != 0 and 0 <= i < n and 0 <= j < m:
-            if route[i][j][0] == "Fin":
-                res[index] = True
-            elif route[i][j][0] == "Intersection":
-                if route_etude[i][j][1][(index + 2) % 4] == True:
-                    res[(index + 2) % 4] = True
+        # Si on atteint la case d'arrivée on décompile le chemin et on calcul le nbr de virage
+        if (i, j) == arrivee:
+            chemin = []
+            virage = 0
+            chemin.append((i, j))
+            x, y = parents[(i, j)]
+            # Cas chemin de longeur 1
+            if (x, y) == ("fin", "fin"):
+                res.append([chemin[::-1],virage])
+            # Sinon
             else:
-                if route[i][j][1] == index or route[i][j][1] == (index + 2) % 4:
-                    res[route[i][j][1]] = True
+                dir = inverse_directions[(x - i, y - j)]
+                while (x, y) != ("fin", "fin"):
+                    chemin.append((x, y))
+                    ox, oy = copy.copy((x, y))
+                    x, y = parents[(x, y)]
+                    if (x, y) != ("fin", "fin") and dir != inverse_directions[
+                        (x - ox, y - oy)
+                    ]:
+                        virage += 1
+                        dir = inverse_directions[(x - ox, y - oy)]
+                res.append([chemin[::-1], virage])  # Retourne le chemin inversé
 
-    return res
+        # On cherche les directions possibles
+        dir = []
 
-def initialisation_direction_intersection_antihoraire(route):
+        for k, test in enumerate(route[i][j][1]):
+            if test:
+                dir.append(k)
 
-    tab = trouve_intersection(route)
+        # Explorer les voisins accessibles à partir des directions de la case actuelle
+        for index in dir:
+            di, dj = directions[index]
+            ni, nj = i + di, j + dj
 
-    for inter in tab:
+            if (
+                0 <= ni < n
+                and 0 <= nj < m
+                and route[ni][nj] != 0
+                and route[ni][nj][0] == "Intersection"
+                and (ni, nj) not in visite
+            ):
+                visite.add((ni, nj))
+                file.append((ni, nj))
+                parents[(ni, nj)] = (i, j)  # Garder trace du parent
 
-        # On doit trouver la taille de l'intersection
-        min_i, min_j = inter[0]
-        max_i, max_j = inter[0]
+    # On retourne le chemin avec le moins de virage
+    chemin_final, nbr_virage_min = res[0]
 
-        for pos in inter:
-            min_i = min(min_i, pos[0])
-            min_j = min(min_j, pos[1])
-            max_i = max(max_i, pos[0])
-            max_j = max(max_j, pos[1])
+    for chemin, nbr_virage in res:
+        if nbr_virage < nbr_virage_min:
+            chemin_final = chemin
 
-        # On doit trouver le coin droit min i et max j
-        coin_droit = (min_i, max_j)
+    return chemin_final
 
-        # Une fois le coin droit trouver on ajoute les directions jusqu'à avoir tout visité
-        visited = []
-        compt = 0
 
-        while coin_droit not in visited and coin_droit in inter:
+def trouve_arrivee(route, direction, depart):
+    # TODO : Mettre un test pour savoir si on est sur le bon élément
+    # Def variable local
+    i, j = depart
+    n, m = len(route), len(route[0])  # Dimensions de la route
+    dir_route = route[i][j][1]
+    dir_voiture = direction[i][j][1]
 
-            for pos in inter:
-                # Barre haute
+    # Dictionnaire avec toute les directions
+    directions = {
+        0: (0, -1),  # Gauche
+        1: (1, 0),  # Bas
+        2: (0, 1),  # Droite
+        3: (-1, 0),  # Haut
+    }
+
+    di, dj = directions[dir_route]
+    ni, nj = i + di, j + dj
+
+    # On test si le bloc pointé est bien une intersection
+    if route[ni][nj] == 0 or route[ni][nj][0] != "Intersection":
+        raise TypeError("Le bloc adjacent n'est pas une intersection")
+
+    # On test tous les blocs pour trouver ceux coller à l'intersection concernée
+    num_inter = route[ni][nj][2]
+    route_arv = []
+
+    for x in range(len(route)):
+        for y in range(len(route[x])):
+            if (
+                route[x][y] != 0
+                and route[x][y][0] == "Intersection"
+                and route[x][y][2] == num_inter
+            ):
+                dx, dy = directions[dir_voiture]
+                nx, ny = x + dx, y + dy
                 if (
-                    pos[0] == min_i
-                    and min_j <= pos[1] <= max_j
-                    and pos[1] - 1 > 0
-                    and route[pos[0]][pos[1] - 1] != 0
+                    0 <= nx < n
+                    and 0 <= ny < m
+                    and route[nx][ny] != 0
+                    and route[nx][ny][0] != "Intersection"
+                    and route[nx][ny][1] == dir_voiture
                 ):
-                    route[pos[0]][pos[1]][1][0] = True
-                    visited.append(pos)
-                # Barre droite
-                if (
-                    pos[1] == max_j
-                    and min_j <= pos[1] <= max_j
-                    and pos[0] + 1 < len(route)
-                    and route[pos[0] + 1][pos[1]] != 0
-                ):
-                    route[pos[0]][pos[1]][1][3] = True
-                    visited.append(pos)
-                # Barre bas
-                if (
-                    pos[0] == max_i
-                    and min_j <= pos[1] <= max_j
-                    and pos[1] + 1 < len(route[0])
-                    and route[pos[0]][pos[1] + 1] != 0
-                ):
-                    route[pos[0]][pos[1]][1][2] = True
-                    visited.append(pos)
-                # Barre gauche
-                if (
-                    pos[1] == min_j
-                    and min_i <= pos[0] <= max_i
-                    and pos[0] - 1 > 0
-                    and route[pos[0] - 1][pos[1]] != 0
-                ):
-                    route[pos[0]][pos[1]][1][1] = True
-                    visited.append(pos)
+                    route_arv.append(
+                        (nx, ny)
+                    )  # Affiche les coordonées des routes empruntables
 
-            # On repositionne le coin droit
-            min_i += 1
-            max_i -= 1
-            min_j += 1
-            max_j -= 1
-            
-            coin_droit = (min_i, max_j)
-    
-    return route
+    # Maintenant on définit une loi normale en fonction de la position de la sortie
+    # Pic situé sur le bloc le plus proche du départ
+    # Puis écart type de 1 car on veut que les valeurs soit autour de ce pic
+    if dir_route in [0, 2]:
+        pos = i
+        max_limite = n
+        coord = [x for x, y in route_arv]
+        coord.sort()
+    else:
+        pos = j
+        max_limite = m
+        coord = [y for x, y in route_arv]
+        coord.sort()
 
-print(initialisation_direction_intersection_antihoraire(route_etude))
+    nbr_ite = max(pos, max_limite - pos) + 1
+    ext = [0]
+
+    for k in range(len(coord) - 1):
+        if coord[k + 1] != coord[k] + 1:
+            ext.append(k)
+
+    ext.append(len(coord) - 1)
+
+    # Si aucune pos trouvé on leve une exception
+    if ext == [0, len(coord) - 1]:
+        # ! Ca marche que si on veut aller en face
+        for compt in range(nbr_ite):
+            if pos - compt in coord and pos + compt not in coord:
+                moy_gauss = pos - compt
+            elif pos - compt not in coord and pos + compt in coord:
+                moy_gauss = pos + compt
+            elif pos - compt in coord and pos + compt in coord:
+                moy_gauss = pos
+    else:
+        moy_gauss = []
+        for k in range(len(ext) - 1):
+            if coord[ext[k]] <= i <= coord[ext[k + 1]]:
+                moy_gauss.append(i)
+            else:
+                res = (
+                    coord[ext[k]]
+                    if abs(coord[ext[k]] - i) <= abs(coord[ext[k + 1]] - i)
+                    else coord[ext[k + 1]]
+                )
+                moy_gauss.append(res)
+
+    # On génère la sortie sélectionner en respectant les distribution gaussienne
+    # Cas 1 une seule gaussienne
+    if type(moy_gauss) == int:
+        arrivee = round(random.gauss(moy_gauss, 1))
+        if arrivee in coord:
+            return (
+                (arrivee, route_arv[0][1])
+                if dir_route in [0, 2]
+                else (route_arv[0][0], arrivee)
+            )
+        elif arrivee < min(coord):
+            return (
+                (min(coord), route_arv[0][1])
+                if dir_route in [0, 2]
+                else (route_arv[0][0], min(coord))
+            )
+        elif arrivee > max(coord):
+            return (
+                (max(coord), route_arv[0][1])
+                if dir_route in [0, 2]
+                else (route_arv[0][0], max(coord))
+            )
+    # Cas 2 plusieur gaussienne ! Pas de destination préférées les gaussiiennnes ont le mm poids
+    else:
+        choix = random.randint(0, len(moy_gauss) - 1)
+        arrivee = round(random.gauss(moy_gauss[choix], 1))
+        min_gauss = coord[ext[choix] + 1] if choix != 0 else 0
+        max_gauss = coord[ext[choix + 1]]
+        if arrivee in coord:
+            return (
+                (arrivee, route_arv[0][1])
+                if dir_route in [0, 2]
+                else (route_arv[0][0], arrivee)
+            )
+        elif arrivee < min_gauss:
+            return (
+                (min_gauss, route_arv[0][1])
+                if dir_route in [0, 2]
+                else (route_arv[0][0], min_gauss)
+            )
+        elif arrivee > max_gauss:
+            return (
+                (max_gauss, route_arv[0][1])
+                if dir_route in [0, 2]
+                else (route_arv[0][0], max_gauss)
+            )
+
+print(trouve_arrivee(route_etude,direction_etude,(2,4)))
 
 
-def direction_intersection(route):
-
-    n, m = len(route), len(route[0])
-    inter = trouve_intersection(route)
-    nbr_inter = max(max(row) for row in inter)
-
-    for i in range(1, max + 1):
-
-        x, y = 0, 0
-
-        # On trouve le coin haut gauche
-        while (x != n - 1 or y != m - 1) and inter[x][y] != i:
-            if x < n - 1:
-                x += 1
-            elif x == n - 1 and y != m - 1:
-                x = 0
-                y += 1
-
-        # Sens route = Anti horaire
-
-        dir = 0
-
-    return route
-
-
-def chemin_intersection(route, direction, pos_x, pos_y):
-    """Cette fonction permet de,determiner le chemin à emprunter pour une voiture dans une intersection
+def chemin_intersection(route, direction, depart):
+    """Cette fonction permet de déterminer le chemin à emprunter pour une voiture dans une intersection
 
     Args:
         route (2D list): Liste des élements de notre route
@@ -280,22 +340,58 @@ def chemin_intersection(route, direction, pos_x, pos_y):
     Returns:
         res (1D list): Retourne les mouvement à réalisés pour sortir de l'intersection
     """
+    # On déf les dico
+    direction_position = {
+        0: (0, -1),  # Gauche
+        1: (1, 0),  # Bas
+        2: (0, 1),  # Droite
+        3: (-1, 0),  # Haut
+    }
 
-    pos = route[pos_x][pos_y][1]
-    dir = direction[pos_x][pos_y][1]
+    position_direction = {
+        (0, -1): 0,  # Gauche
+        (1, 0): 1,  # Bas
+        (0, 1): 2,  # Droite
+        (-1, 0): 3,  # Haut
+    }
 
-    if pos == dir:
-        return [pos, pos]
+    if route[depart[0]][depart[1]] == 0:
+        raise TypeError("Le départ n'existe pas")
 
-    if pos == (dir + 1) % 4:
-        return [dir]
+    arrivee = trouve_arrivee(route, direction, depart)
 
-    if dir == (pos + 1) % 4:
-        return [pos, dir, dir]
+    if route[arrivee[0]][arrivee[1]] == 0:
+        raise TypeError("L'arrivée n'existe pas")
+
+    # On modifie les départs et arrivée pour être sur une intersection
+
+    i, j = depart
+    dir = route[i][j][1]
+    di, dj = direction_position[dir]
+    i, j = i + di, j + dj
+    depart = (i, j)
+
+    i, j = arrivee
+    dir = (route[i][j][1] + 2) % 4
+    di, dj = direction_position[dir]
+    i, j = i + di, j + dj
+    arrivee_inter = (i, j)
+
+    # On trouve le chemin
+    chemin = bfs(route, depart, arrivee_inter)
+    chemin.append(arrivee)
+
+    # pour chaque étape on détermine le déplacement
+    deplacement = []
+    for k in range(len(chemin) - 1):
+        i = chemin[k + 1][0] - chemin[k][0]
+        j = chemin[k + 1][1] - chemin[k][1]
+        deplacement.append(position_direction[(i, j)])
+
+    return deplacement
 
 
 # TODO : Ajouter la condition des piétons
-# TODO : Généraliser cette fonction pour des routes à plusieurs voies
 # TODO : Prioirité à droite si on est sur une route
 # TODO : Reprendre architecture du projet
 
@@ -569,7 +665,7 @@ def mouvement(route, direction, traffic, temps):
             # Cas particulier non/intersection->intersection
         elif route[nx][ny][0] == "Intersection" and route[x][y][0] != "Intersection":
             if traffic[nx][ny][0] == 0 and ref_traffic[nx][ny][0] == 0:
-                direction[nx][ny] = chemin_intersection(route, direction, x, y)
+                direction[nx][ny] = chemin_intersection(route, direction, (x, y))
                 traffic[nx][ny][0] += 1
                 traffic[x][y][-1] -= 1
 
