@@ -184,6 +184,21 @@ def bfs(route, depart, arrivee):
 
     return chemin_final
 
+# Faire un focntion taille de l'intersection
+def taille_inter(route,num_inter):
+    coord_i = []
+    coord_j = []
+    
+    for i in range(len(route)):
+        for j in range(len(route[i])):
+            if route[i][j] != 0 and route[i][j][0] == 'Intersection' and route[i][j][2] == num_inter:
+                coord_i.append(i)
+                coord_j.append(j)
+    
+    l_i = max(coord_i) - min(coord_i) + 1
+    l_j = max(coord_j) - min(coord_j) + 1
+    
+    return [[min(coord_i),min(coord_j)],[max(coord_i),max(coord_j)]]
 
 def trouve_arrivee(route, direction, depart):
     # TODO : Mettre un test pour savoir si on est sur le bon élément
@@ -211,122 +226,207 @@ def trouve_arrivee(route, direction, depart):
     # On test tous les blocs pour trouver ceux coller à l'intersection concernée
     num_inter = route[ni][nj][2]
     route_arv = []
+    route_adj = []
 
-    for x in range(len(route)):
-        for y in range(len(route[x])):
+    for x in range(n):
+        for y in range(m):
             if (
                 route[x][y] != 0
                 and route[x][y][0] == "Intersection"
                 and route[x][y][2] == num_inter
             ):
-                dx, dy = directions[dir_voiture]
-                nx, ny = x + dx, y + dy
+                # On regarde que dans le sens de la voiture pour les sortie
+                dx_sorti, dy_sorti = directions[dir_voiture]
+                x_sorti, y_sorti= x + dx_sorti, y + dy_sorti
+                
+                # On regarde que dans le sens inverse de la direction de la voiture pour les routes adj
+                dir_opp = (dir_route + 2) % 4
+                dx_adj, dy_adj = directions[dir_opp]
+                x_adj, y_adj = x + dx_adj, y + dy_adj
+                
+                # On test les sortie                
                 if (
-                    0 <= nx < n
-                    and 0 <= ny < m
-                    and route[nx][ny] != 0
-                    and route[nx][ny][0] != "Intersection"
-                    and route[nx][ny][1] == dir_voiture
+                    0 <= x_sorti < n
+                    and 0 <= y_sorti < m
+                    and route[x_sorti][y_sorti] != 0
+                    and route[x_sorti][y_sorti][0] != "Intersection"
+                    and route[x_sorti][y_sorti][1] == dir_voiture
                 ):
                     route_arv.append(
-                        (nx, ny)
+                        (x_sorti, y_sorti)
                     )  # Affiche les coordonées des routes empruntables
+                
+                # On test les bloc adj
+                if (
+                    0 <= x_adj < n
+                    and 0 <= y_adj < m
+                    and route[x_adj][y_adj] != 0
+                    and route[x_adj][y_adj][0] != "Intersection"
+                    and route[x_adj][y_adj][1] == dir_route
+                ):
+                    route_adj.append(
+                        (x_adj, y_adj)
+                    )  # Affiche les coordonées des routes empruntables
+
+                    
 
     # Maintenant on définit une loi normale en fonction de la position de la sortie
     # Pic situé sur le bloc le plus proche du départ
     # Puis écart type de 1 car on veut que les valeurs soit autour de ce pic
+    # ! pos en face dir_voiture = dir_route et que dir_route = [0,2] on garde le i sion j
+    # ! pos en haut dir_voiture = dir_route + 1 % 4 
+    # ! pos en bas dir_voiture = dir_route - 1 % 4 
+    
+    if dir_voiture in [0, 2]:
+        max_limite = taille_inter(route,num_inter)[1][0] - taille_inter(route,num_inter)[0][0] # Taille i inter
+        coord_sorti = [x for x, y in route_arv]
+        coord_sorti.sort()
+    else:
+        max_limite = taille_inter(route,num_inter)[1][1] - taille_inter(route,num_inter)[0][1] # Taille j inter
+        coord_sorti = [y for x, y in route_arv]
+        coord_sorti.sort()
+
     if dir_route in [0, 2]:
-        pos = i
-        max_limite = n
-        coord = [x for x, y in route_arv]
-        coord.sort()
+        coord_adj = [x for x, y in route_adj]
+        pos_depart = i
+        coord_adj.sort()
     else:
-        pos = j
-        max_limite = m
-        coord = [y for x, y in route_arv]
-        coord.sort()
+        coord_adj = [y for x, y in route_adj]
+        pos_depart = j
+        coord_adj.sort()
+    
+    # On crée une liste avec l'ensemble des bloc de sortie possible la longeur - 1 = le nbr de sortie possible
+    min_sorti = [coord_sorti[0]]
+    max_sorti = []
+        
+    for k in range(len(coord_sorti) - 1):
+        if coord_sorti[k + 1] != coord_sorti[k] + 1:
+            max_sorti.append(coord_sorti[k])
+            min_sorti.append(coord_sorti[k+1])
 
-    nbr_ite = max(pos, max_limite - pos) + 1
-    ext = [0]
-
-    for k in range(len(coord) - 1):
-        if coord[k + 1] != coord[k] + 1:
-            ext.append(k)
-
-    ext.append(len(coord) - 1)
-
+    max_sorti.append(coord_sorti[-1])
+    
+    # On charche les positions 
+    
+    min_adj_liste = [coord_adj[0]]
+    max_adj_liste = []
+        
+    for k in range(len(coord_adj) - 1):
+        if coord_adj[k + 1] != coord_adj[k] + 1:
+            max_adj_liste.append(coord_adj[k])
+            min_adj_liste.append(coord_adj[k+1])
+    
+    max_adj_liste.append(coord_adj[-1])
+    
+    for k in range(len(max_adj_liste)):
+        if min_adj_liste[k] <= pos_depart <= max_adj_liste[k]:
+            min_adj = min_adj_liste[k]
+            max_adj = max_adj_liste[k]
+            
+    # On cherche mtn à positionner selon nous l'endroit de sorti idéal pour les voitures 
+    # Si plusiseur sorites alors plusieur point idéaux mais sinon un seul
+    
+    pos = []
+    
+    for k in range(len(max_sorti)):
+        if dir_route == 0:
+            if dir_voiture == 0:
+                pos.append(pos_depart)                
+            elif dir_voiture == 1:
+                pos_projete = max_sorti[k] - abs(max_adj - pos_depart) 
+                if pos_projete >= taille_inter(route,num_inter)[0][1]: # Min j inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[0][1]) # Min j inter
+            elif dir_voiture == 3:
+                pos_projete = max_sorti[k] - abs(min_adj - pos_depart)
+                if pos_projete >= taille_inter(route,num_inter)[0][1]:
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[0][1]) # Min j inter            
+        elif dir_route == 1:
+            if dir_voiture == 0:
+                pos_projete = min_sorti[k] + abs(min_adj - pos_depart)
+                if pos_projete <= taille_inter(route,num_inter)[1][0]: # Max i inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[1][0]) # Max i inter
+            elif dir_voiture == 1:
+                pos.append(pos_depart)
+            elif dir_voiture == 2:
+                pos_projete =  min_sorti[k] + abs(max_adj - pos_depart)
+                if pos_projete <= taille_inter(route,num_inter)[1][0]: # Max i inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[1][0]) # Max i inter
+        elif dir_route == 2:
+            if dir_voiture == 1:
+                pos_projete = min_sorti[k] + abs(max_adj - pos_depart)
+                if pos_projete <= taille_inter(route,num_inter)[1][1]: # Max j inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[1][1]) # Max j inter
+            elif dir_voiture == 2:
+                pos.append(pos_depart)
+            elif dir_voiture == 3:
+                pos_projete = min_sorti[k] + abs(min_adj - pos_depart)
+                if pos_projete <= taille_inter(route,num_inter)[1][1]: # Max j inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[1][1]) # Max j inter
+        else:
+            if dir_voiture == 0:
+                pos_projete = max_sorti[k] - abs(min_adj - pos_depart)
+                if pos_projete >= taille_inter(route,num_inter)[0][0]: # Min i inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[0][0]) # Min i inter
+            elif dir_voiture == 2:
+                pos_projete = max_sorti[k] - abs(max_adj - pos_depart)
+                if pos_projete >= taille_inter(route,num_inter)[0][0]: # Min i inter
+                    pos.append(pos_projete)
+                else:
+                    pos.append(taille_inter(route,num_inter)[0][0]) # Min i inter
+            elif dir_voiture == 3:
+                pos.append(pos_depart)    
+    
     # Si aucune pos trouvé on leve une exception
-    if ext == [0, len(coord) - 1]:
-        # ! Ca marche que si on veut aller en face
-        for compt in range(nbr_ite):
-            if pos - compt in coord and pos + compt not in coord:
-                moy_gauss = pos - compt
-            elif pos - compt not in coord and pos + compt in coord:
-                moy_gauss = pos + compt
-            elif pos - compt in coord and pos + compt in coord:
-                moy_gauss = pos
-    else:
-        moy_gauss = []
-        for k in range(len(ext) - 1):
-            if coord[ext[k]] <= i <= coord[ext[k + 1]]:
-                moy_gauss.append(i)
+    # Si une seule sortie
+    moy_gauss = []
+    for k in range(len(pos)):
+        if min_sorti[k] <= pos[k] <= max_sorti[k]:
+            moy_gauss.append(pos[k])
+        else:
+            if abs(min_sorti[k] - pos[k]) <= abs(max_sorti[k] - pos[k]):
+                moy_gauss.append(min_sorti[k]) 
             else:
-                res = (
-                    coord[ext[k]]
-                    if abs(coord[ext[k]] - i) <= abs(coord[ext[k + 1]] - i)
-                    else coord[ext[k + 1]]
-                )
-                moy_gauss.append(res)
+                moy_gauss.append(max_sorti[k]) 
 
     # On génère la sortie sélectionner en respectant les distribution gaussienne
-    # Cas 1 une seule gaussienne
-    if type(moy_gauss) == int:
-        arrivee = round(random.gauss(moy_gauss, 1))
-        if arrivee in coord:
-            return (
-                (arrivee, route_arv[0][1])
-                if dir_route in [0, 2]
-                else (route_arv[0][0], arrivee)
-            )
-        elif arrivee < min(coord):
-            return (
-                (min(coord), route_arv[0][1])
-                if dir_route in [0, 2]
-                else (route_arv[0][0], min(coord))
-            )
-        elif arrivee > max(coord):
-            return (
-                (max(coord), route_arv[0][1])
-                if dir_route in [0, 2]
-                else (route_arv[0][0], max(coord))
-            )
-    # Cas 2 plusieur gaussienne ! Pas de destination préférées les gaussiiennnes ont le mm poids
-    else:
-        choix = random.randint(0, len(moy_gauss) - 1)
-        arrivee = round(random.gauss(moy_gauss[choix], 1))
-        min_gauss = coord[ext[choix] + 1] if choix != 0 else 0
-        max_gauss = coord[ext[choix + 1]]
-        if arrivee in coord:
-            return (
-                (arrivee, route_arv[0][1])
-                if dir_route in [0, 2]
-                else (route_arv[0][0], arrivee)
-            )
-        elif arrivee < min_gauss:
-            return (
-                (min_gauss, route_arv[0][1])
-                if dir_route in [0, 2]
-                else (route_arv[0][0], min_gauss)
-            )
-        elif arrivee > max_gauss:
-            return (
-                (max_gauss, route_arv[0][1])
-                if dir_route in [0, 2]
-                else (route_arv[0][0], max_gauss)
-            )
 
-print(trouve_arrivee(route_etude,direction_etude,(2,4)))
-
+    choix = random.randint(0, len(moy_gauss) - 1)
+    arrivee = round(random.gauss(moy_gauss[choix], 1))
+    min_gauss = min_sorti[choix]
+    max_gauss = max_sorti[choix]
+    
+    if min_gauss <= arrivee <= max_gauss:
+        return (
+            (arrivee, route_arv[0][1])
+            if dir_voiture in [0, 2]
+            else (route_arv[0][0], arrivee)
+        )
+    elif arrivee < min_gauss:
+        return (
+            (min_gauss, route_arv[0][1])
+            if dir_voiture in [0, 2]
+            else (route_arv[0][0], min_gauss)
+        )
+    elif arrivee > max_gauss:
+        return (
+            (max_gauss, route_arv[0][1])
+            if dir_voiture in [0, 2]
+            else (route_arv[0][0], max_gauss)
+        )
 
 def chemin_intersection(route, direction, depart):
     """Cette fonction permet de déterminer le chemin à emprunter pour une voiture dans une intersection
