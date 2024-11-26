@@ -7,7 +7,7 @@ import random
 from Variables import *
 from collections import deque
 
-# Fonction qui permet de trouver les chemins à emprunter dans les intersections
+# ! Fonction qui permet de trouver les chemins à emprunter dans les intersections
 
 # Fonction BFS pour trouver le chemin le plus court
 def bfs(route, depart, arrivee):
@@ -76,7 +76,7 @@ def bfs(route, depart, arrivee):
             x_parent, y_parent = parents[(x, y)]
             # Cas chemin de longeur 1
             if (x_parent, y_parent) == ("fin", "fin"):
-                res.append([chemin[::-1],virage])
+                res.append([chemin[::-1], virage])
             # Sinon
             else:
                 # On trouve la direction de départ
@@ -87,7 +87,10 @@ def bfs(route, depart, arrivee):
                     x_fils, y_fils = copy.copy((x, y))
                     x_parent, y_parent = parents[(x_parent, y_parent)]
                     # Si on est pas à la fin et on tourne on ajt un virage
-                    if (x_parent, y_parent) != ("fin", "fin") and dir != inverse_directions[
+                    if (x_parent, y_parent) != (
+                        "fin",
+                        "fin",
+                    ) and dir != inverse_directions[
                         (x_parent - x_fils, y_parent - y_fils)
                     ]:
                         virage += 1
@@ -129,14 +132,14 @@ def bfs(route, depart, arrivee):
     return chemin_final
 
 # Faire un focntion taille de l'intersection
-def taille_inter(route,num_inter):
+def taille_inter(route, num_inter):
     """
     Calcule les coordonnées des limites rectangulaires de l'intersection spécifiée dans une grille.
 
-    Cette fonction parcourt une grille donnée sous forme de liste de listes (représentant un réseau routier) 
-    pour trouver l'intersection correspondant au numéro `num_inter`. Une intersection est identifiée 
-    par une cellule contenant un tuple dont le premier élément est la chaîne "Intersection" et 
-    le troisième élément est égal à `num_inter`. La fonction retourne les coordonnées des coins 
+    Cette fonction parcourt une grille donnée sous forme de liste de listes (représentant un réseau routier)
+    pour trouver l'intersection correspondant au numéro `num_inter`. Une intersection est identifiée
+    par une cellule contenant un tuple dont le premier élément est la chaîne "Intersection" et
+    le troisième élément est égal à `num_inter`. La fonction retourne les coordonnées des coins
     supérieur gauche et inférieur droit du rectangle englobant cette intersection.
 
     Args:
@@ -144,32 +147,33 @@ def taille_inter(route,num_inter):
         num_inter (int): Le numéro de l'intersection à localiser.
 
     Returns:
-        list[list[int]]: Une liste de deux sous-listes représentant les coordonnées des coins 
+        list[list[int]]: Une liste de deux sous-listes représentant les coordonnées des coins
                          supérieur gauche et inférieur droit de la zone englobante de l'intersection.
-                         Format : [[i_min, j_min], [i_max, j_max]], où (i_min, j_min) est le coin supérieur 
+                         Format : [[i_min, j_min], [i_max, j_max]], où (i_min, j_min) est le coin supérieur
                          gauche et (i_max, j_max) est le coin inférieur droit.
     """
     coord_i = []
     coord_j = []
-    
+
     for i in range(len(route)):
         for j in range(len(route[i])):
-            if route[i][j] != 0 and route[i][j][0] == 'Intersection' and route[i][j][2] == num_inter:
+            if (
+                route[i][j] != 0
+                and route[i][j][0] == "Intersection"
+                and route[i][j][2] == num_inter
+            ):
                 coord_i.append(i)
                 coord_j.append(j)
-    
-    l_i = max(coord_i) - min(coord_i) + 1
-    l_j = max(coord_j) - min(coord_j) + 1
-    
-    return [[min(coord_i),min(coord_j)],[max(coord_i),max(coord_j)]]
+
+    return [[min(coord_i), min(coord_j)], [max(coord_i), max(coord_j)]]
 
 # Fonction qui trouve les sorties possibles
-def trouve_sorti(route,direction,depart):
+def trouve_sorti(route, dir_voiture, num_inter):
     """
     Trouve les routes accessibles à partir d'une intersection en fonction de la direction initiale.
 
-    Cette fonction identifie toutes les routes adjacentes à une intersection donnée, à partir 
-    de laquelle une voiture peut sortir dans une direction spécifiée. Elle prend en compte les 
+    Cette fonction identifie toutes les routes adjacentes à une intersection donnée, à partir
+    de laquelle une voiture peut sortir dans une direction spécifiée. Elle prend en compte les
     orientations des routes et des intersections pour déterminer les sorties valides.
 
     Args:
@@ -178,9 +182,9 @@ def trouve_sorti(route,direction,depart):
         depart (tuple[int, int]): Les coordonnées (x, y) de la cellule de départ dans la grille.
 
     Returns:
-        list[tuple[int, int]]: Une liste de tuples représentant les coordonnées des sorties valides 
+        list[tuple[int, int]]: Une liste de tuples représentant les coordonnées des sorties valides
                                accessibles depuis l'intersection spécifiée.
-                               
+
     Notes:
         - Les directions possibles sont codées comme suit :
             0 : gauche
@@ -188,11 +192,8 @@ def trouve_sorti(route,direction,depart):
             2 : droite
             3 : haut
     """
-    # Def variable local
-    x_depart, y_depart = depart
-    n, m = len(route), len(route[0])  # Dimensions de la route
-    dir_route = route[x_depart][y_depart][1]
-    dir_voiture = direction[x_depart][y_depart][1]
+    # Dimensions de la route
+    n, m = len(route), len(route[0]) 
 
     # Dictionnaire avec toute les directions
     directions = {
@@ -201,16 +202,11 @@ def trouve_sorti(route,direction,depart):
         2: (0, 1),  # Droite
         3: (-1, 0),  # Haut
     }
-    
-    # On se décale sur l'intersection et on note le num de l'inter
-    dx, dy = directions[dir_route]
-    nx, ny = x_sorti + dx, y_sorti + dy
-    num_inter = route[nx][ny][2]
-    
+
     # On définit une liste rés
     route_arv = []
-    
-    # On parcourt tous les élemnents de la route et on cherche ceux qui sont collés à l'intersection et 
+
+    # On parcourt tous les élemnents de la route et on cherche ceux qui sont collés à l'intersection et
     # dont la direction permet la sorti de la route dir = dir_route
     for x in range(n):
         for y in range(m):
@@ -221,9 +217,9 @@ def trouve_sorti(route,direction,depart):
             ):
                 # On regarde que dans le sens de la voiture pour les sortie
                 dx_sorti, dy_sorti = directions[dir_voiture]
-                x_sorti, y_sorti= x + dx_sorti, y + dy_sorti
-                
-                # On test les sorties             
+                x_sorti, y_sorti = x + dx_sorti, y + dy_sorti
+
+                # On test les sorties
                 if (
                     0 <= x_sorti < n
                     and 0 <= y_sorti < m
@@ -232,11 +228,11 @@ def trouve_sorti(route,direction,depart):
                     and route[x_sorti][y_sorti][1] == dir_voiture
                 ):
                     route_arv.append((x_sorti, y_sorti))
-    
+
     return route_arv
 
 # Fonction qui trouve les entrées possibles
-def trouve_entre(route,direction,depart):
+def trouve_entre(route, dir_route, num_inter):
     """
     Identifie les routes adjacentes à une intersection, dont la direction est la direction initiale
     et la route collée à une intersection.
@@ -246,9 +242,9 @@ def trouve_entre(route,direction,depart):
         depart (tuple[int, int]): Les coordonnées (i, j) de la cellule de départ dans la grille.
 
     Returns:
-        list[tuple[int, int]]: Une liste de tuples représentant les coordonnées des routes adjacentes 
+        list[tuple[int, int]]: Une liste de tuples représentant les coordonnées des routes adjacentes
                                valides connectées à l'intersection.
-                               
+
     Notes:
         - Les directions possibles sont codées comme suit :
             0 : gauche
@@ -256,10 +252,8 @@ def trouve_entre(route,direction,depart):
             2 : droite
             3 : haut
     """
-    # Def variable local
-    x_depart, y_depart = depart
-    n, m = len(route), len(route[0])  # Dimensions de la route
-    dir_route = route[x_depart][y_depart][1]
+    # Dimensions de la route
+    n, m = len(route), len(route[0]) 
 
     # Dictionnaire avec toute les directions
     directions = {
@@ -269,11 +263,6 @@ def trouve_entre(route,direction,depart):
         3: (-1, 0),  # Haut
     }
 
-    # Num intersection
-    dx, dy = directions[dir_route]
-    nx, ny = x_depart + dx, y_depart + dy
-    num_inter = route[nx][ny][2]
-    
     # On définit le res
     route_adj = []
 
@@ -285,33 +274,35 @@ def trouve_entre(route,direction,depart):
                 and route[x][y][0] == "Intersection"
                 and route[x][y][2] == num_inter
             ):
-                  
+
                 # On regarde que dans le sens inverse de la direction de la voiture pour les routes adj
                 dir_opp = (dir_route + 2) % 4
-                dx_adj, dy_adj = directions[dir_opp]
-                x_adj, y_adj = x + dx_adj, y + dy_adj
-                
+                dx_ent, dy_ent = directions[dir_opp]
+                x_ent, y_ent = x + dx_ent, y + dy_ent
+
                 # On test les bloc adj
                 if (
-                    0 <= x_adj < n
-                    and 0 <= y_adj < m
-                    and route[x_adj][y_adj] != 0
-                    and route[x_adj][y_adj][0] != "Intersection"
-                    and route[x_adj][y_adj][1] == dir_route
+                    0 <= x_ent < n
+                    and 0 <= y_ent < m
+                    and route[x_ent][y_ent] != 0
+                    and route[x_ent][y_ent][0] != "Intersection"
+                    and route[x_ent][y_ent][1] == dir_route
                 ):
-                    route_adj.append((x_adj, y_adj))
+                    route_adj.append((x_ent, y_ent))
 
     return route_adj
-                    
 
+# Fonction test qui s'assure que tous les critères sont bons pour la fonction arrivee
+def test_situation_ok(route, depart):
+    # Pos de départ
+    x, y = depart
 
-def arrivee(route, direction, depart):
-    # TODO : Mettre un test pour savoir si on est sur le bon élément
-    # Def variable local
-    i, j = depart
-    n, m = len(route), len(route[0])  # Dimensions de la route
-    dir_route = route[i][j][1]
-    dir_voiture = direction[i][j][1]
+    # On test si le bloc de départ n'est pas un bloc de fin ou 0
+    if route[x][y] == 0 or route[x][y][0] != "Fin":
+        return False
+
+    # Direction
+    dir_route = route[x][y][1]
 
     # Dictionnaire avec toute les directions
     directions = {
@@ -321,199 +312,238 @@ def arrivee(route, direction, depart):
         3: (-1, 0),  # Haut
     }
 
-    di, dj = directions[dir_route]
-    ni, nj = i + di, j + dj
+    # On se déplace sur l'intersection
+    dx, dy = directions[dir_route]
+    x, y = x + dx, y + dy
 
     # On test si le bloc pointé est bien une intersection
-    if route[ni][nj] == 0 or route[ni][nj][0] != "Intersection":
-        raise TypeError("Le bloc adjacent n'est pas une intersection")
+    if route[x][y] == 0 or route[x][y][0] != "Intersection":
+        return False
 
-    # On test tous les blocs pour trouver ceux coller à l'intersection concernée
-    num_inter = route[ni][nj][2]
-    route_arv = []
-    route_adj = []
+    # Si tous les test ok
+    return True
 
-    for x in range(n):
-        for y in range(m):
-            if (
-                route[x][y] != 0
-                and route[x][y][0] == "Intersection"
-                and route[x][y][2] == num_inter
-            ):
-                # On regarde que dans le sens de la voiture pour les sortie
-                dx_sorti, dy_sorti = directions[dir_voiture]
-                x_sorti, y_sorti= x + dx_sorti, y + dy_sorti
-                
-                # On regarde que dans le sens inverse de la direction de la voiture pour les routes adj
-                dir_opp = (dir_route + 2) % 4
-                dx_adj, dy_adj = directions[dir_opp]
-                x_adj, y_adj = x + dx_adj, y + dy_adj
-                
-                # On test les sortie                
-                if (
-                    0 <= x_sorti < n
-                    and 0 <= y_sorti < m
-                    and route[x_sorti][y_sorti] != 0
-                    and route[x_sorti][y_sorti][0] != "Intersection"
-                    and route[x_sorti][y_sorti][1] == dir_voiture
-                ):
-                    route_arv.append(
-                        (x_sorti, y_sorti)
-                    )  # Affiche les coordonées des routes empruntables
-                
-                # On test les bloc adj
-                if (
-                    0 <= x_adj < n
-                    and 0 <= y_adj < m
-                    and route[x_adj][y_adj] != 0
-                    and route[x_adj][y_adj][0] != "Intersection"
-                    and route[x_adj][y_adj][1] == dir_route
-                ):
-                    route_adj.append(
-                        (x_adj, y_adj)
-                    )  # Affiche les coordonées des routes empruntables
+# Fonction qui retourne le numéro de l'intersection adjacente
+def num_intersection_adj(route, depart):
+    # Pos de départ
+    x, y = depart
 
-                    
+    # Direction
+    dir_route = route[x][y][1]
 
-    # Maintenant on définit une loi normale en fonction de la position de la sortie
-    # Pic situé sur le bloc le plus proche du départ
-    # Puis écart type de 1 car on veut que les valeurs soit autour de ce pic
-    # ! pos en face dir_voiture = dir_route et que dir_route = [0,2] on garde le i sion j
-    # ! pos en haut dir_voiture = dir_route + 1 % 4 
-    # ! pos en bas dir_voiture = dir_route - 1 % 4 
-    
-    if dir_voiture in [0, 2]:
-        max_limite = taille_inter(route,num_inter)[1][0] - taille_inter(route,num_inter)[0][0] # Taille i inter
-        coord_sorti = [x for x, y in route_arv]
-        coord_sorti.sort()
+    # Dictionnaire avec toute les directions
+    directions = {
+        0: (0, -1),  # Gauche
+        1: (1, 0),  # Bas
+        2: (0, 1),  # Droite
+        3: (-1, 0),  # Haut
+    }
+
+    # On se déplace sur l'intersection
+    dx, dy = directions[dir_route]
+    x, y = x + dx, y + dy
+
+    return route[x][y][1]
+
+# Fonction qui prend en entrée les coordonnes des sorties et cherche à regrouper les sorties
+# qui sont collées entres elles et retourne un intervalle qui spécifie les positions des groupes
+def intervalle_sorti(route_arv, dir):
+    if dir in [0, 2]:
+        coord = [x for x, y in route_arv]
+        coord.sort()
     else:
-        max_limite = taille_inter(route,num_inter)[1][1] - taille_inter(route,num_inter)[0][1] # Taille j inter
-        coord_sorti = [y for x, y in route_arv]
-        coord_sorti.sort()
+        coord = [y for x, y in route_arv]
+        coord.sort()
 
-    if dir_route in [0, 2]:
-        coord_adj = [x for x, y in route_adj]
-        pos_depart = i
-        coord_adj.sort()
-    else:
-        coord_adj = [y for x, y in route_adj]
-        pos_depart = j
-        coord_adj.sort()
-    
     # On crée une liste avec l'ensemble des bloc de sortie possible la longeur - 1 = le nbr de sortie possible
-    min_sorti = [coord_sorti[0]]
-    max_sorti = []
-        
-    for k in range(len(coord_sorti) - 1):
-        if coord_sorti[k + 1] != coord_sorti[k] + 1:
-            max_sorti.append(coord_sorti[k])
-            min_sorti.append(coord_sorti[k+1])
+    min_list = [coord[0]]
+    max_list = []
 
-    max_sorti.append(coord_sorti[-1])
+    for k in range(len(coord) - 1):
+        if coord[k + 1] != coord[k] + 1:
+            max_list.append(coord[k])
+            min_list.append(coord[k + 1])
+
+    max_list.append(coord[-1])
+
+    return min_list, max_list
+
+# Fonction qui prend en entrée les coord des entrées et trouve le max et min de la route d'entrée
+def intervalle_entre(route_ent, dir, pos_depart):
+    if dir in [0, 2]:
+        coord = [x for x, y in route_ent]
+        coord.sort()
+    else:
+        coord = [y for x, y in route_ent]
+        coord.sort()
+
+    # On crée une liste avec l'ensemble des bloc d'entrée possible la longeur - 1 = le nbr d'entrée possible
+    min_list = [coord[0]]
+    max_list = []
+
+    for k in range(len(coord) - 1):
+        if coord[k + 1] != coord[k] + 1:
+            max_list.append(coord[k])
+            min_list.append(coord[k + 1])
+
+    max_list.append(coord[-1])
+
+    # On cherche le bloc d'entrée où notre départ est situé
+    for k in range(len(max_list)):
+        if min_list[k] <= pos_depart <= max_list[k]:
+            min_ent = min_list[k]
+            max_ent = max_list[k]
+
+    return min_ent, max_ent
+
+# Fonction qui projete la position des entree sur la sorti en fonction de la taille de l'intersection
+def projete_entre_sorti(taille, pos_depart, dir_route, dir_voiture, min_entre, max_entre, min_sorti, max_sorti):
     
-    # On charche les positions 
-    
-    min_adj_liste = [coord_adj[0]]
-    max_adj_liste = []
-        
-    for k in range(len(coord_adj) - 1):
-        if coord_adj[k + 1] != coord_adj[k] + 1:
-            max_adj_liste.append(coord_adj[k])
-            min_adj_liste.append(coord_adj[k+1])
-    
-    max_adj_liste.append(coord_adj[-1])
-    
-    for k in range(len(max_adj_liste)):
-        if min_adj_liste[k] <= pos_depart <= max_adj_liste[k]:
-            min_adj = min_adj_liste[k]
-            max_adj = max_adj_liste[k]
-            
-    # On cherche mtn à positionner selon nous l'endroit de sorti idéal pour les voitures 
-    # Si plusiseur sorites alors plusieur point idéaux mais sinon un seul
-    
+    # On définit le rés
     pos = []
-    
+
     for k in range(len(max_sorti)):
         if dir_route == 0:
             if dir_voiture == 0:
-                pos.append(pos_depart)                
+                pos.append(pos_depart)
             elif dir_voiture == 1:
-                pos_projete = max_sorti[k] - abs(max_adj - pos_depart) 
-                if pos_projete >= taille_inter(route,num_inter)[0][1]: # Min j inter
+                pos_projete = max_sorti[k] - abs(max_entre - pos_depart)
+                if pos_projete >= taille[0][1]:  # Min j inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[0][1]) # Min j inter
+                    pos.append(taille[0][1])  # Min j inter
             elif dir_voiture == 3:
-                pos_projete = max_sorti[k] - abs(min_adj - pos_depart)
-                if pos_projete >= taille_inter(route,num_inter)[0][1]:
+                pos_projete = max_sorti[k] - abs(min_entre - pos_depart)
+                if pos_projete >= taille[0][1]:
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[0][1]) # Min j inter            
+                    pos.append(taille[0][1])  # Min j inter
         elif dir_route == 1:
             if dir_voiture == 0:
-                pos_projete = min_sorti[k] + abs(min_adj - pos_depart)
-                if pos_projete <= taille_inter(route,num_inter)[1][0]: # Max i inter
+                pos_projete = min_sorti[k] + abs(min_entre - pos_depart)
+                if pos_projete <= taille[1][0]:  # Max i inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[1][0]) # Max i inter
+                    pos.append(taille[1][0])  # Max i inter
             elif dir_voiture == 1:
                 pos.append(pos_depart)
             elif dir_voiture == 2:
-                pos_projete =  min_sorti[k] + abs(max_adj - pos_depart)
-                if pos_projete <= taille_inter(route,num_inter)[1][0]: # Max i inter
+                pos_projete = min_sorti[k] + abs(max_entre - pos_depart)
+                if pos_projete <= taille[1][0]:  # Max i inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[1][0]) # Max i inter
+                    pos.append(taille[1][0])  # Max i inter
         elif dir_route == 2:
             if dir_voiture == 1:
-                pos_projete = min_sorti[k] + abs(max_adj - pos_depart)
-                if pos_projete <= taille_inter(route,num_inter)[1][1]: # Max j inter
+                pos_projete = min_sorti[k] + abs(max_entre - pos_depart)
+                if pos_projete <= taille[1][1]:  # Max j inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[1][1]) # Max j inter
+                    pos.append(taille[1][1])  # Max j inter
             elif dir_voiture == 2:
                 pos.append(pos_depart)
             elif dir_voiture == 3:
-                pos_projete = min_sorti[k] + abs(min_adj - pos_depart)
-                if pos_projete <= taille_inter(route,num_inter)[1][1]: # Max j inter
+                pos_projete = min_sorti[k] + abs(min_entre - pos_depart)
+                if pos_projete <= taille[1][1]:  # Max j inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[1][1]) # Max j inter
+                    pos.append(taille[1][1])  # Max j inter
         else:
             if dir_voiture == 0:
-                pos_projete = max_sorti[k] - abs(min_adj - pos_depart)
-                if pos_projete >= taille_inter(route,num_inter)[0][0]: # Min i inter
+                pos_projete = max_sorti[k] - abs(min_entre - pos_depart)
+                if pos_projete >= taille[0][0]:  # Min i inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[0][0]) # Min i inter
+                    pos.append(taille[0][0])  # Min i inter
             elif dir_voiture == 2:
-                pos_projete = max_sorti[k] - abs(max_adj - pos_depart)
-                if pos_projete >= taille_inter(route,num_inter)[0][0]: # Min i inter
+                pos_projete = max_sorti[k] - abs(max_entre - pos_depart)
+                if pos_projete >= taille[0][0]:  # Min i inter
                     pos.append(pos_projete)
                 else:
-                    pos.append(taille_inter(route,num_inter)[0][0]) # Min i inter
+                    pos.append(taille[0][0])  # Min i inter
             elif dir_voiture == 3:
-                pos.append(pos_depart)    
+                pos.append(pos_depart)
+
+    return pos
+
+# Fonction qui trouve la position de la moy de gauss
+def pos_moy_gauss(proj, min_sorti, max_sorti):
     
-    # Si aucune pos trouvé on leve une exception
-    # Si une seule sortie
+    # On définit notre rés
     moy_gauss = []
-    for k in range(len(pos)):
-        if min_sorti[k] <= pos[k] <= max_sorti[k]:
-            moy_gauss.append(pos[k])
+    
+    for k in range(len(proj)):
+        if min_sorti[k] <= proj[k] <= max_sorti[k]:
+            moy_gauss.append(proj[k])
         else:
-            if abs(min_sorti[k] - pos[k]) <= abs(max_sorti[k] - pos[k]):
-                moy_gauss.append(min_sorti[k]) 
+            if abs(min_sorti[k] - proj[k]) <= abs(max_sorti[k] - proj[k]):
+                moy_gauss.append(min_sorti[k])
             else:
-                moy_gauss.append(max_sorti[k]) 
+                moy_gauss.append(max_sorti[k])
+    
+    return moy_gauss
 
+# Fonction qui trouve l'arrivée pour un départ et une direction
+def trouve_arrivee(route, direction, depart):
+
+    # Test
+    if not test_situation_ok(route, depart):
+        raise TypeError("Mauvaise situation départ :" + str(depart))
+
+    # Pos de départ
+    x, y = depart
+
+    # Direction
+    dir_route = route[x][y][1]
+    dir_voiture = direction[x][y][1]
+    
+    # Numéro de l'intersection
+    num_inter = num_intersection_adj(route, depart)
+    
+    # Taille de l'intersection
+    taille = taille_inter(route, num_inter)
+
+    # On test tous les blocs pour trouver ceux coller à l'intersection concernée
+    route_arv = trouve_sorti(route, dir_voiture, num_inter)
+    route_ent = trouve_entre(route, dir_route, num_inter)
+
+    # Sur les deux coordonnees de départ seul une seule varie et nous intéresse
+    pos_depart = x if dir_route in [0, 2] else y
+
+    # On cherche les extrémitées des sorties possibles
+    # ! Les min et max sont des listes
+    min_sorti, max_sorti = intervalle_sorti(route_arv, dir_voiture)
+
+    # On cherche les extrémitées de l'entrée
+    # ! Les min et max sont des entiers
+    min_entre, max_entre = intervalle_entre(route_ent, dir_route, pos_depart)
+
+    # On cherche mtn à positionner selon nous l'endroit de sorti idéal pour les voitures
+    # Pour cela il faut projeter l'entrée sur la sortie en tenant compte de la taille de l'intersection
+    proj = projete_entre_sorti(taille,
+                               pos_depart,
+                               dir_route,
+                               dir_voiture,
+                               min_entre,
+                               max_entre,
+                               min_sorti,
+                               max_sorti)
+    
+    # On trouve les postions des moyennes de gauss
+    moy_gauss = pos_moy_gauss(proj, min_sorti, max_sorti)
+    
     # On génère la sortie sélectionner en respectant les distribution gaussienne
-
+    # On tire au sort une sortie
     choix = random.randint(0, len(moy_gauss) - 1)
-    arrivee = round(random.gauss(moy_gauss[choix], 1))
+    
+    # On définit les bornes de notre gaussienne
     min_gauss = min_sorti[choix]
     max_gauss = max_sorti[choix]
     
+    # On tire au sort un nombre en respectant les paramètres de la gaussienne
+    arrivee = round(random.gauss(moy_gauss[choix], 1))
+
+    # En fonction du résultat on retourne la bonne sortie
     if min_gauss <= arrivee <= max_gauss:
         return (
             (arrivee, route_arv[0][1])
@@ -533,6 +563,7 @@ def arrivee(route, direction, depart):
             else (route_arv[0][0], max_gauss)
         )
 
+# Focntion qui pour un départ et une direction trouve le chemin à parcourir dans une intersection
 def chemin_intersection(route, direction, depart):
     """Cette fonction permet de déterminer le chemin à emprunter pour une voiture dans une intersection
 
