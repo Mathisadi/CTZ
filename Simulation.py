@@ -1,4 +1,4 @@
-import Modele
+import Modele.Modele as Modele
 from Variables import *
 import matplotlib
 import matplotlib.pyplot as plt
