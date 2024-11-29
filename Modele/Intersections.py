@@ -294,6 +294,22 @@ def trouve_entre(route, dir_route, num_inter):
 
 # Fonction test qui s'assure que tous les critères sont bons pour la fonction arrivee
 def test_situation_ok(route, depart):
+    """
+    Vérifie si la situation de départ est ok pour une voiture.
+    
+    Args:
+        route (list[list]): Notre route
+        depart (tuple[int, int]): Les coordonnées (i, j) de la cellule de départ dans la grille.
+    
+    Returns:
+        bool: True si la situation est ok, sinon False.
+    
+    Notes:
+        - On vérifie que le bloc de départ n'est pas un bloc de fin ou 0.
+        - On se déplace sur l'intersection en fonction de la direction du bloc de départ.
+        - On vérifie que le bloc pointé est bien une intersection.
+    """
+    
     # Pos de départ
     x, y = depart
 
@@ -325,6 +341,18 @@ def test_situation_ok(route, depart):
 
 # Fonction qui retourne le numéro de l'intersection adjacente
 def num_intersection_adj(route, depart):
+    """
+    Fonction qui retourne le numéro de l'intersection adjacente
+    dans la direction de la route
+
+    Args:
+        route (2D list): Liste des élements de notre route
+        depart (tuple[int, int]): Les coordonnées (x, y) de la cellule de départ dans la grille
+
+    Returns:
+        int: Le numéro de l'intersection adjacent
+    """
+    
     # Pos de départ
     x, y = depart
 
@@ -348,6 +376,20 @@ def num_intersection_adj(route, depart):
 # Fonction qui prend en entrée les coordonnes des sorties et cherche à regrouper les sorties
 # qui sont collées entres elles et retourne un intervalle qui spécifie les positions des groupes
 def intervalle_sorti(route_arv, dir):
+    """
+    Prend en entrée les coordonnes des sorties et cherche à regrouper les sorties
+    qui sont collées entres elles et retourne un intervalle qui spécifie les positions
+    des groupes.
+
+    Args:
+        route_arv (list[tuple[int, int]]): Les coordonnées (x, y) des sorties
+        dir (int): La direction dans laquelle on sort de l'intersection
+
+    Returns:
+        tuple[list[int], list[int]]: Un tuple contenant deux listes, la première
+        correspond aux valeurs minimales des intervalles, la seconde aux valeurs maximales
+    """
+    
     if dir in [0, 2]:
         coord = [x for x, y in route_arv]
         coord.sort()
@@ -370,6 +412,22 @@ def intervalle_sorti(route_arv, dir):
 
 # Fonction qui prend en entrée les coord des entrées et trouve le max et min de la route d'entrée
 def intervalle_entre(route_ent, dir, pos_depart):
+    """
+    Prend en entrée les coordonnes des entrées et la direction de l'intersection
+    et cherche à regrouper les entrées qui sont collées entres elles et
+    retourne un intervalle qui spécifie la position de la route d'entrée
+    dans laquelle on se trouve.
+
+    Args:
+        route_ent (list[tuple[int, int]]): Les coordonnées (x, y) des entrées
+        dir (int): La direction dans laquelle on entre dans l'intersection
+        pos_depart (int): La position de départ
+
+    Returns:
+        tuple[int, int]: Un tuple contenant deux entiers, le premier
+        correspond au minimum de l'intervalle, le second au maximum
+    """
+    
     if dir in [0, 2]:
         coord = [x for x, y in route_ent]
         coord.sort()
@@ -398,6 +456,23 @@ def intervalle_entre(route_ent, dir, pos_depart):
 
 # Fonction qui projete la position des entree sur la sorti en fonction de la taille de l'intersection
 def projete_entre_sorti(taille, pos_depart, dir_route, dir_voiture, min_entre, max_entre, min_sorti, max_sorti):
+    """
+    Fonction qui projete la position des entree sur la sorti en fonction de la taille de l'intersection
+    et de la direction de la route et de la voiture.
+
+    Args:
+        taille (list[tuple[int, int]]): La taille de l'intersection
+        pos_depart (int): La position de départ
+        dir_route (int): La direction de la route
+        dir_voiture (int): La direction de la voiture
+        min_entre (int): La position minimale de l'entrée
+        max_entre (int): La position maximale de l'entrée
+        min_sorti (list[int]): La liste des positions minimales des sorties
+        max_sorti (list[int]): La liste des positions maximales des sorties
+
+    Returns:
+        list[int]: La liste des positions projetées sur la sortie
+    """
     
     # On définit le rés
     pos = []
@@ -485,7 +560,32 @@ def pos_moy_gauss(proj, min_sorti, max_sorti):
 
 # Fonction qui trouve l'arrivée pour un départ et une direction
 def trouve_arrivee(route, direction, depart):
+    """
+    Trouve l'arrivée pour un départ et une direction.
 
+    On prend en compte les directions des routes et des intersections pour déterminer les sorties valides
+    et on positionne les voitures en fonction de la taille de l'intersection et de la direction des routes
+    adjacentes.
+
+    Args:
+        route (list[list]): Notre route
+        direction (list[list]): Une grille représentant la direction des véhicules dans chaque cellule.
+        depart (tuple[int, int]): Les coordonnées (x, y) de la cellule de départ dans la grille.
+
+    Returns:
+        tuple[int, int]: Les coordonnées (x, y) de la cellule d'arrivée sélectionnée.
+
+    Raises:
+        TypeError: si la situation de départ n'est pas valide.
+
+    Notes:
+        - Les directions possibles sont codées comme suit :
+            0 : gauche
+            1 : bas
+            2 : droite
+            3 : haut
+    """
+    
     # Test
     if not test_situation_ok(route, depart):
         raise TypeError("Mauvaise situation départ :" + str(depart))
