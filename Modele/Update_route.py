@@ -88,3 +88,26 @@ def update_feux_rouges(route, temps):
                         route[x][y][3] = not (route[x][y][3])
 
     return route
+
+def update_grille(route, direction, traffic, temps):
+    """Mise à jour de la grille de simulation, qui met à jour la direction des voitures, 
+    génère des voitures sur les cases de départ et met à jour les feux rouges.
+    
+    Args:
+        route (2D list): Liste des élements de notre route
+        direction (2D list): Liste des préferences de direction des utilisateur pour chaque élement
+        traffic (2D list): Liste resprésentant le traffic de notre route 0 = vide / 1 = voiture
+        temps (int): Temps depuis début de la simulation en seconde
+
+    Returns:
+        route (2D list): Retourne la route avec les éléments mis à jour
+        direction (2D list): Retourne la direction avec les éléments mis à jour
+        traffic (2D list): Retourne le traffic avec les éléments mis à jour
+    """
+    
+    # On met à jour les éléments dans l'ordre
+    direction = update_direction(route, direction)
+    traffic = update_départ(route, traffic)
+    route = update_feux_rouges(route, temps)
+    
+    return route, direction, traffic
