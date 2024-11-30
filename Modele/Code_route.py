@@ -2,7 +2,7 @@
 # @Date of creation : 25/11/2024
 
 # Bibliothèques utilisées
-from Intersections import trouve_arrivee
+from Modele import *
 import copy
 
 # ! ATTENTION : on part du principe qu'on s'est assurer que la route est bien construite
@@ -79,8 +79,8 @@ def regle_intersection(route, direction, traffic, x, y):
     # On trouve la direction
     dir_voiture = direction[x][y][0]
     
-    # On crée le res
-    res = []
+    # On définit une variable res
+    res = None
     
     # Pour les intersections ca se complique en effet il faut faire attention aux priorités à droite
     # La priorité à droite s'applique si le bloc à droite de la destination est une route occupée
@@ -97,11 +97,11 @@ def regle_intersection(route, direction, traffic, x, y):
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
                 if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
-                    res.append([x, y, x, y - 1])
+                    res = [x, y, x, y - 1]
             else:
-                res.append([x, y, x, y - 1])
+                res = [x, y, x, y - 1]
         else:
-            res.append([x, y, x, y - 1])
+            res = [x, y, x, y - 1]
 
     # Bas
     elif dir_voiture == 1:
@@ -111,11 +111,11 @@ def regle_intersection(route, direction, traffic, x, y):
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
                 if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
-                    res.append([x, y, x + 1, y])
+                    res = [x, y, x + 1, y]
             else:
-                res.append([x, y, x + 1, y])
+                res = [x, y, x + 1, y]
         else:
-            res.append([x, y, x + 1, y])
+            res = [x, y, x + 1, y]
 
     # Droite
     elif dir_voiture == 2:
@@ -125,11 +125,11 @@ def regle_intersection(route, direction, traffic, x, y):
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
                 if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
-                    res.append([x, y, x, y + 1])
+                    res = [x, y, x, y + 1]
             else:
-                res.append([x, y, x, y + 1])
+                res = [x, y, x, y + 1]
         else:
-            res.append([x, y, x, y + 1])
+            res = [x, y, x, y + 1]
 
     # Haut
     elif dir_voiture == 3:
@@ -139,13 +139,15 @@ def regle_intersection(route, direction, traffic, x, y):
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
                 if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
-                    res.append([x, y, x - 1, y])
+                    res = [x, y, x - 1, y]
             else:
-                res.append([x, y, x - 1, y])
+                res = [x, y, x - 1, y]
         else:
-            res.append([x, y, x - 1, y])
+            res = [x, y, x - 1, y]
 
-    return res
+    # Si pas none on retourn res
+    if res is not None:
+        return res
 
 def regle_feu(route, traffic, x, y):
     """
@@ -161,15 +163,15 @@ def regle_feu(route, traffic, x, y):
         res (1D list): Retourne l'ensemble des changements de blocs en indiquant le point de départ et l'arrivée
     """
     
-    # On défini le rés
-    res = []
-    
     # Le feu doit etre au vert
     if route[x][y][-1] == False:
         return None
      
     # On définit la direction de la route
     dir_route = route[x][y][1]
+    
+    # On définit une variable res
+    res = None
     
     # Feux rouges : pour les feux rouges il va dans la direction si le feu est vert
     # Attention execption si le feu rouge est relier à une intersection
@@ -181,9 +183,9 @@ def regle_feu(route, traffic, x, y):
             # On test si la route est libre
             if est_dans_la_grille(route, x + 1, y - 1):
                 if traffic[x + 1][y - 1][-1] == 0:
-                    res.append([x, y, x, y - 1])
+                    res = [x, y, x, y - 1]
         else:
-            res.append([x, y, x, y - 1])
+            res = [x, y, x, y - 1]
             
     # Bas
     elif dir_route == 1:
@@ -191,9 +193,9 @@ def regle_feu(route, traffic, x, y):
             # On test si la route est libre
             if est_dans_la_grille(route, x + 1, y + 1):
                 if traffic[x + 1][y + 1][-1] == 0:
-                    res.append([x, y, x + 1, y])
+                    res = [x, y, x + 1, y]
         else:
-            res.append([x, y, x + 1, y])
+            res = [x, y, x + 1, y]
 
     # Droite
     elif dir_route == 2:
@@ -201,9 +203,9 @@ def regle_feu(route, traffic, x, y):
             # On test si la route est libre
             if est_dans_la_grille(route, x - 1, y + 1):
                 if traffic[x - 1][y + 1][-1] == 0:
-                    res.append([x, y, x, y + 1])
+                    res = [x, y, x, y + 1]
         else:
-            res.append([x, y, x, y + 1])
+            res = [x, y, x, y + 1]
 
     # Haut
     elif dir_route == 3:
@@ -211,11 +213,13 @@ def regle_feu(route, traffic, x, y):
             # On test si la route est libre
             if est_dans_la_grille(route, x - 1, y - 1):
                 if traffic[x - 1][y - 1][-1] == 0:
-                    res.append([x, y, x - 1, y])    
+                    res = [x, y, x - 1, y]
         else:
-            res.append([x, y, x - 1, y])
+            res = [x, y, x - 1, y]
 
-    return res
+    # Si pas none on retourne res
+    if res is not None:
+        return res
 
 def voie_libre(route, traffic, nbr_case_libre_necessaire, dir_route, x, y):
     """
@@ -338,7 +342,7 @@ def regle_priorite(route, direction, x, y):
     # On retourne l'arrivée si on est passé
     return [x_start, y_start, x, y]
 
-def regle_circulation(route, x, y):
+def regle_circulation(route, direction, traffic, x, y):
     """
     Applique la règle de circulation pour le bloc de coordonnée (x, y) de la route.
     
@@ -358,11 +362,11 @@ def regle_circulation(route, x, y):
     if type_route == "Route" or type_route == "Depart":
         return regle_route_depart(route, x, y)
     elif type_route == "Intersection":
-        return regle_intersection(route, x, y)
+        return regle_intersection(route, direction, traffic, x, y)
     elif type_route == "Feu":
-        return regle_feu(route, x, y)
+        return regle_feu(route, traffic, x, y)
     elif type_route == "Priorité":
-        return regle_priorite(route, x, y)
+        return regle_priorite(route, direction, x, y)
 
 def changement_bloc(route, direction, traffic):
     """
@@ -392,7 +396,7 @@ def changement_bloc(route, direction, traffic):
         for y in range(m):    
             if route[x][y] != 0:
                 if traffic[x][y][-1] >= 1:
-                    change = regle_circulation(route, direction, x, y)
+                    change = regle_circulation(route, direction, traffic, x, y)
                     if change is not None:
                         res.append(change)
                         

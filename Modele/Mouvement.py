@@ -4,10 +4,8 @@
 # Bibliothèques utilisées
 
 import copy
-from Variables import *
-from Intersections import *
-from Code_route import *
-from Update_route import *
+from Modele import *
+
 
 # Objectif définir une fonction qui déplace les voitures et met à jour le traffic
 

@@ -4,123 +4,112 @@
 # Bibliothèques utilisées
 import copy
 import random
-from Variables import *
 from collections import deque
 
-# ! Fonction qui permet de trouver les chemins à emprunter dans les intersections
+# Objectif : Fonction qui permet de trouver les chemins à emprunter dans les intersections
 
 # Fonction BFS pour trouver le chemin le plus court
 def bfs(route, depart, arrivee):
     """
-    Effectue une recherche en largeur (BFS) pour trouver le chemin entre deux points
-    dans une grille donnée, tout en minimisant le nombre de virages nécessaires.
+    Cherche le chemin le plus court entre deux intersections dans une route.
 
-    Args:
-        route (list[list[tuple]]): Notre route
-        depart (tuple): Coordonnées (i, j) de l'intersection de départ.
-        arrivee (tuple): Coordonnées (i, j) de l'intersection d'arrivée.
+    Parameters
+    ----------
+    route : 2D list
+        Route à étudier.
+    depart : tuple
+        Coordonnées de l'intersection de départ.
+    arrivee : tuple
+        Coordonnées de l'intersection d'arrivée.
 
-    Returns:
-        list[tuple]: Le chemin optimal sous forme d'une liste de coordonnées (i, j),
-                     où chaque élément représente une case du chemin.
-                     Le chemin minimise le nombre de virages nécessaires.
+    Returns
+    -------
+    list
+        Chemin le plus court entre les deux intersections, sous forme de
+        liste de tuples (x, y) représentant les coordonnées des intersections
+        successives. La liste est vide si il n'y a pas de chemin possible.
 
-    Raises:
-        TypeError: Si la case de départ ou d'arrivée n'est pas une intersection valide
-                   dans la grille.
-
-    Notes:
-        - Un virage est compté lorsqu'il y a un changement de direction dans le chemin.
-        - Si plusieurs chemins ont le même nombre minimal de virages, un seul est retourné.
-        - Le chemin retourné inclut la case de départ et celle d'arrivée.
+    Raises
+    ------
+    TypeError
+        Si les coordonnées de départ ou d'arrivée ne sont pas valides (hors
+        route, non-intersection, etc.).
     """
-    # Départ et arrivée sont des intersections
+    
+    # Vérification des points de départ et d'arrivée
     if (
         route[depart[0]][depart[1]] == 0
         or route[depart[0]][depart[1]][0] != "Intersection"
     ):
-        raise TypeError("Départ n'est pas une intersection")
+        raise TypeError("Départ n'est pas une intersection valide")
     if (
         route[arrivee[0]][arrivee[1]] == 0
         or route[arrivee[0]][arrivee[1]][0] != "Intersection"
     ):
-        raise TypeError("Arrivee n'est pas une intersection")
-
-    # Variables
+        raise TypeError("Arrivée n'est pas une intersection valide")
+    
     n, m = len(route), len(route[0])  # Dimensions de la grille
-    file = deque([depart])  # File d'attente pour le BFS
-    visite = set()  # Ensemble pour marquer les cases visitées
-    visite.add(depart)  # Marquer le point de départ
+    file = deque([depart])  # File pour BFS
+    visite = set()  # Cases visitées
+    visite.add(depart)
     parents = {depart: ("fin", "fin")}  # Pour reconstruire le chemin
     res = []
 
-    # Dico des directions avec déplacement associé
+    # Directions possibles
     directions = {
         3: (-1, 0),  # Haut
-        1: (1, 0),  # Bas
+        1: (1, 0),   # Bas
         0: (0, -1),  # Gauche
-        2: (0, 1),  # Droite
+        2: (0, 1),   # Droite
     }
 
     inverse_directions = {v: k for k, v in directions.items()}
 
-    # Parcourt en largeur
+    # Parcours BFS
     while file:
         x, y = file.popleft()
 
-        # Si on atteint la case d'arrivée on décompile le chemin et on calcul le nbr de virage
+        # Si on atteint la destination
         if (x, y) == arrivee:
             chemin = []
-            virage = 0
+            virages = 0
             chemin.append((x, y))
             x_parent, y_parent = parents[(x, y)]
-            # Cas chemin de longeur 1
+
+            # Reconstruction du chemin
             if (x_parent, y_parent) == ("fin", "fin"):
-                res.append([chemin[::-1], virage])
-            # Sinon
+                res.append([chemin[::-1], virages])
             else:
-                # On trouve la direction de départ
-                dir = inverse_directions[(x_parent - x, y_parent - y)]
-                # Tant qu'on est pas à la fin
+                direction = inverse_directions[(x_parent - x, y_parent - y)]
                 while (x_parent, y_parent) != ("fin", "fin"):
                     chemin.append((x_parent, y_parent))
-                    x_fils, y_fils = copy.copy((x, y))
+                    x_fils, y_fils = copy.copy((x_parent, y_parent))
                     x_parent, y_parent = parents[(x_parent, y_parent)]
-                    # Si on est pas à la fin et on tourne on ajt un virage
-                    if (x_parent, y_parent) != (
-                        "fin",
-                        "fin",
-                    ) and dir != inverse_directions[
-                        (x_parent - x_fils, y_parent - y_fils)
-                    ]:
-                        virage += 1
-                        dir = inverse_directions[(x_parent - x_fils, y_parent - y_fils)]
-                # Retourne le chemin inversé
-                res.append([chemin[::-1], virage])
 
-        # On cherche les directions possibles
-        dir = []
+                    # Compter les virages
+                    if (x_parent, y_parent) != ("fin", "fin") and direction != inverse_directions[(x_parent - x_fils, y_parent - y_fils)]:
+                        virages += 1
+                        direction = inverse_directions[(x_parent - x_fils, y_parent - y_fils)]
 
-        for k, test in enumerate(route[x][y][1]):
-            if test:
-                dir.append(k)
+                res.append([chemin[::-1], virages])
 
-        # Explorer les voisins accessibles à partir des directions de la case actuelle
-        for index in dir:
-            dx, dy = directions[index]
-            nx, ny = x + dy, y + dy
+        # Vérifier les directions possibles
+        for index, test in enumerate(route[x][y][1]):
+            if test:  # Direction disponible
+                dx, dy = directions[index]
+                nx, ny = x + dx, y + dy
 
-            if (
-                0 <= nx < n
-                and 0 <= nx < m
-                and route[nx][ny] != 0
-                and route[nx][ny][0] == "Intersection"
-                and (nx, ny) not in visite
-            ):
-                visite.add((nx, ny))
-                file.append((nx, ny))
-                parents[(nx, ny)] = (x, y)  # Garder trace du parent
-
+                # Vérifier si la case voisine est valide
+                if (
+                    0 <= nx < n and 0 <= ny < m and
+                    route[nx][ny] != 0 and
+                    route[nx][ny][0] == "Intersection" and
+                    (nx, ny) not in visite
+                ):
+                    visite.add((nx, ny))
+                    file.append((nx, ny))
+                    parents[(nx, ny)] = (x, y)
+    
     # On retourne le chemin avec le premier chemin avec le moins de virage
     # ! Comment différencier deux chemins de même longeur ?
     chemin_final, nbr_virage_min = res[0]
@@ -314,7 +303,7 @@ def test_situation_ok(route, depart):
     x, y = depart
 
     # On test si le bloc de départ n'est pas un bloc de fin ou 0
-    if route[x][y] == 0 or route[x][y][0] != "Fin":
+    if route[x][y] == 0 or route[x][y][0] == "Fin":
         return False
 
     # Direction
@@ -371,7 +360,7 @@ def num_intersection_adj(route, depart):
     dx, dy = directions[dir_route]
     x, y = x + dx, y + dy
 
-    return route[x][y][1]
+    return route[x][y][2]
 
 # Fonction qui prend en entrée les coordonnes des sorties et cherche à regrouper les sorties
 # qui sont collées entres elles et retourne un intervalle qui spécifie les positions des groupes

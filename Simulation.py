@@ -1,13 +1,15 @@
-import Modele.Modele as Modele
+# @Autor : Mathis Adinolfi
+# @Date of creation : 25/09/2024
+
+# Bibliothéques utilisées
+from Modele import *
 from Variables import *
-import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.animation import FuncAnimation
 import numpy as np
-import time
 
-# Simulation
+# Objectif : Faire une simulation
 
 def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
     ax.clear()  # Effacer l'axe pour le prochain frame
@@ -271,12 +273,10 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
     ax.set_aspect("equal", adjustable="box")
     ax.set_title("Simulation du traffic au temps : " + str(frame), pad = 20)
 
-
-
 # Fonction pour générer une animation en mettant à jour la matrice de trafic
 def update(frame, ax, route, direction, traffic):
     # Simuler le mouvement des véhicules (fonction fictive)
-    r = Modele.mouvement(route, direction, traffic, frame)
+    r = mouvement(route, direction, traffic, frame)
     route, direction, traffic = r[0], r[1], r[2]
 
     # Taille de la matrice
@@ -285,7 +285,6 @@ def update(frame, ax, route, direction, traffic):
 
     # Appeler la fonction de simulation pour mettre à jour le graphique
     simulation(frame, ax, route, direction, traffic, n_rows, n_cols)
-
 
 # Initialisation de la simulation
 fig, ax = plt.subplots()
