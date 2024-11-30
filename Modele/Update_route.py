@@ -4,7 +4,7 @@
 # Bibliothèque utilisée
 import random
 
-# Fonction permettant de update les éléments de la route
+# Objectif : update les éléments de la route
 
 def update_direction(route, direction):
     """Cette fonction modifie les choix de trajet des utilisateurs de manière aléatoire afin de respecter les
@@ -39,7 +39,6 @@ def update_direction(route, direction):
                     )[0]
 
     return direction
-
 
 def update_départ(route, traffic):
     """Cette fonction permet de générer des voitures dans les cases départ de manière aléatoire,
