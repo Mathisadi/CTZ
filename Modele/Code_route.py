@@ -2,12 +2,9 @@
 # @Date of creation : 25/11/2024
 
 # Bibliothèques utilisées
-from Modele import *
+from .Intersections import trouve_arrivee
+from .Repere import *
 import copy
-
-# ! ATTENTION : on part du principe qu'on s'est assurer que la route est bien construite
-# TODO : construire un fichier test qui vérifie que la route est bien construite
-# TODO : créer un test qui vérifie que les blocs priorités sont collées aux blocs intersection
 
 # Obejctif : définir une fonction qui cherche les voitures qui veulent changer des blocs et retourne leur
 # pos avant aprés si elle respecte le code de la route
@@ -48,19 +45,24 @@ def regle_route_depart(route, x, y):
     
     # Pour la route et les départ la voiture voudra toujour suivre la direction
     # aucune perturbation n'est à prévoir
-    if dir_route == 0:
-        # Gauche
-        return [x, y, x, y - 1]
-    elif dir_route == 1:
-        # Bas
-        return [x, y, x + 1, y]
-    elif dir_route == 2:
-        # Droite
-        return [x, y, x, y + 1]
-    else:
-        # Haut
-        return [x, y, x - 1, y]
+    dx, dy = repere[dir_route]
+    nx, ny = x + dx, y + dy
     
+    return [x, y, nx, ny]
+
+
+def regle_pieton(direction, x, y):
+    
+    # On trouve la direction de la voiture
+    dir_route = direction[x][y][1]
+    
+    # Pour les passages pieton la voiture voudra toujour suivre la direction
+    # aucune perturbation n'est à prévoir
+    dx, dy = repere[dir_route]
+    nx, ny = x + dx, y + dy
+    
+    return [x, y, nx, ny]
+
 def regle_intersection(route, direction, trafic, x, y):
     """
     Cette fonction permet de respecter les règles de la route pour un utilisateur sur une intersection.
@@ -345,6 +347,8 @@ def regle_circulation(route, direction, trafic, x, y):
     # On attribue à chaque élément la bonne fonction
     if type_route == "Route" or type_route == "Depart":
         return regle_route_depart(route, x, y)
+    elif type_route == "Pieton":
+        return regle_pieton(direction, x, y)
     elif type_route == "Intersection":
         return regle_intersection(route, direction, trafic, x, y)
     elif type_route == "Feu":

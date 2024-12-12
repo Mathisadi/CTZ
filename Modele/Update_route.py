@@ -25,11 +25,12 @@ def update_direction(route, direction):
         for y in range(len(route[x])):
             # Vérifie que l'élément de la route est différent de zéro (par exemple, 0 pourrait représenter un espace vide)
             if route[x][y] != 0:
-                # Si l'élément n'est pas un point de fin ou une intersection, on modifie la direction
+                # Si l'élément n'est pas une extremité ou une intersection, on modifie la direction
                 if (
                     route[x][y][0] != "Fin"
                     and route[x][y][0] != "Intersection"
                     and route[x][y][0] != "Depart"
+                    and route[x][y][0] != "Depart_pieton"
                 ):
                     # Mise à jour aléatoire de la direction en fonction des poids fournis
                     # direction[x][y][0] contient les probabilités pour chaque direction
@@ -107,8 +108,9 @@ def update_pieton(route):
             if route[x][y] != 0:
                 # Si l'élément est un passage piéton
                 if route[x][y][0] == "Pieton":
-                    # Si piéton sur le passage  
-                    route[x][y][2] -= 1 if route[x][y][2]!= 0 else 0
+                    for k in route[x][y][1]:
+                        # Si piéton sur le passage  
+                        route[x][y][2][k] -= 1 if route[x][y][2][k]!= 0 else 0
 
     return route
 
@@ -139,8 +141,9 @@ def update_depart_pieton(route, trafic, temps):
                         trafic[x][y][0] = 1
                     
                     # Si passage avec alternance et on arrive à la fin du cycle
-                    if route[x][y][3] == 0 and (temps % route[x][y][3]) == 0:
-                        route[x][y][4] = not (route[x][y][4])
+                    if route[x][y][3] != 0:
+                        if (temps % route[x][y][3]) == 0:
+                            route[x][y][4] = not (route[x][y][4])
                         
     return route, trafic
 

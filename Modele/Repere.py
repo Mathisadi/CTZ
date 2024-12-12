@@ -11,8 +11,8 @@ repere = {
     }
 
 inverse_repere = {
-        (0, -1): 3,  # Haut
+        (-1, 0): 3,  # Haut
         (1, 0): 1,   # Bas
-        (0, 1): 0,   # Gauche
-        (-1, 0): 2,  # Droite
+        (0, -1): 0,   # Gauche
+        (0, 1): 2,  # Droite
     }

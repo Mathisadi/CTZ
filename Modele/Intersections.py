@@ -5,7 +5,7 @@
 import copy
 import random
 from collections import deque
-from Modele import *
+from .Repere import *
 
 # Objectif : Fonction qui permet de trouver les chemins à emprunter dans les intersections
 

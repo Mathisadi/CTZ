@@ -221,6 +221,7 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                       rotation=0,
                     )
 
+            # Si c'est un feu rouge
             elif elm[0] == "Feu":
                 # Couleur Feu
                 couleur_feu = "green" if elm[-1] == True else "red"
@@ -261,6 +262,62 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                     ha="center",
                     va="center",
                 )
+            
+            # Si c'est un depart de passage pieton
+            elif elm[0] == "Depart_pieton":
+                ax.add_patch(
+                    patches.Rectangle(
+                        (j, n_rows - 1 - i), 1, 1, fill=True, color="lightgreen"
+                    )
+                )
+
+                ax.text(
+                    j + 0.5,
+                    n_rows - 1 - i + 0.5,
+                    'Pieton',
+                    color="black",
+                    fontsize = 8,
+                    ha="center",
+                    va="center",
+                )
+            
+            # Si c'est un passage piéton
+            elif elm[0] == "Pieton":
+                # Couleur paddage
+                if elm[1] == [0,2]:
+                    couleur_bas = "orange" if elm[-1][0] == True else "white"
+                    couleur_haut = "orange" if elm[-1][2] == True else "white"
+                    
+                    # Rectangle bas
+                    ax.add_patch(
+                        patches.Rectangle(
+                            (j, n_rows - 1 - i),
+                            1,
+                            1/2,
+                            fill=True,
+                            color=couleur_bas,
+                        )
+                    )
+                    
+                    # Rectangle haut
+                    ax.add_patch(
+                        patches.Rectangle(
+                            (j, n_rows - 1 - i + 1/2),
+                            1,
+                            1/2,
+                            fill=True,
+                            color=couleur_haut,
+                        )
+                    )
+                    
+                    couleur = "Grey" if value == [1] else "white"
+                    
+                    ax.add_patch(
+                        patches.Circle((j + 1 / 2, n_rows - 1 - i + 1 / 2),
+                                        1/16,
+                                        fill = True,
+                                        color = couleur)
+                    )
 
     # Réglages de la grille
     ax.set_xlim(0, n_cols)
