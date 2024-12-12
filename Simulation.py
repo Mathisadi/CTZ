@@ -11,7 +11,7 @@ import numpy as np
 
 # Objectif : Faire une simulation
 
-def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
+def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
     ax.clear()  # Effacer l'axe pour le prochain frame
 
     # Parcourir la matrice et ajouter des éléments graphiques
@@ -19,7 +19,7 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
         for j in range(n_cols):
             elm = route[i][j]
             dir = direction[i][j]
-            value = traffic[i][j]
+            value = trafic[i][j]
 
             # Si c'est une case vide (0)
             if elm == 0:
@@ -271,32 +271,32 @@ def simulation(frame, ax, route, direction, traffic, n_rows, n_cols):
     ax.set_yticklabels([])
     ax.grid(True)
     ax.set_aspect("equal", adjustable="box")
-    ax.set_title("Simulation du traffic au temps : " + str(frame), pad = 20)
+    ax.set_title("Simulation du trafic au temps : " + str(frame), pad = 20)
 
 # Fonction pour générer une animation en mettant à jour la matrice de trafic
-def update(frame, ax, route, direction, traffic):
+def update(frame, ax, route, direction, trafic):
     # Simuler le mouvement des véhicules (fonction fictive)
-    r = mouvement(route, direction, traffic, frame)
-    route, direction, traffic = r[0], r[1], r[2]
+    r = mouvement(route, direction, trafic, frame)
+    route, direction, trafic = r[0], r[1], r[2]
 
     # Taille de la matrice
-    n_rows = len(traffic)
-    n_cols = len(traffic[0])
+    n_rows = len(trafic)
+    n_cols = len(trafic[0])
 
     # Appeler la fonction de simulation pour mettre à jour le graphique
-    simulation(frame, ax, route, direction, traffic, n_rows, n_cols)
+    simulation(frame, ax, route, direction, trafic, n_rows, n_cols)
 
 # Initialisation de la simulation
 fig, ax = plt.subplots()
-n_rows = len(traffic_etude)
-n_cols = len(traffic_etude[0])
+n_rows = len(trafic_etude)
+n_cols = len(trafic_etude[0])
 
 # Créer l'animation
 ani = FuncAnimation(
     fig,
     update,
     frames=duree,
-    fargs=(ax, route_etude, direction_etude, traffic_etude),
+    fargs=(ax, route_etude, direction_etude, trafic_etude),
     repeat=False,
 )
 

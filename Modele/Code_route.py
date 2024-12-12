@@ -61,14 +61,14 @@ def regle_route_depart(route, x, y):
         # Haut
         return [x, y, x - 1, y]
     
-def regle_intersection(route, direction, traffic, x, y):
+def regle_intersection(route, direction, trafic, x, y):
     """
     Cette fonction permet de respecter les règles de la route pour un utilisateur sur une intersection.
 
     Args:
         route (2D list): Liste des élements de notre route
         direction (2D list): Liste des préferences de direction des utilisateur pour chaque élement et la direction
-        traffic (2D list): Liste des préferences de direction des utilisateur pour chaque élement et la direction
+        trafic (2D list): Liste des préferences de direction des utilisateur pour chaque élement et la direction
         x (int): Indique la position en x de la voiture
         y (int): Indique la position en y de la voiture
 
@@ -96,7 +96,7 @@ def regle_intersection(route, direction, traffic, x, y):
 
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
-                if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
+                if route[x_dest][y_dest][0] != "Route" or trafic[x_dest][y_dest][-1] == 0:
                     res = [x, y, x, y - 1]
             else:
                 res = [x, y, x, y - 1]
@@ -110,7 +110,7 @@ def regle_intersection(route, direction, traffic, x, y):
         
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
-                if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
+                if route[x_dest][y_dest][0] != "Route" or trafic[x_dest][y_dest][-1] == 0:
                     res = [x, y, x + 1, y]
             else:
                 res = [x, y, x + 1, y]
@@ -124,7 +124,7 @@ def regle_intersection(route, direction, traffic, x, y):
 
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
-                if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
+                if route[x_dest][y_dest][0] != "Route" or trafic[x_dest][y_dest][-1] == 0:
                     res = [x, y, x, y + 1]
             else:
                 res = [x, y, x, y + 1]
@@ -138,7 +138,7 @@ def regle_intersection(route, direction, traffic, x, y):
 
         if est_dans_la_grille(route, x_dest, y_dest):
             if route[x_dest][y_dest] != 0:
-                if route[x_dest][y_dest][0] != "Route" or traffic[x_dest][y_dest][-1] == 0:
+                if route[x_dest][y_dest][0] != "Route" or trafic[x_dest][y_dest][-1] == 0:
                     res = [x, y, x - 1, y]
             else:
                 res = [x, y, x - 1, y]
@@ -149,13 +149,13 @@ def regle_intersection(route, direction, traffic, x, y):
     if res is not None:
         return res
 
-def regle_feu(route, traffic, x, y):
+def regle_feu(route, trafic, x, y):
     """
     Cette fonction permet de respecter le code de la route pour un feu.
 
     Args:
         route (2D list): Liste des éléments de notre route
-        traffic (2D list): Liste des éléments de notre traffic
+        trafic (2D list): Liste des éléments de notre trafic
         x (int): Indique la position en x de la voiture
         y (int): Indique la position en y de la voiture
 
@@ -182,7 +182,7 @@ def regle_feu(route, traffic, x, y):
         if route[x][y - 1][0] == "Intersection":
             # On test si la route est libre
             if est_dans_la_grille(route, x + 1, y - 1):
-                if traffic[x + 1][y - 1][-1] == 0:
+                if trafic[x + 1][y - 1][-1] == 0:
                     res = [x, y, x, y - 1]
         else:
             res = [x, y, x, y - 1]
@@ -192,7 +192,7 @@ def regle_feu(route, traffic, x, y):
         if route[x + 1][y][0] == "Intersection":
             # On test si la route est libre
             if est_dans_la_grille(route, x + 1, y + 1):
-                if traffic[x + 1][y + 1][-1] == 0:
+                if trafic[x + 1][y + 1][-1] == 0:
                     res = [x, y, x + 1, y]
         else:
             res = [x, y, x + 1, y]
@@ -202,7 +202,7 @@ def regle_feu(route, traffic, x, y):
         if route[x][y + 1][0] == "Intersection":
             # On test si la route est libre
             if est_dans_la_grille(route, x - 1, y + 1):
-                if traffic[x - 1][y + 1][-1] == 0:
+                if trafic[x - 1][y + 1][-1] == 0:
                     res = [x, y, x, y + 1]
         else:
             res = [x, y, x, y + 1]
@@ -212,7 +212,7 @@ def regle_feu(route, traffic, x, y):
         if route[x - 1][y][0] == "Intersection":
             # On test si la route est libre
             if est_dans_la_grille(route, x - 1, y - 1):
-                if traffic[x - 1][y - 1][-1] == 0:
+                if trafic[x - 1][y - 1][-1] == 0:
                     res = [x, y, x - 1, y]
         else:
             res = [x, y, x - 1, y]
@@ -221,13 +221,13 @@ def regle_feu(route, traffic, x, y):
     if res is not None:
         return res
 
-def voie_libre(route, traffic, nbr_case_libre_necessaire, dir_route, x, y):
+def voie_libre(route, trafic, nbr_case_libre_necessaire, dir_route, x, y):
     """
     Fonction qui permet de savoir si il y a une place pour avancer.
     
     Args:
         route (2D list): Liste des élements de notre route
-        traffic (2D list): Liste des préferences de direction des utilisateur pour chaque élement et la direction
+        trafic (2D list): Liste des préferences de direction des utilisateur pour chaque élement et la direction
         nbr_case_libre_necessaire (int): Nombre de case qu'il faut avoir pour avancer
         dir_route (int): Direction de la route
         x (int): Indique la position en x de la voiture
@@ -259,16 +259,16 @@ def voie_libre(route, traffic, nbr_case_libre_necessaire, dir_route, x, y):
         3: (-1, 0),  # Haut
     }    
     
-    # On crée une liste avec les traffics de toutes les directions
+    # On crée une liste avec les trafics de toutes les directions
     test = []
     
     for d in dir_test:
-        traffic_dir = []
+        trafic_dir = []
         while est_dans_la_grille(route, x, y) and route[x][y] != 0:
-            traffic_dir = traffic[x][y] + traffic_dir
+            trafic_dir = trafic[x][y] + trafic_dir
             x, y = x + directions[d][0], y + directions[d][1]
         
-        test.append(traffic_dir)
+        test.append(trafic_dir)
         
     # On vérifie si on a la place
     for index in range(len(test)):
@@ -342,7 +342,7 @@ def regle_priorite(route, direction, x, y):
     # On retourne l'arrivée si on est passé
     return [x_start, y_start, x, y]
 
-def regle_circulation(route, direction, traffic, x, y):
+def regle_circulation(route, direction, trafic, x, y):
     """
     Applique la règle de circulation pour le bloc de coordonnée (x, y) de la route.
     
@@ -362,13 +362,13 @@ def regle_circulation(route, direction, traffic, x, y):
     if type_route == "Route" or type_route == "Depart":
         return regle_route_depart(route, x, y)
     elif type_route == "Intersection":
-        return regle_intersection(route, direction, traffic, x, y)
+        return regle_intersection(route, direction, trafic, x, y)
     elif type_route == "Feu":
-        return regle_feu(route, traffic, x, y)
+        return regle_feu(route, trafic, x, y)
     elif type_route == "Priorité":
         return regle_priorite(route, direction, x, y)
 
-def changement_bloc(route, direction, traffic):
+def changement_bloc(route, direction, trafic):
     """
     Calcule les changements de blocs sur la grille en respectant les règles de circulation.
 
@@ -378,7 +378,7 @@ def changement_bloc(route, direction, traffic):
     Args:
         route (2D list): Liste des éléments de la route.
         direction (2D list): Liste des directions préférées des utilisateurs pour chaque élément.
-        traffic (2D list): Représentation du trafic sur la route : 0 = vide, 1 = voiture présente.
+        trafic (2D list): Représentation du trafic sur la route : 0 = vide, 1 = voiture présente.
 
     Returns:
         list[list[int, int, int, int]]: Liste des changements de blocs autorisés sous forme 
@@ -395,8 +395,8 @@ def changement_bloc(route, direction, traffic):
     for x in range(n):
         for y in range(m):    
             if route[x][y] != 0:
-                if traffic[x][y][-1] >= 1:
-                    change = regle_circulation(route, direction, traffic, x, y)
+                if trafic[x][y][-1] >= 1:
+                    change = regle_circulation(route, direction, trafic, x, y)
                     if change is not None:
                         res.append(change)
                         

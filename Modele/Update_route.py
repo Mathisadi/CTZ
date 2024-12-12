@@ -40,16 +40,16 @@ def update_direction(route, direction):
 
     return direction
 
-def update_départ(route, traffic):
+def update_départ(route, trafic):
     """Cette fonction permet de générer des voitures dans les cases départ de manière aléatoire,
     tout en respectant le débit d'entrée
 
     Args:
         route (2D list): Liste des élements de notre route
-        traffic (2D list): Liste resprésentant le traffic de notre route 0 = vide / 1 = voiture
+        trafic (2D list): Liste resprésentant le trafic de notre route 0 = vide / 1 = voiture
 
     Returns:
-        traffic (2D list): Ajoute les voitures générées sur les cases départs
+        trafic (2D list): Ajoute les voitures générées sur les cases départs
     """
 
     for x in range(len(route)):
@@ -59,11 +59,11 @@ def update_départ(route, traffic):
                 # Si l'élément est un départ
                 if route[x][y][0] == "Depart":
                     # Si on génère un nombre aléatoire et si il est inférieur à débit par seconde alors
-                    # On génère une voiture permet de modéliser l'aléatoire du traffic
+                    # On génère une voiture permet de modéliser l'aléatoire du trafic
                     if random.random() <= route[x][y][2] / 60:
-                        traffic[x][y][0] += 1
+                        trafic[x][y][0] += 1
 
-    return traffic
+    return trafic
 
 # ! - A mettrre à jour afin de pouvoir gérer les cycles de feux rouges complexe
 def update_feux_rouges(route, temps):
@@ -88,25 +88,25 @@ def update_feux_rouges(route, temps):
 
     return route
 
-def update_grille(route, direction, traffic, temps):
+def update_grille(route, direction, trafic, temps):
     """Mise à jour de la grille de simulation, qui met à jour la direction des voitures, 
     génère des voitures sur les cases de départ et met à jour les feux rouges.
     
     Args:
         route (2D list): Liste des élements de notre route
         direction (2D list): Liste des préferences de direction des utilisateur pour chaque élement
-        traffic (2D list): Liste resprésentant le traffic de notre route 0 = vide / 1 = voiture
+        trafic (2D list): Liste resprésentant le trafic de notre route 0 = vide / 1 = voiture
         temps (int): Temps depuis début de la simulation en seconde
 
     Returns:
         route (2D list): Retourne la route avec les éléments mis à jour
         direction (2D list): Retourne la direction avec les éléments mis à jour
-        traffic (2D list): Retourne le traffic avec les éléments mis à jour
+        trafic (2D list): Retourne le trafic avec les éléments mis à jour
     """
     
     # On met à jour les éléments dans l'ordre
     direction = update_direction(route, direction)
-    traffic = update_départ(route, traffic)
+    trafic = update_départ(route, trafic)
     route = update_feux_rouges(route, temps)
     
-    return route, direction, traffic
+    return route, direction, trafic
