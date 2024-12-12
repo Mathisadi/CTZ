@@ -42,7 +42,7 @@ Direction = [[0,0,1,0] = les directions possibles et les probas associées, 2 = 
 
 Pieton
 ----------------------------------
-Route = ["Pieton", 4 = temps restant pour traverser, True = piéton présent] : parametres piétons
+Route = ["Pieton", 1 = direction du piéton,  4 = temps restant pour traverser, True = piéton présent] : parametres piétons
 Trafic = [0] len = 1  : paramètres voitures
 Direction = [[0,0,1,0] = les directions possibles et les probas associées, 2 = la direction choisie] : paramètres voitures
 ----------------------------------
@@ -82,8 +82,8 @@ Route_24 = ["Feu", 3, 34, False]
 Route_33 = ["Route", 1]
 Route_34 = ["Route", 3]
 Route_42 = ["Depart_pieton", 2, 1, 0, True]
-Route_43 = ["Pieton", 0, False]
-Route_44 = ["Pieton", 0, False]
+Route_43 = ["Pieton", 0, 0, False]
+Route_44 = ["Pieton", 0, 0, False]
 Route_45 = ["Depart_pieton", 0, 1, 0, True]
 Route_53 = ["Fin", 1]
 Route_54 = ["Depart", 3]

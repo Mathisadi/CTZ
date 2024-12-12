@@ -5,6 +5,7 @@
 import copy
 import random
 from collections import deque
+from Modele import *
 
 # Objectif : Fonction qui permet de trouver les chemins à emprunter dans les intersections
 
@@ -54,17 +55,7 @@ def bfs(route, depart, arrivee):
     visite.add(depart)
     parents = {depart: ("fin", "fin")}  # Pour reconstruire le chemin
     res = []
-
-    # Directions possibles
-    directions = {
-        3: (-1, 0),  # Haut
-        1: (1, 0),   # Bas
-        0: (0, -1),  # Gauche
-        2: (0, 1),   # Droite
-    }
-
-    inverse_directions = {v: k for k, v in directions.items()}
-
+    
     # Parcours BFS
     while file:
         x, y = file.popleft()
@@ -80,23 +71,23 @@ def bfs(route, depart, arrivee):
             if (x_parent, y_parent) == ("fin", "fin"):
                 res.append([chemin[::-1], virages])
             else:
-                direction = inverse_directions[(x_parent - x, y_parent - y)]
+                direction = inverse_repere[(x_parent - x, y_parent - y)]
                 while (x_parent, y_parent) != ("fin", "fin"):
                     chemin.append((x_parent, y_parent))
                     x_fils, y_fils = copy.copy((x_parent, y_parent))
                     x_parent, y_parent = parents[(x_parent, y_parent)]
 
                     # Compter les virages
-                    if (x_parent, y_parent) != ("fin", "fin") and direction != inverse_directions[(x_parent - x_fils, y_parent - y_fils)]:
+                    if (x_parent, y_parent) != ("fin", "fin") and direction != inverse_repere[(x_parent - x_fils, y_parent - y_fils)]:
                         virages += 1
-                        direction = inverse_directions[(x_parent - x_fils, y_parent - y_fils)]
+                        direction = inverse_repere[(x_parent - x_fils, y_parent - y_fils)]
 
                 res.append([chemin[::-1], virages])
 
         # Vérifier les directions possibles
         for index, test in enumerate(route[x][y][1]):
             if test:  # Direction disponible
-                dx, dy = directions[index]
+                dx, dy = repere[index]
                 nx, ny = x + dx, y + dy
 
                 # Vérifier si la case voisine est valide
@@ -184,14 +175,6 @@ def trouve_sorti(route, dir_voiture, num_inter):
     # Dimensions de la route
     n, m = len(route), len(route[0]) 
 
-    # Dictionnaire avec toute les directions
-    directions = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }
-
     # On définit une liste rés
     route_arv = []
 
@@ -205,7 +188,7 @@ def trouve_sorti(route, dir_voiture, num_inter):
                 and route[x][y][2] == num_inter
             ):
                 # On regarde que dans le sens de la voiture pour les sortie
-                dx_sorti, dy_sorti = directions[dir_voiture]
+                dx_sorti, dy_sorti = repere[dir_voiture]
                 x_sorti, y_sorti = x + dx_sorti, y + dy_sorti
 
                 # On test les sorties
@@ -244,14 +227,6 @@ def trouve_entre(route, dir_route, num_inter):
     # Dimensions de la route
     n, m = len(route), len(route[0]) 
 
-    # Dictionnaire avec toute les directions
-    directions = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }
-
     # On définit le res
     route_adj = []
 
@@ -266,7 +241,7 @@ def trouve_entre(route, dir_route, num_inter):
 
                 # On regarde que dans le sens inverse de la direction de la voiture pour les routes adj
                 dir_opp = (dir_route + 2) % 4
-                dx_ent, dy_ent = directions[dir_opp]
+                dx_ent, dy_ent = repere[dir_opp]
                 x_ent, y_ent = x + dx_ent, y + dy_ent
 
                 # On test les bloc adj
@@ -309,16 +284,8 @@ def test_situation_ok(route, depart):
     # Direction
     dir_route = route[x][y][1]
 
-    # Dictionnaire avec toute les directions
-    directions = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }
-
     # On se déplace sur l'intersection
-    dx, dy = directions[dir_route]
+    dx, dy = repere[dir_route]
     x, y = x + dx, y + dy
 
     # On test si le bloc pointé est bien une intersection
@@ -348,16 +315,8 @@ def num_intersection_adj(route, depart):
     # Direction
     dir_route = route[x][y][1]
 
-    # Dictionnaire avec toute les directions
-    directions = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }
-
     # On se déplace sur l'intersection
-    dx, dy = directions[dir_route]
+    dx, dy = repere[dir_route]
     x, y = x + dx, y + dy
 
     return route[x][y][2]
@@ -665,21 +624,7 @@ def chemin_intersection(route, direction, depart):
     Returns:
         res (1D list): Retourne les mouvement à réalisés pour sortir de l'intersection
     """
-    # On déf les dico
-    direction_position = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }
-
-    position_direction = {
-        (0, -1): 0,  # Gauche
-        (1, 0): 1,  # Bas
-        (0, 1): 2,  # Droite
-        (-1, 0): 3,  # Haut
-    }
-
+    
     if route[depart[0]][depart[1]] == 0:
         raise TypeError("Le départ n'existe pas")
 
@@ -692,13 +637,13 @@ def chemin_intersection(route, direction, depart):
 
     i, j = depart
     dir = route[i][j][1]
-    di, dj = direction_position[dir]
+    di, dj = repere[dir]
     i, j = i + di, j + dj
     depart = (i, j)
 
     i, j = arrivee
     dir = (route[i][j][1] + 2) % 4
-    di, dj = direction_position[dir]
+    di, dj = repere[dir]
     i, j = i + di, j + dj
     arrivee_inter = (i, j)
 
@@ -711,6 +656,6 @@ def chemin_intersection(route, direction, depart):
     for k in range(len(chemin) - 1):
         i = chemin[k + 1][0] - chemin[k][0]
         j = chemin[k + 1][1] - chemin[k][1]
-        deplacement.append(position_direction[(i, j)])
+        deplacement.append(inverse_repere[(i, j)])
 
     return deplacement

@@ -249,15 +249,7 @@ def voie_libre(route, trafic, nbr_case_libre_necessaire, dir_route, x, y):
         else:
             dir_test = [dir for dir, flag in enumerate(route[x][y][1][0:3:2]) if flag]
     else:
-        dir_test = [route[x][y][1]]
-        
-    # On crée un dictionnaire des directions
-    directions = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }    
+        dir_test = [route[x][y][1]]  
     
     # On crée une liste avec les trafics de toutes les directions
     test = []
@@ -266,7 +258,7 @@ def voie_libre(route, trafic, nbr_case_libre_necessaire, dir_route, x, y):
         trafic_dir = []
         while est_dans_la_grille(route, x, y) and route[x][y] != 0:
             trafic_dir = trafic[x][y] + trafic_dir
-            x, y = x + directions[d][0], y + directions[d][1]
+            x, y = x + repere[d][0], y + repere[d][1]
         
         test.append(trafic_dir)
         
@@ -302,14 +294,6 @@ def regle_priorite(route, direction, x, y):
     
     # On trouve les directions
     dir_route = route[x][y][1]
-    
-    # On crée un dictionnaire des directions
-    directions = {
-        0: (0, -1),  # Gauche
-        1: (1, 0),  # Bas
-        2: (0, 1),  # Droite
-        3: (-1, 0),  # Haut
-    }    
 
     # Lorsqu'on est sur une priorité on le s'engage que lorsqu'il n'y a personne sur l'ensemble
     # des voies que l'on coupent. Ainsi savoir si l'on peut s'engager dans une intersection depuis une priorité
@@ -327,7 +311,7 @@ def regle_priorite(route, direction, x, y):
             if not voie_libre(route, direction, compt, dir_route, x, y):                
                 return None
             else:
-                y = y + directions[dir_route][1]
+                y = y + repere[dir_route][1]
                 compt += 1
     
     elif dir_route in [1, 3]:
@@ -336,7 +320,7 @@ def regle_priorite(route, direction, x, y):
             if not voie_libre(route, direction, compt, dir_route, x, y):
                 return None
             else:
-                x = x + directions[dir_route][0]
+                x = x + repere[dir_route][0]
                 compt += 1
                 
     # On retourne l'arrivée si on est passé

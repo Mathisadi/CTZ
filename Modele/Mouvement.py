@@ -9,6 +9,24 @@ from Modele import *
 
 # Objectif définir une fonction qui déplace les voitures et met à jour le trafic
 
+def mouvement_pieton(route, trafic):
+        
+    # Dans un premier temps on bouge les piétons aux abords de la route
+    # On teste tous les éléments
+    for x in range(len(route)):
+        for y in range(len(route[x])):
+            if route[x][y] != 0:
+                if route[x][y][0] == "Depart_pieton":
+                    if route[x][y][4] and trafic[x][y][0] == 1:
+                        dx, dy = repere[route[x][y][1]]
+                        nx, ny = x + dx, y + dy
+                        route[nx][ny][2] = 4
+                        route[nx][ny][3] = True
+                        trafic[x][y][0] = 0
+    
+    # Dans un second temps
+                        
+                        
 def mouvement(route, direction, trafic, temps):
     """Cette fonction a pour but de faire avancer les voitures et de mettre à jour le trafic,
     1 itération correspond à 1 seconde.
@@ -30,6 +48,13 @@ def mouvement(route, direction, trafic, temps):
     
     # On garde en copie le trafic
     ref_trafic = copy.deepcopy(trafic)
+    
+    # Mouvement des piétons
+    
+    
+    # Mouvement entre les blocs
+    
+    # Mouvement dans les blocs
     
     # Dans un premier temps on fait déplacer les voitures entre les blocs
     deplacement_entre_bloc = changement_bloc(route, direction, trafic)
