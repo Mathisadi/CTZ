@@ -40,7 +40,7 @@ def update_direction(route, direction):
 
     return direction
 
-def update_départ(route, trafic):
+def update_depart(route, trafic):
     """Cette fonction permet de générer des voitures dans les cases départ de manière aléatoire,
     tout en respectant le débit d'entrée
 
@@ -88,25 +88,86 @@ def update_feux_rouges(route, temps):
 
     return route
 
-def update_grille(route, direction, trafic, temps):
-    """Mise à jour de la grille de simulation, qui met à jour la direction des voitures, 
-    génère des voitures sur les cases de départ et met à jour les feux rouges.
-    
+def update_pieton(route):
+    """Met à jour les piétons en réduisant le temps restant pour traverser
+    si il y a un piéton sur la route. Si le temps restant est à 0 et qu'il y a
+    un piéton sur la route, on retire le piéton. Si le temps restant est à 0
+    et qu'il n'y a pas de piéton sur la route, on ne fait rien.
+
     Args:
         route (2D list): Liste des élements de notre route
-        direction (2D list): Liste des préferences de direction des utilisateur pour chaque élement
-        trafic (2D list): Liste resprésentant le trafic de notre route 0 = vide / 1 = voiture
-        temps (int): Temps depuis début de la simulation en seconde
 
     Returns:
-        route (2D list): Retourne la route avec les éléments mis à jour
-        direction (2D list): Retourne la direction avec les éléments mis à jour
-        trafic (2D list): Retourne le trafic avec les éléments mis à jour
+        route (2D list): Retourne la route avec les piétons mis à jour
+    """
+    
+    for x in range(len(route)):
+        for y in range(len(route[x])):
+            # Vérifie que l'élément de la route est différent de zéro (par exemple, 0 pourrait représenter un espace vide)
+            if route[x][y] != 0:
+                # Si l'élément est un passage piéton
+                if route[x][y][0] == "Pieton":
+                    # Si piéton sur le passage  
+                    route[x][y][2] -= 1 if route[x][y][2]!= 0 else 0
+
+    return route
+
+# ! - A mettrre à jour afin de pouvoir gérer les cycles de feux rouges complexe
+def update_depart_pieton(route, trafic, temps):
+    """
+    Met à jour le trafic piétonnier sur les cases de départ piéton et gère l'alternance des passages piétons.
+
+    Args:
+        route (2D list): Liste des éléments de la route où chaque élément peut contenir des informations 
+                         sur un emplacement, comme "Depart_pieton".
+        trafic (2D list): Liste représentant le trafic de la route, avec 0 pour vide et 1 pour piéton présent.
+        temps (int): Temps écoulé depuis le début de la simulation en secondes.
+
+    Returns:
+        tuple: Retourne la route mise à jour et le trafic mis à jour.
+    """
+    
+    for x in range(len(route)):
+        for y in range(len(route[x])):
+            # Vérifie que l'élément de la route est différent de zéro (par exemple, 0 pourrait représenter un espace vide)
+            if route[x][y] != 0:
+                # Si l'élément estun départ de piéton
+                if route[x][y][0] == "Depart_pieton":
+                    # Si on génère un nombre aléatoire et si il est inférieur à débit par seconde alors
+                    # On génère un piéton permet de modéliser l'aléatoire du trafic
+                    if random.random() <= route[x][y][2] / 60:
+                        trafic[x][y][0] = 1
+                    
+                    # Si passage avec alternance et on arrive à la fin du cycle
+                    if route[x][y][3] == 0 and (temps % route[x][y][3]) == 0:
+                        route[x][y][4] = not (route[x][y][4])
+                        
+    return route, trafic
+
+def update_grille(route, direction, trafic, temps):
+    """
+    Met à jour la grille de simulation en fonction des conditions actuelles des routes, des directions,
+    et du trafic pour un instant donné.
+
+    Args:
+        route (2D list): Liste des éléments de la route, représentant l'état de chaque cellule.
+        direction (2D list): Liste des préférences de direction pour chaque élément de la route.
+        trafic (2D list): Représentation du trafic sur la route, indiquant la présence de voitures et piétons.
+        temps (int): Temps écoulé depuis le début de la simulation en secondes.
+
+    Returns:
+        tuple: Retourne la route mise à jour, les directions mises à jour, et le trafic mis à jour après le traitement des piétons, des voitures, et des feux rouges.
     """
     
     # On met à jour les éléments dans l'ordre
+    # On commence par les piétons car prioritaire
+    route, trafic = update_depart_pieton(route,trafic,temps)
+    route = update_pieton(route)
+    
+    # Puis les voitures
     direction = update_direction(route, direction)
-    trafic = update_départ(route, trafic)
+    trafic = update_depart(route, trafic)
     route = update_feux_rouges(route, temps)
     
     return route, direction, trafic
+
