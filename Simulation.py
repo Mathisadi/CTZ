@@ -352,7 +352,7 @@ n_cols = len(trafic_etude[0])
 ani = FuncAnimation(
     fig,
     update,
-    frames=duree,
+    frames=range(1, duree + 1),
     fargs=(ax, route_etude, direction_etude, trafic_etude),
     repeat=False,
 )

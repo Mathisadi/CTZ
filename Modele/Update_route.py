@@ -83,8 +83,10 @@ def update_feux_rouges(route, temps):
             if route[x][y] != 0:
                 # Si l'élément est un feu
                 if route[x][y][0] == "Feu":
+                    temps_tot = sum(route[x][y][2])
+                    temps_cumule = [sum(route[x][y][2][:i]) for i in range(len(route[x][y][2]))]
                     # Si on arrive à la fin du cycle on change l'état des feux
-                    if (temps % route[x][y][2]) == 0:
+                    if (temps % temps_tot) in temps_cumule:
                         route[x][y][3] = not (route[x][y][3])
 
     return route
@@ -133,7 +135,7 @@ def update_depart_pieton(route, trafic, temps):
         for y in range(len(route[x])):
             # Vérifie que l'élément de la route est différent de zéro (par exemple, 0 pourrait représenter un espace vide)
             if route[x][y] != 0:
-                # Si l'élément estun départ de piéton
+                # Si l'élément est un départ de piéton
                 if route[x][y][0] == "Depart_pieton":
                     # Si on génère un nombre aléatoire et si il est inférieur à débit par seconde alors
                     # On génère un piéton permet de modéliser l'aléatoire du trafic
@@ -141,8 +143,11 @@ def update_depart_pieton(route, trafic, temps):
                         trafic[x][y][0] = 1
                     
                     # Si passage avec alternance et on arrive à la fin du cycle
-                    if route[x][y][3] != 0:
-                        if (temps % route[x][y][3]) == 0:
+                    if route[x][y][3] != [0]:
+                        temps_tot = sum(route[x][y][3])
+                        temps_cumule = [sum(route[x][y][3][:i]) for i in range(len(route[x][y][3]))]
+                        # Si on arrive à la fin du cycle on change l'état des feux
+                        if (temps % temps_tot) in temps_cumule:
                             route[x][y][4] = not (route[x][y][4])
                         
     return route, trafic
