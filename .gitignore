@@ -1,4 +1,70 @@
+# Fichiers Python compilés
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+
+# Environnements virtuels
+env/
 venv/
-.venv
-TODO.md
-test.py
+ENV/
+*.venv/
+
+# Configurations spécifiques à l'éditeur
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Logs et fichiers temporaires
+*.log
+*.tmp
+*.out
+*.pid
+*.bak
+
+# Données sensibles
+.env
+*.env
+
+# Fichiers de configuration système
+.DS_Store
+Thumbs.db
+
+# Dépendances installées
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Sorties générées par les tests
+htmlcov/
+*.coverage
+*.cover
+*.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# Sorties générées par les outils de construction
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Sorties générées par Jupyter
+.ipynb_checkpoints/
+
+# Artifacts générés par des paquets Python
+*.egg
+*.manifest
+*.spec
+
+# Répertoires générés par des outils d'analyse
+.pytest_cache/
+.tox/
+.nox/
+mypy_cache/
+coverage/
+scrapy_doctests.*
