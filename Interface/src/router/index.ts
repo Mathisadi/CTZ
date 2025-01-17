@@ -9,13 +9,26 @@ const router = createRouter({
       component: () => import('../views/Menu.vue'),
     },
     {
-      path: '/app',
-      name: 'App',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Appli.vue'),
+      path: '/appli/edition',
+      name: 'Edition',
+      component: () => import('../views/Edition.vue'),
     },
+    {
+      path: '/appli/simulation',
+      name: 'Simulation',
+      component: () => import('../views/Simulation.vue'),
+    },
+    {
+      path: '/appli/lecture',
+      name: 'Lecture',
+      component: () => import('../views/Lecture.vue'),
+    },
+    {
+      // Pour Vue Router v4 (Vue 3) :
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/404.vue'),
+    }
   ],
 })
 

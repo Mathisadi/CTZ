@@ -9,11 +9,6 @@ export default defineComponent({
     components: {
         Add_circle,
         Open_folder
-    },
-
-    return(){
-        Add_circle;
-        Open_folder
     }
 })
 

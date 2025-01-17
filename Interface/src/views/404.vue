@@ -1,4 +1,3 @@
-
 <template>
-    <p>Appli</p>
+    <p>404</p>
 </template>
