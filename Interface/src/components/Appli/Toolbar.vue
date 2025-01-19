@@ -1,0 +1,91 @@
+<script>
+import { defineComponent } from 'vue';
+import IconRoute from '../Icons/Route.vue';
+import IconIntersection from '../Icons/Intersection.vue';
+import IconFeu from '../Icons/Feu.vue';
+import IconPriorite from '../Icons/Priorite.vue';
+import IconPieton from '../Icons/Pieton.vue';
+import IconDepart from '../Icons/Depart.vue';
+import IconFin from '../Icons/Fin.vue';
+import IconSelection from '../Icons/Selection.vue';
+import IconParametre from '../Icons/Parametre.vue';
+
+export default defineComponent({
+    name: "Toolbar",
+    components: {
+        IconRoute,
+        IconIntersection,
+        IconFeu,
+        IconPriorite,
+        IconPieton,
+        IconDepart,
+        IconFin,
+        IconSelection,
+        IconParametre
+    },
+})
+</script>
+
+<template>
+    <div class="toolbar">
+        <button class="icon"><IconRoute />Route</button>
+        <button class="icon"><IconIntersection />Intersect°</button>
+        <button class="icon"><IconFeu />Feu</button>
+        <button class="icon"><IconPriorite />Priorité</button>
+        <button class="icon"><IconPieton />Pieton</button>
+        <button class="icon"><IconDepart />Depart</button>
+        <button class="icon"><IconFin />Fin</button>
+        <button class="icon"><IconSelection />Selection</button>
+        <button class="icon_bas"><IconParametre />Paramètres</button>
+    </div>
+</template>
+
+<style scoped>
+.toolbar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-left-bar-1);
+    left: 0;
+    top: 5vh;
+    height: 95vh;
+    width: 5vw;
+    gap: 4px;
+}
+
+.icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    color: var(--color-text);
+    border: none;
+    cursor: pointer;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.icon_bas {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    color: var(--color-text);
+    border: none;
+    cursor: pointer;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 400;
+    bottom: 4px;
+}
+</style>

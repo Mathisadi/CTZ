@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-    name: "Topbar"
-}
-</script>
-
 <template>
     <div class="topbar">
         <h1>CTZ</h1>
@@ -11,7 +5,7 @@ export default {
     </div>
 </template>
 
-<style>
+<style scoped>
 .topbar {
     position: absolute;
     display: flex;

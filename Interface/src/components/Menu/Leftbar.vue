@@ -1,17 +1,13 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
 import Add_circle from '../Icons/Add_circle.vue';
 import Open_folder from '../Icons/Open_folder.vue';
 
-export default defineComponent({
-    name: "Leftbar",
-    
+export default {
     components: {
         Add_circle,
-        Open_folder
-    }
-})
-
+        Open_folder,
+    },
+}
 </script>
 
 <template>
@@ -22,7 +18,7 @@ export default defineComponent({
     </div>
 </template>
 
-<style>
+<style scoped>
 .leftbar {
     position: absolute;
     display: flex;
