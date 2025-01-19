@@ -2,11 +2,13 @@
 import { defineComponent } from 'vue';
 import Topbar from '@/components/Appli/Topbar.vue';
 import Toolbar from '@/components/Appli/Toolbar.vue';
+import Quadrillage from '@/components/Appli/Quadrillage.vue';
 
 export default defineComponent({
     components: {
         Topbar,
-        Toolbar
+        Toolbar,
+        Quadrillage
     },
 })
 </script>
@@ -15,5 +17,6 @@ export default defineComponent({
     <body>
         <Topbar />
         <Toolbar />
+        <Quadrillage />
     </body>
 </template>

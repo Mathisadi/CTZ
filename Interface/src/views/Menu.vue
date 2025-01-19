@@ -8,11 +8,6 @@ export default defineComponent({
         Topbar,
         Leftbar
     },
-
-    return () {
-        Topbar;
-        Leftbar
-    }
 })
 
 </script>
