@@ -15,8 +15,10 @@ export default defineComponent({
 
 <template>
     <body>
+
+        <Quadrillage />
         <Topbar />
         <Toolbar />
-        <Quadrillage />
+        
     </body>
 </template>
