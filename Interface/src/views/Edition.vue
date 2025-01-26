@@ -19,6 +19,7 @@ export default{
     <div class="topbar-container"><Topbar /></div>
     <div class="main_cotainer">
         <div class="toolbar-container"><Toolbar /></div>
+        <div class="left-ruler"><Ruler_left /></div>
         <div class="quadrillage-container"><Quadrillage /></div>
     </div>
 </template>
@@ -56,7 +57,8 @@ export default{
     align-items: center;
     background-color: var(--color-left-bar-1);
     border: 2px solid var(--color-line);
-    width: 20px;
+    width: 200px;
+    overflow: hidden;
 }
 
 .quadrillage-container {

@@ -1,5 +1,4 @@
 <template>
-    <div class="carre">
-      404
-    </div>
-</template>
+  <h1>404</h1>
+  <h3>Page introuvable</h3>
+</template> 
