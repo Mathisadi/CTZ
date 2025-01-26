@@ -35,94 +35,79 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="toolbar">
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_route()"
-      :style="{ backgroundColor: toolbarStore.bgColor_route }"
-    >
-      <IconRoute />Route
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_intersection()"
-      :style="{ backgroundColor: toolbarStore.bgColor_intersection }"
-    >
-      <IconIntersection />Intersect°
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_feu()"
-      :style="{ backgroundColor: toolbarStore.bgColor_feu }"
-    >
-      <IconFeu />Feu
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_priorite()"
-      :style="{ backgroundColor: toolbarStore.bgColor_priorite }"
-    >
-      <IconPriorite />Priorité
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_pieton()"
-      :style="{ backgroundColor: toolbarStore.bgColor_pieton }"
-    >
-      <IconPieton />Pieton
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_depart()"
-      :style="{ backgroundColor: toolbarStore.bgColor_depart }"
-    >
-      <IconDepart />Depart
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_fin()"
-      :style="{ backgroundColor: toolbarStore.bgColor_fin }"
-    >
-      <IconFin />Fin
-    </button>
-    <button
-      class="icon"
-      @click="toolbarStore.changeColor_selection()"
-      :style="{ backgroundColor: toolbarStore.bgColor_selection }"
-    >
-      <IconSelection />Selection
-    </button>
-    <button
-      class="icon_bas"
-      @click="toolbarStore.changeColor_parametres()"
-      :style="{ backgroundColor: toolbarStore.bgColor_parametres }"
-    >
-      <IconParametre />Paramètres
-    </button>
-  </div>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_route()"
+    :style="{ backgroundColor: toolbarStore.bgColor_route }"
+  >
+    <IconRoute />Route
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_intersection()"
+    :style="{ backgroundColor: toolbarStore.bgColor_intersection }"
+  >
+    <IconIntersection />Intersect°
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_feu()"
+    :style="{ backgroundColor: toolbarStore.bgColor_feu }"
+  >
+    <IconFeu />Feu
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_priorite()"
+    :style="{ backgroundColor: toolbarStore.bgColor_priorite }"
+  >
+    <IconPriorite />Priorité
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_pieton()"
+    :style="{ backgroundColor: toolbarStore.bgColor_pieton }"
+  >
+    <IconPieton />Pieton
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_depart()"
+    :style="{ backgroundColor: toolbarStore.bgColor_depart }"
+  >
+    <IconDepart />Depart
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_fin()"
+    :style="{ backgroundColor: toolbarStore.bgColor_fin }"
+  >
+    <IconFin />Fin
+  </button>
+  <button
+    class="icon"
+    @click="toolbarStore.changeColor_selection()"
+    :style="{ backgroundColor: toolbarStore.bgColor_selection }"
+  >
+    <IconSelection />Selection
+  </button>
+  <button
+    class="icon_bas"
+    @click="toolbarStore.changeColor_parametres()"
+    :style="{ backgroundColor: toolbarStore.bgColor_parametres }"
+  >
+    <IconParametre />Paramètres
+  </button>
 </template>
 
-<style scoped>
-.toolbar {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--color-left-bar-1);
-  left: 0;
-  top: 5vh;
-  height: 95vh;
-  width: 5vw;
-}
-
+<style >
 .icon {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 10/9;
   color: var(--color-text);
   border: none;
   cursor: pointer;
@@ -132,20 +117,19 @@ export default defineComponent({
 }
 
 .icon_bas {
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   aspect-ratio: 1/1;
-  background-color: transparent;
   color: var(--color-text);
   border: none;
   cursor: pointer;
-  gap: 10px;
   font-size: 10px;
   font-weight: 400;
-  bottom: 0;
+  margin-top: auto; /* Pousse ce bouton vers le bas */
 }
+
+
 </style>

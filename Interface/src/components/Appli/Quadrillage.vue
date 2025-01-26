@@ -101,27 +101,25 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="quadrillage-container">
+  <div
+    class="quadrillage"
+    @mousedown="startDrag"
+    @mousemove="onDrag"
+    @mouseup="endDrag"
+    @mouseleave="endDrag"
+    :style="{
+      transform: `translate(${offset.x}px, ${offset.y}px)`,
+      '--cols': cols,
+      '--rows': rows,
+    }"
+  >
     <div
-      class="quadrillage"
-      @mousedown="startDrag"
-      @mousemove="onDrag"
-      @mouseup="endDrag"
-      @mouseleave="endDrag"
-      :style="{
-        transform: `translate(${offset.x}px, ${offset.y}px)`,
-        '--cols': cols,
-        '--rows': rows,
-      }"
-    >
-      <div
-        v-for="(cell, index) in grid"
-        :key="index"
-        @click="change_color(index)"
-        :style="{ backgroundColor: cell.color }"
-        class="cases"
-      ></div>
-    </div>
+      v-for="(cell, index) in grid"
+      :key="index"
+      @click="change_color(index)"
+      :style="{ backgroundColor: cell.color }"
+      class="cases"
+    ></div>
   </div>
 </template>
 

@@ -14,11 +14,54 @@ export default defineComponent({
 </script>
 
 <template>
-    <body>
+    <div class="topbar-container"><Topbar /></div>
 
-        <Quadrillage />
-        <Topbar />
-        <Toolbar />
-        
-    </body>
+    <div class="main_cotainer">
+        <div class="toolbar-container"><Toolbar /></div>
+        <div class="left-ruler"></div>
+        <div class="quadrillage-container"><Quadrillage /></div>   
+    </div>
 </template>
+
+<style scoped>
+.topbar-container {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 5vh;
+}
+
+.main_cotainer {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 5vh;
+    width: 100vw;
+    height: 95vh;
+}
+
+.toolbar-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-left-bar-1);
+    height: 95vh;
+    width: 5vw;
+    max-width: 100px;
+    min-width: 80px;
+}
+
+.left-ruler {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-left-bar-1);
+    border: 2px solid var(--color-line);
+    width: 20px;
+}
+
+.quadrillage-container {
+    flex: 1;
+    overflow: hidden;
+}
+
+</style>

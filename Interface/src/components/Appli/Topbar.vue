@@ -34,8 +34,8 @@ export default defineComponent({
 
 <style scoped>
 .topbar {
-  position: absolute;
   display: flex;
+  flex-direction: row;
   align-items: center;
   background-color: var(--color-top-bar);
   width: 100vw;
@@ -43,7 +43,6 @@ export default defineComponent({
 }
 
 div h1 {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +56,6 @@ div h1 {
 }
 
 div h2 {
-  position: absolute;
   left: 5%;
   font-size: 14px;
   font-weight: normal;
