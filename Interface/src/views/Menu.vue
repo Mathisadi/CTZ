@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import Topbar from '../components/Menu/Topbar.vue';
 import Leftbar from '../components/Menu/Leftbar.vue';

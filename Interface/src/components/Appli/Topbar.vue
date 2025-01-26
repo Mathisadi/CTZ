@@ -1,9 +1,9 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script>
+import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import More from "../Icons/More.vue";
 import Choix_mode from "./Choix_mode.vue";
-import { useToogleChoixStore } from "@/stores/tooglechoix.ts";
+import { useToogleChoixStore } from "@/stores/tooglechoix";
 
 export default defineComponent({
   components: {

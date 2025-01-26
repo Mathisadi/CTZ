@@ -1,5 +1,4 @@
 <script>
-import { defineComponent, ref } from "vue";
 import IconRoute from "../Icons/Route.vue";
 import IconIntersection from "../Icons/Intersection.vue";
 import IconFeu from "../Icons/Feu.vue";
@@ -9,9 +8,9 @@ import IconDepart from "../Icons/Depart.vue";
 import IconFin from "../Icons/Fin.vue";
 import IconSelection from "../Icons/Selection.vue";
 import IconParametre from "../Icons/Parametre.vue";
-import { useToogleChoixStore } from "@/stores/toolbarInteraction.ts";
+import { useToogleChoixStore } from "@/stores/toolbarInteraction";
 
-export default defineComponent({
+export default{
   name: "Toolbar",
   components: {
     IconRoute,
@@ -31,7 +30,7 @@ export default defineComponent({
       toolbarStore,
     };
   },
-});
+}
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script>
-import { defineComponent, ref } from "vue";
-import { useToogleChoixStore } from "@/stores/toolbarInteraction.ts";
+import { ref } from "vue";
+import { useToogleChoixStore } from "@/stores/toolbarInteraction";
+import { mouvement } from "@/stores/mouvement";
 
-export default defineComponent({
+export default{
   name: "Quadrillage",
   setup() {
-
     // Constante de la grille
     const cols = ref(101);
     const rows = ref(101);
@@ -14,31 +14,13 @@ export default defineComponent({
         color: "#222831",
       }))
     );
-
-    // Constante du zoom et drag
-    const offset = ref({ x: -5100, y: -5100 });
-    const startPosition = ref({ x: 0, y: 0 });
-    const isDraging = ref(false);
-
+    
     // Drag
-    const startDrag = (event) => {
-      isDraging.value = true;
-      startPosition.value = { x: event.clientX, y: event.clientY };
-    };
-
-    const onDrag = (event) => {
-      if (isDraging.value) {
-        const dx = event.clientX - startPosition.value.x;
-        const dy = event.clientY - startPosition.value.y;
-        offset.value.x += dx;
-        offset.value.y += dy;
-        startPosition.value = { x: event.clientX, y: event.clientY };
-      }
-    };
-
-    const endDrag = () => {
-      isDraging.value = false;
-    };
+    const dragStore = mouvement();
+    const startDrag = dragStore.startDrag;
+    const onDrag = dragStore.onDrag;
+    const endDrag = dragStore.endDrag;
+    const offset= dragStore.offset;
 
     // Constante couleur
     const color_route = "#76ABAE";
@@ -89,15 +71,13 @@ export default defineComponent({
       cols,
       rows,
       offset,
-      startPosition,
-      isDraging,
       startDrag,
       onDrag,
       endDrag,
       change_color
     };
   },
-});
+}
 </script>
 
 <template>
@@ -124,16 +104,6 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.quadrillage-container {
-  position: absolute;
-  top: 5vh;
-  left: 5vw;
-  height: 95vh;
-  width: 95vw;
-  overflow: hidden;
-}
-
-
 .quadrillage {
   display: grid;
   grid-template-columns: repeat(var(--cols), 100px);

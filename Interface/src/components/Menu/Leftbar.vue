@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import Add_circle from '../Icons/Add_circle.vue';
 import Open_folder from '../Icons/Open_folder.vue';
 

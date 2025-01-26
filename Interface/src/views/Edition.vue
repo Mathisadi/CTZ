@@ -1,25 +1,25 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script>
 import Topbar from '@/components/Appli/Topbar.vue';
 import Toolbar from '@/components/Appli/Toolbar.vue';
 import Quadrillage from '@/components/Appli/Quadrillage.vue';
+import Ruler_left from '@/components/Appli/Ruler_left.vue';
 
-export default defineComponent({
+
+export default{
     components: {
         Topbar,
         Toolbar,
-        Quadrillage
+        Quadrillage,
+        Ruler_left
     },
-})
+}
 </script>
 
 <template>
     <div class="topbar-container"><Topbar /></div>
-
     <div class="main_cotainer">
         <div class="toolbar-container"><Toolbar /></div>
-        <div class="left-ruler"></div>
-        <div class="quadrillage-container"><Quadrillage /></div>   
+        <div class="quadrillage-container"><Quadrillage /></div>
     </div>
 </template>
 
@@ -62,6 +62,7 @@ export default defineComponent({
 .quadrillage-container {
     flex: 1;
     overflow: hidden;
+    cursor: crosshair;
 }
 
 </style>

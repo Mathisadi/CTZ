@@ -1,9 +1,9 @@
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import Edit from '../Icons/Edit.vue';
 import Eye from '../Icons/Eye.vue';
 import Start from '../Icons/Start.vue';
-import { useToogleChoixStore } from '@/stores/tooglechoix.ts';
+import { useToogleChoixStore } from '@/stores/tooglechoix';
 
 export default defineComponent({
     name: "Choix_mode",
