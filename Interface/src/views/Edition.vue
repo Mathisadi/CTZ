@@ -53,11 +53,10 @@ export default{
 
 .left-ruler {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     background-color: var(--color-left-bar-1);
     border: 2px solid var(--color-line);
-    width: 200px;
+    width: 20px;
     overflow: hidden;
 }
 
