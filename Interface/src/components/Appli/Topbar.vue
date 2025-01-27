@@ -53,6 +53,8 @@ div h1 {
   font-size: 16px;
   font-weight: bold;
   color: var(--color-title);
+  max-width: 100px;
+  min-width: 80px;
 }
 
 div h2 {
