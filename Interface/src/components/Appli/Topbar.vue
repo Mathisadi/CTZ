@@ -1,25 +1,24 @@
 <script>
-import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import More from "../Icons/More.vue";
 import Choix_mode from "./Choix_mode.vue";
-import { useToogleChoixStore } from "@/stores/tooglechoix";
+import { toogleChoix } from "@/stores/tooglechoix";
 
-export default defineComponent({
+export default {
   components: {
     More,
     Choix_mode,
   },
   setup() {
     const buttonName = useRoute().name;
-    const store = useToogleChoixStore();
+    const store = toogleChoix();
 
     return { 
       buttonName,
       store
     };
   }
-});
+}
 </script>
 
 <template>
@@ -28,8 +27,7 @@ export default defineComponent({
     <h2>| ... Project path</h2>
     <button class="mode" @click="store.toggle">{{ buttonName }}<More /></button>
   </div>
-
-  <Choix_mode v-if="store.choixVisible" />
+  <Choix_mode v-if="store.choixVisible"/>
 </template>
 
 <style scoped>

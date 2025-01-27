@@ -1,7 +1,7 @@
 <script>
 import { ref } from "vue";
-import { useToogleChoixStore } from "@/stores/toolbarInteraction";
-import { mouvement } from "@/stores/mouvement";
+import { toolbarInteraction } from "@/stores/toolbarInteraction.js";
+import { mouvement } from "@/stores/mouvement.js";
 
 export default{
   name: "Quadrillage",
@@ -32,7 +32,7 @@ export default{
     const color_pieton = "#AE7676";
 
     // Etats des boutons
-    const toolbarStore = useToogleChoixStore();
+    const toolbarStore = toolbarInteraction();
 
     const change_color = (index) => {
       if (toolbarStore.isRouteToogle) {
@@ -62,7 +62,6 @@ export default{
       if (toolbarStore.isPietonToogle) {
         grid.value[index].color = color_pieton;
       }
-      console.log(grid.value[index])
     }
 
 

@@ -1,6 +1,6 @@
 <script>
 import { ref } from "vue";
-import { mouvement } from "@/stores/mouvement";
+import { mouvement } from "@/stores/mouvement.js";
 
 export default {
   name: "Ruler_top",

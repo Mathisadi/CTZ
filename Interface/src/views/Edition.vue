@@ -4,6 +4,7 @@ import Toolbar from "@/components/Appli/Toolbar.vue";
 import Quadrillage from "@/components/Appli/Quadrillage.vue";
 import Ruler_left from "@/components/Appli/Ruler_left.vue";
 import Ruler_top from "@/components/Appli/Ruler_top.vue";
+import Info_route from "@/components/Appli/Info_route.vue";
 
 export default {
   components: {
@@ -11,15 +12,18 @@ export default {
     Toolbar,
     Quadrillage,
     Ruler_left,
-    Ruler_top
+    Ruler_top,
+    Info_route
   },
 };
 </script>
 
 <template>
-  <div class="topbar-container"><Topbar /></div>
-  <div class="main_cotainer">
+  <div class="main_container">
     <div class="toolbar-container"><Toolbar /></div>
+    <div class="info">
+      <Info_route />
+    </div>
     <div class="grid">
       <div class="left-ruler"><Ruler_left /></div>
       <div class="quadrillage-container"><Quadrillage /></div>
@@ -27,6 +31,7 @@ export default {
       <div class="carre"></div>
     </div>
   </div>
+  <div class="topbar-container"><Topbar /></div>
 </template>
 
 <style scoped>
@@ -37,7 +42,7 @@ export default {
   height: 5vh;
 }
 
-.main_cotainer {
+.main_container {
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -54,6 +59,14 @@ export default {
   width: 5vw;
   max-width: 100px;
   min-width: 80px;
+}
+
+.info {
+  background-color: var(--color-left-bar-2);
+  min-width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .grid {

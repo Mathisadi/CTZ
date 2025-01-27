@@ -1,11 +1,10 @@
 <script>
-import { defineComponent } from 'vue';
 import Edit from '../Icons/Edit.vue';
 import Eye from '../Icons/Eye.vue';
 import Start from '../Icons/Start.vue';
-import { useToogleChoixStore } from '@/stores/tooglechoix';
+import { toogleChoix } from '@/stores/tooglechoix';
 
-export default defineComponent({
+export default {
     name: "Choix_mode",
     components: {
         Edit,
@@ -13,13 +12,13 @@ export default defineComponent({
         Start,
     },
     setup() {
-        const modeStore = useToogleChoixStore();
+        const modeStore = toogleChoix();
 
         return { 
             modeStore
         };
     }
-})
+}
 </script>
 
 <template>
@@ -32,7 +31,7 @@ export default defineComponent({
 
 <style scoped>
 .choix_mode {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     background-color: var(--color-left-bar-1);
@@ -44,6 +43,7 @@ export default defineComponent({
     padding-top: 10px;
     padding-bottom: 10px;
     gap: 10px;
+    border: var(--color-left-bar-2) solid 1px;
 }
 
 .mode {

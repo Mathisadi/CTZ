@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const mouvement = defineStore('mouvement', () => {
     // Constante de la grille
-    const offset = ref({ x: -5100, y: -5100 });
+    const offset = ref({ x: -5090, y: -5070 });
     const startPosition = ref({ x: 0, y: 0 });
     const isDraging = ref(false);
 

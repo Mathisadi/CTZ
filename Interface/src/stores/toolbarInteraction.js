@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
-export const useToogleChoixStore = defineStore('toolbarInteraction', () => {
+export const toolbarInteraction = defineStore('toolbarInteraction', () => {
     const bgColor_route =  ref('transparent');
     const bgColor_intersection = ref('transparent');
     const bgColor_feu = ref('transparent');

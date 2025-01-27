@@ -8,7 +8,7 @@ import IconDepart from "../Icons/Depart.vue";
 import IconFin from "../Icons/Fin.vue";
 import IconSelection from "../Icons/Selection.vue";
 import IconParametre from "../Icons/Parametre.vue";
-import { useToogleChoixStore } from "@/stores/toolbarInteraction";
+import { toolbarInteraction } from "@/stores/toolbarInteraction.js";
 
 export default{
   name: "Toolbar",
@@ -24,7 +24,7 @@ export default{
     IconParametre,
   },
   setup() {
-    const toolbarStore = useToogleChoixStore();
+    const toolbarStore = toolbarInteraction();
 
     return {
       toolbarStore,
