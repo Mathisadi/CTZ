@@ -2,25 +2,25 @@
 import { ref } from "vue";
 import { toolbarInteraction } from "@/stores/toolbarInteraction.js";
 import { mouvement } from "@/stores/mouvement.js";
+import { grid } from "@/stores/grid.js";
 
-export default{
+export default {
   name: "Quadrillage",
   setup() {
     // Constante de la grille
-    const cols = ref(101);
-    const rows = ref(101);
-    const grid = ref(
-      Array.from({ length: rows.value * cols.value }, () => ({
-        color: "#222831",
-      }))
+    const storeGrid = grid();
+    const cols = storeGrid.cols;
+    const rows = storeGrid.rows;
+    const couleurs = ref(
+      Array.from({ length: rows * cols }, () => ({ color: "#222831" }))
     );
-    
+
     // Drag
     const dragStore = mouvement();
     const startDrag = dragStore.startDrag;
     const onDrag = dragStore.onDrag;
     const endDrag = dragStore.endDrag;
-    const offset= dragStore.offset;
+    const offset = dragStore.offset;
 
     // Constante couleur
     const color_route = "#76ABAE";
@@ -36,47 +36,46 @@ export default{
 
     const change_color = (index) => {
       if (toolbarStore.isRouteToogle) {
-        grid.value[index].color = color_route;
+        couleurs.value[index].color = color_route;
       }
 
       if (toolbarStore.isIntersectionToogle) {
-        grid.value[index].color = color_intersection;
+        couleurs.value[index].color = color_intersection;
       }
 
       if (toolbarStore.isFeuToogle) {
-        grid.value[index].color = color_feu;
+        couleurs.value[index].color = color_feu;
       }
 
-      if (toolbarStore.isPrioriteToogle) {    
-        grid.value[index].color = color_priorite;
+      if (toolbarStore.isPrioriteToogle) {
+        couleurs.value[index].color = color_priorite;
       }
 
       if (toolbarStore.isDepartToogle) {
-        grid.value[index].color = color_depart;
+        couleurs.value[index].color = color_depart;
       }
 
       if (toolbarStore.isFinToogle) {
-        grid.value[index].color = color_fin;
+        couleurs.value[index].color = color_fin;
       }
 
       if (toolbarStore.isPietonToogle) {
-        grid.value[index].color = color_pieton;
+        couleurs.value[index].color = color_pieton;
       }
-    }
-
+    };
 
     return {
-      grid,
+      couleurs,
       cols,
       rows,
       offset,
       startDrag,
       onDrag,
       endDrag,
-      change_color
+      change_color,
     };
   },
-}
+};
 </script>
 
 <template>
@@ -93,7 +92,7 @@ export default{
     }"
   >
     <div
-      v-for="(cell, index) in grid"
+      v-for="(cell, index) in couleurs"
       :key="index"
       @click="change_color(index)"
       :style="{ backgroundColor: cell.color }"

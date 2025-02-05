@@ -1,10 +1,12 @@
 <script>
+import { ref, onMounted, onUnmounted } from "vue";
 import Topbar from "@/components/Appli/Topbar.vue";
 import Toolbar from "@/components/Appli/Toolbar.vue";
 import Quadrillage from "@/components/Appli/Quadrillage.vue";
 import Ruler_left from "@/components/Appli/Ruler_left.vue";
 import Ruler_top from "@/components/Appli/Ruler_top.vue";
 import Info_route from "@/components/Appli/Info_route.vue";
+import { grid } from "@/stores/grid.js";
 
 export default {
   components: {
@@ -13,7 +15,34 @@ export default {
     Quadrillage,
     Ruler_left,
     Ruler_top,
-    Info_route
+    Info_route,
+  },
+
+  setup() {
+    const container = ref(null);
+    const gridStore = grid();
+
+    const updateContainerSize = () => {
+      if (container.value) {
+        const rect = container.value.getBoundingClientRect();
+        const width_grid = Math.round(rect.width);
+        const height_grid = Math.round(rect.height);
+        gridStore.updateTaille(width_grid, height_grid);
+      }
+    };
+
+    onMounted(() => {
+      updateContainerSize();
+      window.addEventListener("resize", updateContainerSize);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("resize", updateContainerSize);
+    });
+
+    return {
+      container
+    };
   },
 };
 </script>
@@ -26,7 +55,7 @@ export default {
     </div>
     <div class="grid">
       <div class="left-ruler"><Ruler_left /></div>
-      <div class="quadrillage-container"><Quadrillage /></div>
+      <div class="quadrillage-container" ref="container"><Quadrillage /></div>
       <div class="top-ruler"><Ruler_top /></div>
       <div class="carre"></div>
     </div>
@@ -55,15 +84,15 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: var(--color-left-bar-1);
-  height: 95vh;
-  width: 5vw;
+  height: 100%;
+  width: 5%;
   max-width: 100px;
   min-width: 80px;
 }
 
 .info {
   background-color: var(--color-left-bar-2);
-  min-width: 20%;
+  min-width: 20vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -73,6 +102,7 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: row;
+  min-width: 0;
 }
 
 .left-ruler {
