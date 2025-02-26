@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import More from "../Icons/More.vue";
 import Choix_mode from "./Choix_mode.vue";
-import { toogleChoix } from "@/stores/tooglechoix";
+import { toogleChoix } from "@/stores/toogleChoix";
 
 export default {
   components: {
@@ -38,6 +38,7 @@ export default {
   background-color: var(--color-top-bar);
   width: 100vw;
   height: 5vh;
+  min-height: 30px;
 }
 
 div h1 {

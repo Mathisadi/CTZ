@@ -2,7 +2,7 @@
 import Edit from '../Icons/Edit.vue';
 import Eye from '../Icons/Eye.vue';
 import Start from '../Icons/Start.vue';
-import { toogleChoix } from '@/stores/tooglechoix';
+import { toogleChoix } from '@/stores/toogleChoix';
 
 export default {
     name: "Choix_mode",

@@ -5,7 +5,7 @@ import Toolbar from "@/components/Appli/Toolbar.vue";
 import Quadrillage from "@/components/Appli/Quadrillage.vue";
 import Ruler_left from "@/components/Appli/Ruler_left.vue";
 import Ruler_top from "@/components/Appli/Ruler_top.vue";
-import Info_route from "@/components/Appli/Info_route.vue";
+import Info_route from "@/components/Parametres/Route.vue";
 import { grid } from "@/stores/grid.js";
 
 export default {
@@ -67,8 +67,6 @@ export default {
 .topbar-container {
   position: fixed;
   top: 0;
-  width: 100vw;
-  height: 5vh;
 }
 
 .main_container {
