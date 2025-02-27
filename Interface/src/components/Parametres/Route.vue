@@ -1,12 +1,10 @@
 <script>
 import { ref } from "vue";
-import IconFleche from "../Icons/Fleche_bas.vue";
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
 
 export default {
   components: {
-    IconFleche,
     Dropbox,
     Input
   },
@@ -38,6 +36,12 @@ export default {
       <p>Paramètres Route</p>
     </div>
     <div class="parametre-container">
+      <!-- Nom de la route -->
+      <div class="parametre">
+        <p class="nom-parametre">Nom</p>
+        <!-- Input -->
+        <Input :type="'route'" :param="'nom'" />
+      </div>
       <!-- Sens de la route -->
       <div class="parametre">
         <p class="nom-parametre">Sens route</p>
@@ -53,7 +57,7 @@ export default {
       <!-- Longeur de la route -->
       <div class="parametre">
         <p class="nom-parametre">Longueur de la route</p>
-        <!-- Dropdown -->
+        <!-- Input -->
         <Input :type="'route'" :param="'len'" />
       </div>
     </div>
