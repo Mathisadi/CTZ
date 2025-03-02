@@ -27,50 +27,44 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <p>Paramètres Route</p>
+      <p>Paramètres Priorité</p>
     </div>
     <div class="parametre-container">
-      <!-- Nom de la route -->
+      <!-- Nom de la priorite -->
       <div class="parametre">
         <p class="nom-parametre">Nom</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'nom'" />
+        <Input :type="'priorite'" :param="'nom'" />
       </div>
-      <!-- Sens de la route -->
+      <!-- Sens de la priorite -->
       <div class="parametre">
         <p class="nom-parametre">Sens</p>
         <!-- Dropdown -->
-        <Dropbox :type="'route'" :param="'sens'" />
+        <Dropbox :type="'priorite'" :param="'sens'" />
       </div>
       <!-- Proba de touner à gauche  -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir gauche</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-gauche'" />
+        <Input :type="'priorite'" :param="'proba-gauche'" />
       </div>
       <!-- Proba de touner à droite  -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir droite</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-droite'" />
+        <Input :type="'priorite'" :param="'proba-droite'" />
       </div>
       <!-- Proba de tourner en bas -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir bas</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-bas'" />
+        <Input :type="'priorite'" :param="'proba-bas'" />
       </div>
       <!-- Proba de tourner en haut -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir haut</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-haut'" />
-      </div>
-      <!-- Longeur de la route -->
-      <div class="parametre">
-        <p class="nom-parametre">Longueur de la route</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'len'" />
+        <Input :type="'priorite'" :param="'proba-haut'" />
       </div>
     </div>
   </div>

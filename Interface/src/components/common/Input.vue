@@ -2,6 +2,7 @@
 import { routeSettigns } from "@/stores/routeSettings";
 import { intersectionSettings } from "@/stores/intersectionSettings";
 import { feuSettings } from "@/stores/feuSettings";
+import { prioriteSettings } from "@/stores/prioriteSettings";
 
 import { computed } from "vue";
 
@@ -16,6 +17,9 @@ export default {
 
     // Store feu setting
     const storeFeu = feuSettings();
+
+    // Store priorite setting
+    const storePriorite = prioriteSettings();
 
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
@@ -52,6 +56,18 @@ export default {
           } else if (props.param === "proba-haut") {
             return storeFeu.proba_haut;            
           }
+        } else if (props.type === "priorite") {
+          if (props.param === "nom") {
+            return storePriorite.nom;
+          } else if (props.param === "proba-gauche") {
+            return storePriorite.proba_gauche;
+          } else if (props.param === "proba-droite") {
+            return storePriorite.proba_droite;
+          } else if (props.param === "proba-bas") {
+            return storePriorite.proba_bas;
+          } else if (props.param === "proba-haut") {
+            return storePriorite.proba_haut;
+          }
         }
         return 0;
       },
@@ -87,6 +103,18 @@ export default {
             storeFeu.proba_bas = newValue;
           } else if (props.param === "proba-haut") {
             storeFeu.proba_haut = newValue;
+          }
+        } else if (props.type === "priorite") {
+          if (props.param === "nom") {
+            storePriorite.nom = newValue;
+          } else if (props.param === "proba-gauche") {
+            storePriorite.proba_gauche = newValue;
+          } else if (props.param === "proba-droite") {
+            storePriorite.proba_droite = newValue;
+          } else if (props.param === "proba-bas") {
+            storePriorite.proba_bas = newValue;
+          } else if (props.param === "proba-haut") {
+            storePriorite.proba_haut = newValue;
           }
         }
       },

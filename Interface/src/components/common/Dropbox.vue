@@ -1,6 +1,7 @@
 <script>
 import { routeSettigns } from "@/stores/routeSettings";
 import { feuSettings } from "@/stores/feuSettings";
+import { prioriteSettings } from "@/stores/prioriteSettings";
 import { ref, computed } from "vue";
 import IconFleche from "../Icons/Fleche_bas.vue";
 
@@ -21,6 +22,9 @@ export default {
     // Store feu setting
     const storeFeu = feuSettings();
 
+    // Store priorite setting
+    const storePriorite = prioriteSettings();
+
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
       get() {
@@ -33,6 +37,10 @@ export default {
         } else if (props.type === "feu") {
           if (props.param === "sens") {
             return storeFeu.sens_route;
+          }
+        } else if (props.type === "priorite") {
+          if (props.param === "sens") {
+            return storePriorite.sens_route;
           }
         }
         return [];
@@ -47,6 +55,10 @@ export default {
         } else if (props.type === "feu") {
           if (props.param === "sens") {
             storeFeu.sens_route = newValue;
+          }
+        } else if (props.type === "priorite") {
+          if (props.param === "sens") {
+            storePriorite.sens_route = newValue;
           }
         }
 
