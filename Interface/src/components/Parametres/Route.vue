@@ -11,9 +11,6 @@ export default {
 
   setup() {
     const isOpenDrop1 = ref(false);
-    const items = ["G", "B", "D", "H"];
-    const items_fullname = ["Gauche", "Bas", "Droite", "Haut"];
-    const selectedDrop_1 = ref([]);
 
     const toggleDropdown = () => {
       isOpenDrop1.value = !isOpenDrop1.value;
@@ -21,9 +18,6 @@ export default {
 
     return {
       isOpenDrop1,
-      items,
-      items_fullname,
-      selectedDrop_1,
       toggleDropdown,
     };
   },
@@ -44,15 +38,33 @@ export default {
       </div>
       <!-- Sens de la route -->
       <div class="parametre">
-        <p class="nom-parametre">Sens route</p>
+        <p class="nom-parametre">Sens</p>
         <!-- Dropdown -->
         <Dropbox :type="'route'" :param="'sens'" />
       </div>
-      <!-- Direction -->
+      <!-- Proba de touner à gauche  -->
       <div class="parametre">
-        <p class="nom-parametre">Direction possible</p>
-        <!-- Dropdown -->
-        <Dropbox :type="'route'" :param="'direction'" />
+        <p class="nom-parametre">Proba dir gauche</p>
+        <!-- Input -->
+        <Input :type="'route'" :param="'proba-gauche'" />
+      </div>
+      <!-- Proba de touner à droite  -->
+      <div class="parametre">
+        <p class="nom-parametre">Proba dir droite</p>
+        <!-- Input -->
+        <Input :type="'route'" :param="'proba-droite'" />
+      </div>
+      <!-- Proba de tourner en bas -->
+      <div class="parametre">
+        <p class="nom-parametre">Proba dir bas</p>
+        <!-- Input -->
+        <Input :type="'route'" :param="'proba-bas'" />
+      </div>
+      <!-- Proba de tourner en haut -->
+      <div class="parametre">
+        <p class="nom-parametre">Proba dir haut</p>
+        <!-- Input -->
+        <Input :type="'route'" :param="'proba-haut'" />
       </div>
       <!-- Longeur de la route -->
       <div class="parametre">

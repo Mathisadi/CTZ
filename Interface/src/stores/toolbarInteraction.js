@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 export const toolbarInteraction = defineStore('toolbarInteraction', () => {
-    const bgColor_route =  ref('transparent');
+    const bgColor_route =  ref('var(--color-left-bar-2)');
     const bgColor_intersection = ref('transparent');
     const bgColor_feu = ref('transparent');
     const bgColor_priorite = ref('transparent');
@@ -12,7 +12,7 @@ export const toolbarInteraction = defineStore('toolbarInteraction', () => {
     const bgColor_selection = ref('transparent');
     const bgColor_parametres = ref('transparent');
 
-    const isRouteToogle = ref(false);
+    const isRouteToogle = ref(true);
     const isIntersectionToogle = ref(false);
     const isFeuToogle = ref(false);
     const isPrioriteToogle = ref(false);

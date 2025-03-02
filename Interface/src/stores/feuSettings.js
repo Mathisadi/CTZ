@@ -1,8 +1,8 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 
-export const routeSettigns = defineStore(
-  "routeSettings",
+export const feuSettings = defineStore(
+  "feuSettings",
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
@@ -11,16 +11,16 @@ export const routeSettigns = defineStore(
     const proba_droite = ref(0);
     const proba_bas = ref(0);
     const proba_haut = ref(0);
-    const longeur = ref(0);
+    const cycle = ref("");
 
     return {
       sens_route,
-      longeur,
+      cycle,
       nom,
       proba_gauche,
       proba_droite,
       proba_bas,
-      proba_haut
+      proba_haut,
     };
   },
   {

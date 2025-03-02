@@ -7,6 +7,7 @@ import Ruler_left from "@/components/Appli/Ruler_left.vue";
 import Ruler_top from "@/components/Appli/Ruler_top.vue";
 import Info_route from "@/components/Parametres/Route.vue";
 import { grid } from "@/stores/grid.js";
+import Swapper from "@/components/Parametres/Swapper.vue";
 
 export default {
   components: {
@@ -16,6 +17,7 @@ export default {
     Ruler_left,
     Ruler_top,
     Info_route,
+    Swapper
   },
 
   setup() {
@@ -51,7 +53,7 @@ export default {
   <div class="main_container">
     <div class="toolbar-container"><Toolbar /></div>
     <div class="info">
-      <Info_route />
+      <Swapper />
     </div>
     <div class="grid">
       <div class="left-ruler"><Ruler_left /></div>

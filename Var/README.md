@@ -18,7 +18,7 @@ Direction = [] liste dynamique qui sera remplie en fonction des directions de la
 
 ## Feu
 
-Route = ["Feu", 1 = direction de la route, 34 = temps du cyle du feu, True = état du feu]
+Route = ["Feu", 1 = direction de la route, [34] = temps du cyle du feu, True = état du feu]
 Trafic = [0] len = 1
 Direction = [[0,0,1,0] = les directions possibles et les probas associées, 2 = la direction choisie]
 
