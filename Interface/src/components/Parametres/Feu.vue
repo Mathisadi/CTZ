@@ -27,50 +27,50 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <p>Paramètres Route</p>
+      <p>Paramètres Feu Rouge</p>
     </div>
     <div class="parametre-container">
-      <!-- Nom de la route -->
+      <!-- Nom du feu rouge -->
       <div class="parametre">
         <p class="nom-parametre">Nom</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'nom'" />
+        <Input :type="'feu'" :param="'nom'" />
       </div>
       <!-- Sens de la route -->
       <div class="parametre">
         <p class="nom-parametre">Sens</p>
         <!-- Dropdown -->
-        <Dropbox :type="'route'" :param="'sens'" />
+        <Dropbox :type="'feu'" :param="'sens'" />
       </div>
       <!-- Proba de touner à gauche  -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir gauche</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-gauche'" />
+        <Input :type="'feu'" :param="'proba-gauche'" />
       </div>
       <!-- Proba de touner à droite  -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir droite</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-droite'" />
+        <Input :type="'feu'" :param="'proba-droite'" />
       </div>
       <!-- Proba de tourner en bas -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir bas</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-bas'" />
+        <Input :type="'feu'" :param="'proba-bas'" />
       </div>
       <!-- Proba de tourner en haut -->
       <div class="parametre">
         <p class="nom-parametre">Proba dir haut</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-haut'" />
+        <Input :type="'feu'" :param="'proba-haut'" />
       </div>
-      <!-- Longeur de la route -->
+      <!-- Cycle du feu rouge -->
       <div class="parametre">
-        <p class="nom-parametre">Longueur de la route</p>
+        <p class="nom-parametre">Cycle du feu</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'len'" />
+        <Input :type="'feu'" :param="'cycle'" />
       </div>
     </div>
   </div>

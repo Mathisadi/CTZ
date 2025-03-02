@@ -1,5 +1,6 @@
 <script>
 import { routeSettigns } from "@/stores/routeSettings";
+import { feuSettings } from "@/stores/feuSettings";
 import { ref, computed } from "vue";
 import IconFleche from "../Icons/Fleche_bas.vue";
 
@@ -17,6 +18,9 @@ export default {
     // Store route setting
     const storeRoute = routeSettigns();
 
+    // Store feu setting
+    const storeFeu = feuSettings();
+
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
       get() {
@@ -25,6 +29,10 @@ export default {
             return storeRoute.sens_route;
           } else if (props.param === "direction") {
             return storeRoute.direction_possible;
+          }
+        } else if (props.type === "feu") {
+          if (props.param === "sens") {
+            return storeFeu.sens_route;
           }
         }
         return [];
@@ -36,7 +44,12 @@ export default {
           } else if (props.param === "direction") {
             storeRoute.direction_possible = newValue;
           }
+        } else if (props.type === "feu") {
+          if (props.param === "sens") {
+            storeFeu.sens_route = newValue;
+          }
         }
+
       },
     });
     const toggleDropdown = () => {

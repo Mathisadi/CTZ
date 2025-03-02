@@ -1,7 +1,7 @@
 <script>
 import { routeSettigns } from "@/stores/routeSettings";
 import { intersectionSettings } from "@/stores/intersectionSettings";
-import { feuSettings } from "@/stores/feuSettings"; 
+import { feuSettings } from "@/stores/feuSettings";
 
 import { computed } from "vue";
 
@@ -39,8 +39,18 @@ export default {
             return storeIntersection.nom;
           }
         } else if (props.type === "feu") {
-          if (props.param === "cycle") {
+          if (props.param === "nom") {
+            return storeFeu.nom;
+          } else if (props.param === "cycle") {
             return storeFeu.cycle;
+          } else if (props.param === "proba-gauche") {
+            return storeFeu.proba_gauche;
+          } else if (props.param === "proba-droite") {
+            return storeFeu.proba_droite;
+          } else if (props.param === "proba-bas") {
+            return storeFeu.proba_bas;
+          } else if (props.param === "proba-haut") {
+            return storeFeu.proba_haut;            
           }
         }
         return 0;
@@ -65,11 +75,21 @@ export default {
             storeIntersection.nom = newValue;
           }
         } else if (props.type === "feu") {
-          if (props.param === "cycle") {
+          if (props.param === "nom") {
+            storeFeu.nom = newValue;
+          } else if (props.param === "cycle") {
             storeFeu.cycle = newValue;
+          } else if (props.param === "proba-gauche") {
+            storeFeu.proba_gauche = newValue;
+          } else if (props.param === "proba-droite") {
+            storeFeu.proba_droite = newValue;
+          } else if (props.param === "proba-bas") {
+            storeFeu.proba_bas = newValue;
+          } else if (props.param === "proba-haut") {
+            storeFeu.proba_haut = newValue;
           }
         }
-      }
+      },
     });
 
     return {
