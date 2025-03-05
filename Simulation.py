@@ -4,6 +4,8 @@
 # Bibliothéques utilisées
 from Modele import *
 from Var import *
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.animation import FuncAnimation
