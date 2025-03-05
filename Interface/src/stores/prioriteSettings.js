@@ -12,6 +12,15 @@ export const prioriteSettings = defineStore(
     const proba_bas = ref(0);
     const proba_haut = ref(0);
 
+    const clear = () => {
+      nom.value = "";
+      sens_route.value = [];
+      proba_gauche.value = 0;
+      proba_droite.value = 0;
+      proba_bas.value = 0;
+      proba_haut.value = 0;
+    };
+
     return {
       sens_route,
       nom,
@@ -19,6 +28,7 @@ export const prioriteSettings = defineStore(
       proba_droite,
       proba_bas,
       proba_haut,
+      clear
     };
   },
   {

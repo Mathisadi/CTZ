@@ -8,9 +8,15 @@ export const pietonSettings = defineStore(
     const nom = ref("");
     const sens_route = ref([]);
 
+    const clear = () => {
+      nom.value = "";
+      sens_route.value = [];
+    };
+
     return {
       sens_route,
       nom,
+      clear
     };
   },
   {

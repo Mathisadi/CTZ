@@ -13,6 +13,16 @@ export const feuSettings = defineStore(
     const proba_haut = ref(0);
     const cycle = ref("");
 
+    const clear = () => {
+      nom.value = "";
+      sens_route.value = [];
+      proba_gauche.value = 0;
+      proba_droite.value = 0;
+      proba_bas.value = 0;
+      proba_haut.value = 0;
+      cycle.value = "";
+    };
+
     return {
       sens_route,
       cycle,
@@ -21,6 +31,7 @@ export const feuSettings = defineStore(
       proba_droite,
       proba_bas,
       proba_haut,
+      clear
     };
   },
   {

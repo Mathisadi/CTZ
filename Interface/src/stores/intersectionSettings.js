@@ -5,10 +5,15 @@ export const intersectionSettings = defineStore(
   "intersectionSettings",
   () => {
     // Liste des parametres d'une route*
-    let nom = ref("");
+    const nom = ref("");
     
+    const clear = () => {
+      nom.value = "";
+    };
+
     return {
-      nom
+      nom,
+      clear
     };
   },
   {

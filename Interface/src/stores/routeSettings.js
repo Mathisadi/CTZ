@@ -13,6 +13,16 @@ export const routeSettigns = defineStore(
     const proba_haut = ref(0);
     const longeur = ref(0);
 
+    const clear = () => {
+      nom.value = "";
+      sens_route.value = [];
+      proba_gauche.value = 0;
+      proba_droite.value = 0;
+      proba_bas.value = 0;
+      proba_haut.value = 0;
+      longeur.value = 0;
+    };
+
     return {
       sens_route,
       longeur,
@@ -20,7 +30,8 @@ export const routeSettigns = defineStore(
       proba_gauche,
       proba_droite,
       proba_bas,
-      proba_haut
+      proba_haut,
+      clear
     };
   },
   {
