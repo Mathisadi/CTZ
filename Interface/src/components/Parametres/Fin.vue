@@ -1,25 +1,9 @@
 <script>
-import { ref } from "vue";
-import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
 
 export default {
   components: {
-    Dropbox,
     Input
-  },
-
-  setup() {
-    const isOpenDrop1 = ref(false);
-
-    const toggleDropdown = () => {
-      isOpenDrop1.value = !isOpenDrop1.value;
-    };
-
-    return {
-      isOpenDrop1,
-      toggleDropdown,
-    };
   },
 };
 </script>
@@ -27,50 +11,14 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <p>Paramètres Route</p>
+      <p>Paramètres Fin</p>
     </div>
     <div class="parametre-container">
       <!-- Nom de la route -->
       <div class="parametre">
         <p class="nom-parametre">Nom</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'nom'" />
-      </div>
-      <!-- Sens de la route -->
-      <div class="parametre">
-        <p class="nom-parametre">Sens</p>
-        <!-- Dropdown -->
-        <Dropbox :type="'route'" :param="'sens'" />
-      </div>
-      <!-- Proba de touner à gauche  -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir gauche</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-gauche'" />
-      </div>
-      <!-- Proba de touner à droite  -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir droite</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-droite'" />
-      </div>
-      <!-- Proba de tourner en bas -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir bas</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-bas'" />
-      </div>
-      <!-- Proba de tourner en haut -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir haut</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-haut'" />
-      </div>
-      <!-- Longeur de la route -->
-      <div class="parametre">
-        <p class="nom-parametre">Longueur de la route</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'len'" />
+        <Input :type="'fin'" :param="'nom'" />
       </div>
     </div>
   </div>
