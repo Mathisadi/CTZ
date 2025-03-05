@@ -38,7 +38,7 @@ export default {
       </div>
       <!-- Sens de la route -->
       <div class="parametre">
-        <p class="nom-parametre">Sens</p>
+        <p class="nom-parametre">Sens de circulation</p>
         <!-- Dropdown -->
         <Dropbox :type="'route'" :param="'sens'" />
       </div>

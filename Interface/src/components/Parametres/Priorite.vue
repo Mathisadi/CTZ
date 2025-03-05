@@ -38,7 +38,7 @@ export default {
       </div>
       <!-- Sens de la priorite -->
       <div class="parametre">
-        <p class="nom-parametre">Sens</p>
+        <p class="nom-parametre">Sens de circulation</p>
         <!-- Dropdown -->
         <Dropbox :type="'priorite'" :param="'sens'" />
       </div>
