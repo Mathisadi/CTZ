@@ -6,6 +6,7 @@ export const departSettings = defineStore(
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
+    const sens_route = ref("");
     const type = ref("Voiture");
     const densite = ref(0)
     const etat = ref(true);
@@ -13,6 +14,7 @@ export const departSettings = defineStore(
 
     const clear = () => {
       nom.value = "";
+      sens_route.value = "";
       type.value = "Voiture";
       densite.value = 0;
       etat.value = true;
@@ -23,6 +25,7 @@ export const departSettings = defineStore(
       type,
       cycle,
       nom,
+      sens_route,
       densite,
       etat,
       clear

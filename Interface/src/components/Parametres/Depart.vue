@@ -1,12 +1,15 @@
 <script>
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
+import ClearButton from "../common/ClearButton.vue";
+
 import { departSettings } from "@/stores/departSettings";
 
 export default {
   components: {
     Dropbox,
-    Input
+    Input,
+    ClearButton
   },
   setup() {
     const departStore = departSettings();
@@ -48,6 +51,8 @@ export default {
         <!-- Input -->
         <Input :type="'depart'" :param="'cycle'" />
       </div>
+      <!-- bouton clear-->
+      <ClearButton :type="'depart'" />
     </div>
   </div>
 </template>

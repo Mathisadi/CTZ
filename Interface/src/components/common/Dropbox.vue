@@ -46,27 +46,27 @@ export default {
       get() {
         if (props.type === "route") {
           if (props.param === "sens") {
-            return storeRoute.sens_route || "";
+            return storeRoute.sens_route;
           } else if (props.param === "direction") {
-            return storeRoute.direction_possible || "";
+            return storeRoute.direction_possible;
           }
         } else if (props.type === "feu") {
           if (props.param === "sens") {
-            return storeFeu.sens_route || "";
+            return storeFeu.sens_route;
           }
         } else if (props.type === "priorite") {
           if (props.param === "sens") {
-            return storePriorite.sens_route || "";
+            return storePriorite.sens_route;
           }
         } else if (props.type === "pieton") {
           if (props.param === "sens") {
-            return storePieton.sens_route || "";
+            return storePieton.sens_route;
           }
         } else if (props.type === "depart") {
           if (props.param === "type") {
-            return storeDepart.type || "";
+            return storeDepart.type;
           } else if (props.param === "sens") {
-            return storeDepart.sens_route || "";
+            return storeDepart.sens_route;
           }
         }
         return "";

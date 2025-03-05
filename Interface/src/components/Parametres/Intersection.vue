@@ -1,9 +1,11 @@
 <script>
 import Input from "../common/Input.vue";
+import ClearButton from "../common/ClearButton.vue";
 
 export default {
   components: {
     Input,
+    ClearButton
   },
 };
 </script>
@@ -20,6 +22,8 @@ export default {
         <!-- Input -->
         <Input :type="'intersection'" :param="'nom'" />
       </div>
+      <!-- bouton clear-->
+      <ClearButton :type="'intersection'" />
     </div>
   </div>
 </template>

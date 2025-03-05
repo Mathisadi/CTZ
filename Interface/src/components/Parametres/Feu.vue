@@ -1,11 +1,13 @@
 <script>
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
+import ClearButton from "../common/ClearButton.vue";
 
 export default {
   components: {
     Dropbox,
-    Input
+    Input,
+    ClearButton
   },
 };
 </script>
@@ -58,6 +60,8 @@ export default {
         <!-- Input -->
         <Input :type="'feu'" :param="'cycle'" />
       </div>
+      <!-- bouton clear-->
+      <ClearButton :type="'feu'" />
     </div>
   </div>
 </template>

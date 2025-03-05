@@ -6,11 +6,11 @@ export const pietonSettings = defineStore(
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
-    const sens_route = ref([]);
+    const sens_route = ref("");
 
     const clear = () => {
       nom.value = "";
-      sens_route.value = [];
+      sens_route.value = "";
     };
 
     return {

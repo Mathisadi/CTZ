@@ -6,7 +6,7 @@ export const prioriteSettings = defineStore(
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
-    const sens_route = ref([]);
+    const sens_route = ref("");
     const proba_gauche = ref(0);
     const proba_droite = ref(0);
     const proba_bas = ref(0);
@@ -14,7 +14,7 @@ export const prioriteSettings = defineStore(
 
     const clear = () => {
       nom.value = "";
-      sens_route.value = [];
+      sens_route.value = "";
       proba_gauche.value = 0;
       proba_droite.value = 0;
       proba_bas.value = 0;
