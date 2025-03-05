@@ -4,26 +4,23 @@ import { intersectionSettings } from "@/stores/intersectionSettings";
 import { feuSettings } from "@/stores/feuSettings";
 import { prioriteSettings } from "@/stores/prioriteSettings";
 import { pietonSettings } from "@/stores/pietonSettings";
+import { departSettings } from "@/stores/departSettings";
+import { finSettings } from "@/stores/finSettings";
 
 import { computed } from "vue";
 
 export default {
   props: ["type", "param"],
   setup(props) {
-    // Store route setting
+
+    // Store
     const storeRoute = routeSettigns();
-
-    // Store intersection setting
     const storeIntersection = intersectionSettings();
-
-    // Store feu setting
     const storeFeu = feuSettings();
-
-    // Store priorite setting
     const storePriorite = prioriteSettings();
-
-    // Store pieton setting
     const storePieton = pietonSettings();
+    const storeDepart = departSettings();
+    const storeFin = finSettings();
 
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
@@ -76,7 +73,18 @@ export default {
           if (props.param === "nom") {
             return storePieton.nom;
           }
+        } else if (props.type === "depart") {
+          if (props.param === "nom") {
+            return storeDepart.nom;
+          } else if (props.param === "cycle") {
+            return storeDepart.cycle;
+          }
+        } else if (props.type === "fin") {
+          if (props.param === "nom") {
+            return storeFin.nom;
+          }
         }
+
         return 0;
       },
       set(newValue) {
@@ -127,6 +135,16 @@ export default {
         } else if (props.type === "pieton") {
           if (props.param === "nom") {
             storePieton.nom = newValue;
+          }
+        } else if (props.type === "depart") {
+          if (props.param === "nom") {
+            storeDepart.nom = newValue;
+          } else if (props.param === "cycle") {
+            storeDepart.cycle = newValue;
+          }
+        } else if (props.type === "fin") {
+          if (props.param === "nom") {
+            storeFin.nom = newValue;
           }
         }
       },

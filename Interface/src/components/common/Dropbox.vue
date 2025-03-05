@@ -3,6 +3,7 @@ import { routeSettigns } from "@/stores/routeSettings";
 import { feuSettings } from "@/stores/feuSettings";
 import { prioriteSettings } from "@/stores/prioriteSettings";
 import { pietonSettings } from "@/stores/pietonSettings";
+import { departSettings } from "@/stores/departSettings";
 
 import { ref, computed } from "vue";
 import IconFleche from "../Icons/Fleche_bas.vue";
@@ -13,49 +14,62 @@ export default {
     IconFleche,
   },
   setup(props) {
-    // Liste des params des directions (affichés dans la dropbox)
-    if (props.type === "route") {
-      
-    }
-    const initiale_dir = ["G", "B", "D", "H"];
-    const nom_dir = ["Gauche", "Bas", "Droite", "Haut"];
+    // Variable réactive pour l'ouverture du dropdown
     const isOpen = ref(false);
 
-    // Store route setting
+    // Définition des listes initiale en fonction des props
+    const initiale_dir = computed(() => {
+      if (props.type === "depart" && props.param === "type") {
+        return ["Voiture", "Piéton"];
+      } else {
+        return ["G", "B", "D", "H"];
+      }
+    });
+
+    const nom_dir = computed(() => {
+      if (props.type === "depart" && props.param === "type") {
+        return ["Voiture", "Piéton"];
+      } else {
+        return ["Gauche", "Bas", "Droite", "Haut"];
+      }
+    });
+
+    // Stores
     const storeRoute = routeSettigns();
-
-    // Store feu setting
     const storeFeu = feuSettings();
-
-    // Store priorite setting
     const storePriorite = prioriteSettings();
-
-    // Store pieton setting
     const storePieton = pietonSettings();
+    const storeDepart = departSettings();
 
-    // Fonction qui renvoie le bon élément en fonction des props
+    // Propriété calculée pour gérer la valeur sélectionnée en tant que chaîne
     const selectedValue = computed({
       get() {
         if (props.type === "route") {
           if (props.param === "sens") {
-            return storeRoute.sens_route;
+            return storeRoute.sens_route || "";
           } else if (props.param === "direction") {
-            return storeRoute.direction_possible;
+            return storeRoute.direction_possible || "";
           }
         } else if (props.type === "feu") {
           if (props.param === "sens") {
-            return storeFeu.sens_route;
+            return storeFeu.sens_route || "";
           }
         } else if (props.type === "priorite") {
           if (props.param === "sens") {
-            return storePriorite.sens_route;
+            return storePriorite.sens_route || "";
           }
         } else if (props.type === "pieton") {
           if (props.param === "sens") {
-            return storePieton.sens_route;
+            return storePieton.sens_route || "";
+          }
+        } else if (props.type === "depart") {
+          if (props.param === "type") {
+            return storeDepart.type || "";
+          } else if (props.param === "sens") {
+            return storeDepart.sens_route || "";
           }
         }
-        return [];
+        return "";
       },
       set(newValue) {
         if (props.type === "route") {
@@ -76,9 +90,16 @@ export default {
           if (props.param === "sens") {
             storePieton.sens_route = newValue;
           }
+        } else if (props.type === "depart") {
+          if (props.param === "type") {
+            storeDepart.type = newValue;
+          } else if (props.param === "sens") {
+            storeDepart.sens_route = newValue;
+          }
         }
       },
     });
+
     const toggleDropdown = () => {
       isOpen.value = !isOpen.value;
     };
@@ -97,14 +118,21 @@ export default {
 <template>
   <div class="dropdown-wrapper">
     <button @click="toggleDropdown" class="dropdown">
-      {{ selectedValue.length != 0 ? selectedValue.join(", ") : "None" }}
+      {{ selectedValue !== "" ? selectedValue : "None" }}
       <IconFleche />
     </button>
-    <!-- Si on ouvre la dropbox -->
+    <!-- Affichage du dropdown -->
     <ul v-if="isOpen" class="dropdown-menu">
       <li v-for="(item, index) in initiale_dir" :key="index">
         <label class="dropdown-item">
-          <input type="checkbox" :value="item" v-model="selectedValue" />
+          <!-- Utilisation d'un champ radio pour une sélection unique -->
+          <input
+            type="radio"
+            :value="item"
+            v-model="selectedValue"
+            name="selection"
+            @change="toggleDropdown"
+          />
           {{ nom_dir[index] }}
         </label>
       </li>
@@ -114,8 +142,8 @@ export default {
 
 <style scoped>
 .dropdown-wrapper {
-  position: relative; /* clé pour positionner la liste déroulante en absolu */
-  display: inline-block; /* optionnel pour s'adapter à la taille du bouton */
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown {
@@ -137,16 +165,13 @@ export default {
 }
 
 .dropdown-menu {
-  position: absolute; /* positionnement absolu par rapport à .dropdown-wrapper */
+  position: absolute;
   z-index: 10;
-  top: 100%; /* juste en dessous du bouton */
-  right: 0; /* aligné au même point horizontal que le bouton */
+  top: 100%;
+  right: 0;
   width: 100%;
   list-style: none;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 20px;
-  padding-right: 0;
+  padding: 8px 0 8px 20px;
   border-radius: 2px;
   margin-top: 2px;
   background-color: var(--color-underline);

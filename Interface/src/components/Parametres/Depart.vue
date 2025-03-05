@@ -1,76 +1,52 @@
 <script>
-import { ref } from "vue";
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
+import { departSettings } from "@/stores/departSettings";
 
 export default {
   components: {
     Dropbox,
     Input
   },
-
   setup() {
-    const isOpenDrop1 = ref(false);
-
-    const toggleDropdown = () => {
-      isOpenDrop1.value = !isOpenDrop1.value;
-    };
-
+    const departStore = departSettings();
+    console.log(departStore.type);
     return {
-      isOpenDrop1,
-      toggleDropdown,
+      departStore
     };
-  },
+  }
 };
 </script>
 
 <template>
   <div class="container">
     <div class="title">
-      <p>Paramètres Route</p>
+      <p>Paramètres Départ</p>
     </div>
     <div class="parametre-container">
       <!-- Nom de la route -->
       <div class="parametre">
         <p class="nom-parametre">Nom</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'nom'" />
+        <Input :type="'depart'" :param="'nom'" />
       </div>
-      <!-- Sens de la route -->
+      <!-- Sens de circulation -->
       <div class="parametre">
-        <p class="nom-parametre">Sens</p>
+        <p class="nom-parametre">Sens de circulation</p>
         <!-- Dropdown -->
-        <Dropbox :type="'route'" :param="'sens'" />
+        <Dropbox :type="'depart'" :param="'sens'" />
       </div>
-      <!-- Proba de touner à gauche  -->
+      <!-- Type de départ -->
       <div class="parametre">
-        <p class="nom-parametre">Proba dir gauche</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-gauche'" />
+        <p class="nom-parametre">Type de départ</p>
+        <!-- Dropdown -->
+        <Dropbox :type="'depart'" :param="'type'" />
       </div>
-      <!-- Proba de touner à droite  -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir droite</p>
+      <!-- Cycle si piéton  -->
+      <div v-if="departStore.type === 'Piéton'" class="parametre">
+        <p class="nom-parametre">Cycle</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'proba-droite'" />
-      </div>
-      <!-- Proba de tourner en bas -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir bas</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-bas'" />
-      </div>
-      <!-- Proba de tourner en haut -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir haut</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-haut'" />
-      </div>
-      <!-- Longeur de la route -->
-      <div class="parametre">
-        <p class="nom-parametre">Longueur de la route</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'len'" />
+        <Input :type="'depart'" :param="'cycle'" />
       </div>
     </div>
   </div>
