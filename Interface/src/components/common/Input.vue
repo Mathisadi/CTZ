@@ -3,6 +3,7 @@ import { routeSettigns } from "@/stores/routeSettings";
 import { intersectionSettings } from "@/stores/intersectionSettings";
 import { feuSettings } from "@/stores/feuSettings";
 import { prioriteSettings } from "@/stores/prioriteSettings";
+import { pietonSettings } from "@/stores/pietonSettings";
 
 import { computed } from "vue";
 
@@ -20,6 +21,9 @@ export default {
 
     // Store priorite setting
     const storePriorite = prioriteSettings();
+
+    // Store pieton setting
+    const storePieton = pietonSettings();
 
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
@@ -68,6 +72,10 @@ export default {
           } else if (props.param === "proba-haut") {
             return storePriorite.proba_haut;
           }
+        } else if (props.type === "pieton") {
+          if (props.param === "nom") {
+            return storePieton.nom;
+          }
         }
         return 0;
       },
@@ -115,6 +123,10 @@ export default {
             storePriorite.proba_bas = newValue;
           } else if (props.param === "proba-haut") {
             storePriorite.proba_haut = newValue;
+          }
+        } else if (props.type === "pieton") {
+          if (props.param === "nom") {
+            storePieton.nom = newValue;
           }
         }
       },

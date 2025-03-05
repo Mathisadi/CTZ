@@ -2,6 +2,8 @@
 import { routeSettigns } from "@/stores/routeSettings";
 import { feuSettings } from "@/stores/feuSettings";
 import { prioriteSettings } from "@/stores/prioriteSettings";
+import { pietonSettings } from "@/stores/pietonSettings";
+
 import { ref, computed } from "vue";
 import IconFleche from "../Icons/Fleche_bas.vue";
 
@@ -12,6 +14,9 @@ export default {
   },
   setup(props) {
     // Liste des params des directions (affichés dans la dropbox)
+    if (props.type === "route") {
+      
+    }
     const initiale_dir = ["G", "B", "D", "H"];
     const nom_dir = ["Gauche", "Bas", "Droite", "Haut"];
     const isOpen = ref(false);
@@ -24,6 +29,9 @@ export default {
 
     // Store priorite setting
     const storePriorite = prioriteSettings();
+
+    // Store pieton setting
+    const storePieton = pietonSettings();
 
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
@@ -41,6 +49,10 @@ export default {
         } else if (props.type === "priorite") {
           if (props.param === "sens") {
             return storePriorite.sens_route;
+          }
+        } else if (props.type === "pieton") {
+          if (props.param === "sens") {
+            return storePieton.sens_route;
           }
         }
         return [];
@@ -60,8 +72,11 @@ export default {
           if (props.param === "sens") {
             storePriorite.sens_route = newValue;
           }
+        } else if (props.type === "pieton") {
+          if (props.param === "sens") {
+            storePieton.sens_route = newValue;
+          }
         }
-
       },
     });
     const toggleDropdown = () => {
