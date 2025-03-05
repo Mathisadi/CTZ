@@ -15,4 +15,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  server: {
+    proxy: {
+      '/api': {  // toutes les requêtes commençant par /api seront redirigées
+        target: 'http://localhost:8000', // le port sur lequel tourne votre FastAPI
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
+
+
