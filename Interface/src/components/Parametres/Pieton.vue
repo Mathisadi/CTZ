@@ -1,5 +1,4 @@
 <script>
-import { ref } from "vue";
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
 
@@ -7,19 +6,6 @@ export default {
   components: {
     Dropbox,
     Input
-  },
-
-  setup() {
-    const isOpenDrop1 = ref(false);
-
-    const toggleDropdown = () => {
-      isOpenDrop1.value = !isOpenDrop1.value;
-    };
-
-    return {
-      isOpenDrop1,
-      toggleDropdown,
-    };
   },
 };
 </script>

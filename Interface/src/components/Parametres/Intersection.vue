@@ -1,5 +1,4 @@
 <script>
-import { ref } from "vue";
 import Input from "../common/Input.vue";
 
 export default {

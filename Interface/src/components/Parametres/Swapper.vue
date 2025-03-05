@@ -24,26 +24,15 @@ export default {
   setup() {
     const toolbarStore = toolbarInteraction();
 
-    const test = () => {
-      console.log(toolbarStore.isDepartToogle);
-      console.log(toolbarStore.isRouteToogle);
-      console.log(toolbarStore.isIntersectionToogle);
-      console.log(toolbarStore.isFeuToogle);
-      console.log(toolbarStore.isPietonToogle);
-      console.log(toolbarStore.isPrioriteToogle);
-      console.log(toolbarStore.isFinToogle);
-    };
-
     return {
       toolbarStore,
-      test
     };
   },
 };
 </script>
 
 <template>
-  <Depart v-if="toolbarStore.isDepartToogle" @click="test" />
+  <Depart v-if="toolbarStore.isDepartToogle"/>
   <Route v-else-if="toolbarStore.isRouteToogle" />
   <Intersection v-else-if="toolbarStore.isIntersectionToogle" />
   <Feu v-else-if="toolbarStore.isFeuToogle" />
