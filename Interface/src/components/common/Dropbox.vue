@@ -22,7 +22,7 @@ export default {
       if (props.type === "depart" && props.param === "type") {
         return ["Voiture", "Piéton"];
       } else {
-        return ["G", "B", "D", "H"];
+        return [0, 1, 2, 3];
       }
     });
 

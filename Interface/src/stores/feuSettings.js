@@ -6,7 +6,7 @@ export const feuSettings = defineStore(
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
-    const sens_route = ref("");
+    const sens_route = ref(0);
     const proba_gauche = ref(0);
     const proba_droite = ref(0);
     const proba_bas = ref(0);
@@ -16,7 +16,7 @@ export const feuSettings = defineStore(
 
     const clear = () => {
       nom.value = "";
-      sens_route.value = "";
+      sens_route.value = 0;
       proba_gauche.value = 0;
       proba_droite.value = 0;
       proba_bas.value = 0;

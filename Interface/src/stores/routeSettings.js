@@ -6,12 +6,12 @@ export const routeSettigns = defineStore(
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
-    const sens_route = ref("");
+    const sens_route = ref(0);
     const longeur = ref(0);
 
     const clear = () => {
       nom.value = "";
-      sens_route.value = "";
+      sens_route.value = 0;
       longeur.value = 0;
     };
 
