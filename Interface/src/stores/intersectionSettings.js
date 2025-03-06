@@ -6,6 +6,7 @@ export const intersectionSettings = defineStore(
   () => {
     // Liste des parametres d'une route*
     const nom = ref("");
+    const len = ref(1);	
     
     const clear = () => {
       nom.value = "";

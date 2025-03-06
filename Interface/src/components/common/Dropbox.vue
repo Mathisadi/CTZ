@@ -64,7 +64,7 @@ export default {
           }
         } else if (props.type === "depart") {
           if (props.param === "type") {
-            return storeDepart.type;
+            return storeDepart.type_depart;
           } else if (props.param === "sens") {
             return storeDepart.sens_route;
           }
@@ -92,7 +92,7 @@ export default {
           }
         } else if (props.type === "depart") {
           if (props.param === "type") {
-            storeDepart.type = newValue;
+            storeDepart.type_depart = newValue;
           } else if (props.param === "sens") {
             storeDepart.sens_route = newValue;
           }

@@ -12,6 +12,7 @@ export const feuSettings = defineStore(
     const proba_bas = ref(0);
     const proba_haut = ref(0);
     const cycle = ref("");
+    const len = ref(1);
 
     const clear = () => {
       nom.value = "";
