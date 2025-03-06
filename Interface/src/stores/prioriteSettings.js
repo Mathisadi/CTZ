@@ -11,6 +11,7 @@ export const prioriteSettings = defineStore(
     const proba_droite = ref(0);
     const proba_bas = ref(0);
     const proba_haut = ref(0);
+    const len = ref(1);
 
     const clear = () => {
       nom.value = "";
