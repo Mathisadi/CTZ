@@ -1,0 +1,19 @@
+{
+    "trafic": [
+        {
+            "item_id": 3,
+            "info": {
+                "pos_x": 0,
+                "pos_y": 0,
+                "type": "route",
+                "nom": "test",
+                "sens": "test",
+                "proba_g": 0.5,
+                "proba_d": 0.5,
+                "proba_b": 0.5,
+                "proba_h": 0.5,
+                "len": 100.0
+            }
+        }    
+    ]
+}
