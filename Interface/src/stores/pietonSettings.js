@@ -7,6 +7,7 @@ export const pietonSettings = defineStore(
     // Liste des parametres d'une route*
     const nom = ref("");
     const sens_route = ref("");
+    const len = ref(1);
 
     const clear = () => {
       nom.value = "";
