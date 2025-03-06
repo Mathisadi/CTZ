@@ -30,14 +30,6 @@ export default {
             return storeRoute.longeur;
           } else if (props.param === "nom") {
             return storeRoute.nom;
-          } else if (props.param === "proba-gauche") {
-            return storeRoute.proba_gauche;
-          } else if (props.param === "proba-droite") {
-            return storeRoute.proba_droite;
-          } else if (props.param === "proba-bas") {
-            return storeRoute.proba_bas;
-          } else if (props.param === "proba-haut") {
-            return storeRoute.proba_haut;
           }
         } else if (props.type === "intersection") {
           if (props.param === "nom") {
@@ -93,14 +85,6 @@ export default {
             storeRoute.longeur = newValue;
           } else if (props.param === "nom") {
             storeRoute.nom = newValue;
-          } else if (props.param === "proba-gauche") {
-            storeRoute.proba_gauche = newValue;
-          } else if (props.param === "proba-droite") {
-            storeRoute.proba_droite = newValue;
-          } else if (props.param === "proba-bas") {
-            storeRoute.proba_bas = newValue;
-          } else if (props.param === "proba-haut") {
-            storeRoute.proba_haut = newValue;
           }
         } else if (props.type === "intersection") {
           if (props.param === "nom") {
