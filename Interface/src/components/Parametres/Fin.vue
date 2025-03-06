@@ -1,10 +1,12 @@
 <script>
 import Input from "../common/Input.vue";
+import Dropbox from "../common/Dropbox.vue";
 import ClearButton from "../common/ClearButton.vue";
 
 export default {
   components: {
     Input,
+    Dropbox,
     ClearButton
   },
 };
@@ -21,6 +23,12 @@ export default {
         <p class="nom-parametre">Nom</p>
         <!-- Input -->
         <Input :type="'fin'" :param="'nom'" />
+      </div>
+      <!-- Sens de la fin -->
+      <div class="parametre">
+        <p class="nom-parametre">Sens de circulation</p>
+        <!-- Dropdown -->
+        <Dropbox :type="'fin'" :param="'sens'" />
       </div>
       <!-- bouton clear-->
       <ClearButton :type="'fin'" />

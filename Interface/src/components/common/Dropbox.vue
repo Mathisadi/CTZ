@@ -4,6 +4,7 @@ import { feuSettings } from "@/stores/feuSettings";
 import { prioriteSettings } from "@/stores/prioriteSettings";
 import { pietonSettings } from "@/stores/pietonSettings";
 import { departSettings } from "@/stores/departSettings";
+import { finSettings } from "@/stores/finSettings";
 
 import { ref, computed } from "vue";
 import IconFleche from "../Icons/Fleche_bas.vue";
@@ -40,6 +41,7 @@ export default {
     const storePriorite = prioriteSettings();
     const storePieton = pietonSettings();
     const storeDepart = departSettings();
+    const storeFin = finSettings();
 
     // Propriété calculée pour gérer la valeur sélectionnée en tant que chaîne
     const selectedValue = computed({
@@ -68,6 +70,10 @@ export default {
           } else if (props.param === "sens") {
             return storeDepart.sens_route;
           }
+        } else if (props.type === "fin") {
+          if (props.param === "sens") {
+            return storeFin.sens_route;
+          }     
         }
         return "";
       },
@@ -95,6 +101,10 @@ export default {
             storeDepart.type_depart = newValue;
           } else if (props.param === "sens") {
             storeDepart.sens_route = newValue;
+          }
+        } else if (props.type === "fin") {
+          if (props.param === "sens") {
+            storeFin.sens_route = newValue;
           }
         }
       },
