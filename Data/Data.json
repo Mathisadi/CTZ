@@ -5,6 +5,7 @@
             "info": {
                 "type": "route",
                 "nom": "route",
+                "len": 100.0,
                 "sens": 1
             }
         },
@@ -13,6 +14,7 @@
             "info": {
                 "type": "route",
                 "nom": "route",
+                "len": 100.0,
                 "sens": 1
             }
         }
