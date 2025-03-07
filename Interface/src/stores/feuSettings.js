@@ -12,6 +12,7 @@ export const feuSettings = defineStore(
     const proba_bas = ref(0);
     const proba_haut = ref(0);
     const cycle = ref("");
+    const etat = ref(true);
     const len = ref(1);
 
     const clear = () => {
@@ -22,6 +23,7 @@ export const feuSettings = defineStore(
       proba_bas.value = 0;
       proba_haut.value = 0;
       cycle.value = "";
+      etat.value = true;
     };
 
     return {
@@ -32,6 +34,7 @@ export const feuSettings = defineStore(
       proba_droite,
       proba_bas,
       proba_haut,
+      etat,
       clear
     };
   },

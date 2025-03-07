@@ -71,6 +71,8 @@ export default {
         } else if (props.type === "feu") {
           if (props.param === "sens") {
             result = storeFeu.sens_route;
+          } else if (props.param === "etat") {
+            result = storeFeu.etat;
           }
         } else if (props.type === "priorite") {
           if (props.param === "sens") {
@@ -113,6 +115,8 @@ export default {
         } else if (props.type === "feu") {
           if (props.param === "sens") {
             storeFeu.sens_route = newValue;
+          } else if (props.param === "etat") {
+            storeFeu.etat = newValue;
           }
         } else if (props.type === "priorite") {
           if (props.param === "sens") {
@@ -160,8 +164,7 @@ export default {
       <!-- Affichage : si sélection non vide, on affiche directement pour unique, sinon on joint le tableau -->
       {{
         (selectedValue !== "" &&
-          (isUniqueSelection ? selectedValue : selectedValue.join(", "))) ||
-        "None"
+          (isUniqueSelection ? selectedValue : selectedValue.join(", ")))
       }}
       <IconFleche />
     </button>

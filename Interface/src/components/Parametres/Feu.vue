@@ -60,6 +60,12 @@ export default {
         <!-- Input -->
         <Input :type="'feu'" :param="'cycle'" />
       </div>
+      <!-- Etat du feu -->
+      <div class="parametre">
+        <p class="nom-parametre">Etat initial</p>
+        <!-- Dropdown -->
+        <Dropbox :type="'feu'" :param="'etat'" />
+      </div>
       <!-- bouton clear-->
       <ClearButton :type="'feu'" />
     </div>
