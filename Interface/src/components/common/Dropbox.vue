@@ -15,10 +15,12 @@ export default {
     IconFleche,
   },
   setup(props) {
-    // Variable réactive pour l'ouverture du dropdown
     const isOpen = ref(false);
 
-    // Définition des listes initiale en fonction des props
+    // Détermine si la sélection est unique (cas "Voiture"/"Piéton")
+    const isUniqueSelection = computed(() => props.type === "depart" && props.param === "type");
+
+    // Définition des listes initiales
     const initiale_dir = computed(() => {
       if (props.type === "depart" && props.param === "type") {
         return ["Voiture", "Piéton"];
@@ -35,7 +37,7 @@ export default {
       }
     });
 
-    // Stores
+    // Récupération des stores
     const storeRoute = routeSettigns();
     const storeFeu = feuSettings();
     const storePriorite = prioriteSettings();
@@ -43,39 +45,48 @@ export default {
     const storeDepart = departSettings();
     const storeFin = finSettings();
 
-    // Propriété calculée pour gérer la valeur sélectionnée en tant que chaîne
+    // Computed property pour gérer la valeur sélectionnée
     const selectedValue = computed({
       get() {
+        let result;
         if (props.type === "route") {
           if (props.param === "sens") {
-            return storeRoute.sens_route;
+            result = storeRoute.sens_route;
           } else if (props.param === "direction") {
-            return storeRoute.direction_possible;
+            result = storeRoute.direction_possible;
           }
         } else if (props.type === "feu") {
           if (props.param === "sens") {
-            return storeFeu.sens_route;
+            result = storeFeu.sens_route;
           }
         } else if (props.type === "priorite") {
           if (props.param === "sens") {
-            return storePriorite.sens_route;
+            result = storePriorite.sens_route;
           }
         } else if (props.type === "pieton") {
           if (props.param === "sens") {
-            return storePieton.sens_route;
+            result = storePieton.sens_route;
           }
         } else if (props.type === "depart") {
           if (props.param === "type") {
-            return storeDepart.type_depart;
+            result = storeDepart.type_depart;
           } else if (props.param === "sens") {
-            return storeDepart.sens_route;
+            result = storeDepart.sens_route;
           }
         } else if (props.type === "fin") {
           if (props.param === "sens") {
-            return storeFin.sens_route;
-          }     
+            result = storeFin.sens_route;
+          }
         }
-        return "";
+        // Si aucune valeur n'est définie, renvoyer la valeur par défaut
+        if (result === undefined || result === null) {
+          result = isUniqueSelection.value ? "" : [];
+        }
+        // Si la sélection est multiple, s'assurer que c'est un tableau
+        if (!isUniqueSelection.value && !Array.isArray(result)) {
+          result = [result];
+        }
+        return result;
       },
       set(newValue) {
         if (props.type === "route") {
@@ -120,6 +131,7 @@ export default {
       isOpen,
       toggleDropdown,
       selectedValue,
+      isUniqueSelection,
     };
   },
 };
@@ -128,20 +140,19 @@ export default {
 <template>
   <div class="dropdown-wrapper">
     <button @click="toggleDropdown" class="dropdown">
-      {{ selectedValue !== "" ? selectedValue : "None" }}
+      <!-- Affichage : si sélection non vide, on affiche directement pour unique, sinon on joint le tableau -->
+      {{ selectedValue !== "" && (isUniqueSelection ? selectedValue : selectedValue.join(", ")) || "None" }}
       <IconFleche />
     </button>
-    <!-- Affichage du dropdown -->
+    <!-- Dropdown -->
     <ul v-if="isOpen" class="dropdown-menu">
       <li v-for="(item, index) in initiale_dir" :key="index">
         <label class="dropdown-item">
-          <!-- Utilisation d'un champ radio pour une sélection unique -->
           <input
-            type="radio"
+            :type="isUniqueSelection ? 'radio' : 'checkbox'"
             :value="item"
             v-model="selectedValue"
-            name="selection"
-            @change="toggleDropdown"
+            :name="isUniqueSelection ? 'selection' : ''"
           />
           {{ nom_dir[index] }}
         </label>
@@ -155,7 +166,6 @@ export default {
   position: relative;
   display: inline-block;
 }
-
 .dropdown {
   flex: initial;
   display: flex;
@@ -173,7 +183,6 @@ export default {
   border-bottom: var(--color-underline) solid 1px;
   cursor: pointer;
 }
-
 .dropdown-menu {
   position: absolute;
   z-index: 10;
@@ -187,15 +196,12 @@ export default {
   background-color: var(--color-underline);
   gap: 10px;
 }
-
 .dropdown-menu li {
   margin-bottom: 10px;
 }
-
 .dropdown-menu li:last-child {
   margin-bottom: 0;
 }
-
 .dropdown-item {
   display: flex;
   align-items: center;
