@@ -77,6 +77,14 @@ export default {
             return storeDepart.nom;
           } else if (props.param === "cycle") {
             return storeDepart.cycle;
+          } else if (props.param === "proba-gauche") {
+            return storeDepart.proba_gauche;
+          } else if (props.param === "proba-droite") {
+            return storeDepart.proba_droite;
+          } else if (props.param === "proba-bas") {
+            return storeDepart.proba_bas;
+          } else if (props.param === "proba-haut") {
+            return storeDepart.proba_haut;
           }
         } else if (props.type === "fin") {
           if (props.param === "nom") {
@@ -140,6 +148,14 @@ export default {
             storeDepart.nom = newValue;
           } else if (props.param === "cycle") {
             storeDepart.cycle = newValue;
+          } else if (props.param === "proba-gauche") {
+            storeDepart.proba_gauche = newValue;
+          } else if (props.param === "proba-droite") {
+            storeDepart.proba_droite = newValue;
+          } else if (props.param === "proba-bas") {
+            storeDepart.proba_bas = newValue;
+          } else if (props.param === "proba-haut") {
+            storeDepart.proba_haut = newValue;
           }
         } else if (props.type === "fin") {
           if (props.param === "nom") {
