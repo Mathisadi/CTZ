@@ -3,7 +3,7 @@
 
 # Bibliothéques utilisées
 from Modele import *
-from Var import *
+from Data import *
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt

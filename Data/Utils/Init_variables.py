@@ -1,7 +1,7 @@
 # Fichier avec toutes les fonction qui définiront la variable peut etre mettre en place des classes
 # Pour l'instant juste recopier les valueurs dans la variable*
 
-from Var import *
+from Data import *
 import copy
 
 def dfs(route, pos_i, pos_j, visited, inter):

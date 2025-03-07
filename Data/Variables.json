@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "item_id": 3,
+            "info": {
+                "type": "route",
+                "nom": "route",
+                "sens": 1
+            }
+        },
+        {
+            "item_id": 4,
+            "info": {
+                "type": "route",
+                "nom": "route",
+                "sens": 1
+            }
+        }
+    ]
+}
