@@ -6,7 +6,11 @@
                 "type": "route",
                 "nom": "route",
                 "len": 100.0,
-                "sens": 1
+                "sens": 1,
+                "proba_g": 0,
+                "proba_d": 1,
+                "proba_b": 0,
+                "proba_h": 0
             }
         },
         {
@@ -15,7 +19,11 @@
                 "type": "route",
                 "nom": "route",
                 "len": 100.0,
-                "sens": 1
+                "sens": 1,
+                "proba_g": 0,
+                "proba_d": 1,
+                "proba_b": 0,
+                "proba_h": 0
             }
         }
     ]
