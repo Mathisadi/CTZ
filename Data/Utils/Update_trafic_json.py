@@ -40,5 +40,3 @@ def update_trafic_json():
 
     with open("./Data/Trafic.json", "w", encoding="utf-8") as f:
         f.write(json_str)
-    
-update_trafic_json()
