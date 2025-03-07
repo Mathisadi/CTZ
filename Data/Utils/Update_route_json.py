@@ -1,4 +1,5 @@
 import json
+import re
 
 # On crée un fonction qui crée la value de la route à partir d'un element de data
 def create_route_value(element):
@@ -84,9 +85,20 @@ def update_route_json():
         item_id = item["item_id"]
         value = create_value(item)
         res["route"].append({"item_id": item_id, "value": value})
+        
+    # Sérialisation avec indentation pour une bonne lisibilité
+    json_str = json.dumps(res, ensure_ascii=False, indent=4)
+    
+    # Post-traitement pour remettre en ligne le contenu des tableaux "value"
+    # Cette regex cherche le pattern "value": [ ... ] avec des retours à la ligne à l'intérieur
+    json_str = re.sub(
+        r'("value": )\[\n(.*?)\n\s*\]',
+        lambda m: m.group(1) + '[' + re.sub(r'\n\s*', ' ', m.group(2)).strip() + ']',
+        json_str,
+        flags=re.DOTALL
+    )
 
     with open("./Data/Route.json", "w", encoding="utf-8") as f:
-        json.dump(res, f, ensure_ascii=False, indent=4) 
+        f.write(json_str)
 
-
-
+update_route_json()

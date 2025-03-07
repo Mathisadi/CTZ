@@ -2,17 +2,11 @@
     "route": [
         {
             "item_id": 3,
-            "value": [
-                "Route",
-                1
-            ]
+            "value": ["Route", 1]
         },
         {
             "item_id": 4,
-            "value": [
-                "Route",
-                1
-            ]
+            "value": ["Route", 1]
         }
     ]
 }
