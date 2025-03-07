@@ -75,6 +75,12 @@ export default {
         <!-- Input -->
         <Input :type="'depart'" :param="'cycle'" />
       </div>
+      <!-- Etat si piéton -->
+      <div class="parametre">
+        <p class="nom-parametre">Etat initial</p>
+        <!-- Dropdown -->
+        <Dropbox :type="'depart'" :param="'etat'" />
+      </div>
       <!-- bouton clear-->
       <ClearButton :type="'depart'" />
     </div>

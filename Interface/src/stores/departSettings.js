@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 export const departSettings = defineStore(
   "departSettings",
   () => {
-    // Liste des parametres d'une route*
+    // Liste des parametres d'une route
     const nom = ref("");
     const sens_route = ref(0);
     const type_depart = ref("Voiture");

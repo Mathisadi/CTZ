@@ -17,13 +17,22 @@ export default {
   setup(props) {
     const isOpen = ref(false);
 
-    // Détermine si la sélection est unique (cas "Voiture"/"Piéton")
-    const isUniqueSelection = computed(() => props.type === "depart" && props.param === "type");
+    // Détermine si la sélection est unique
+    const isUniqueSelection = computed(
+      () =>
+        (props.type === "depart" && props.param === "type") ||
+        (props.type === "feu" && props.param === "etat") ||
+        (props.type === "depart" && props.param === "etat")
+    );
 
     // Définition des listes initiales
     const initiale_dir = computed(() => {
       if (props.type === "depart" && props.param === "type") {
         return ["Voiture", "Piéton"];
+      } else if (props.type === "depart" && props.param === "etat") {
+        return [true, false];
+      } else if (props.type === "feu" && props.param === "etat") {
+        return [true, false];
       } else {
         return [0, 1, 2, 3];
       }
@@ -32,6 +41,10 @@ export default {
     const nom_dir = computed(() => {
       if (props.type === "depart" && props.param === "type") {
         return ["Voiture", "Piéton"];
+      } else if (props.type === "depart" && props.param === "etat") {
+        return ["Actif", "Inactif"];
+      } else if (props.type === "feu" && props.param === "etat") {
+        return ["Actif", "Inactif"];
       } else {
         return ["Gauche", "Bas", "Droite", "Haut"];
       }
@@ -72,6 +85,8 @@ export default {
             result = storeDepart.type_depart;
           } else if (props.param === "sens") {
             result = storeDepart.sens_route;
+          } else if (props.param === "etat") {
+            result = storeDepart.etat;
           }
         } else if (props.type === "fin") {
           if (props.param === "sens") {
@@ -112,6 +127,8 @@ export default {
             storeDepart.type_depart = newValue;
           } else if (props.param === "sens") {
             storeDepart.sens_route = newValue;
+          } else if (props.param === "etat") {
+            storeDepart.etat = newValue;
           }
         } else if (props.type === "fin") {
           if (props.param === "sens") {
@@ -141,7 +158,11 @@ export default {
   <div class="dropdown-wrapper">
     <button @click="toggleDropdown" class="dropdown">
       <!-- Affichage : si sélection non vide, on affiche directement pour unique, sinon on joint le tableau -->
-      {{ selectedValue !== "" && (isUniqueSelection ? selectedValue : selectedValue.join(", ")) || "None" }}
+      {{
+        (selectedValue !== "" &&
+          (isUniqueSelection ? selectedValue : selectedValue.join(", "))) ||
+        "None"
+      }}
       <IconFleche />
     </button>
     <!-- Dropdown -->
