@@ -57,3 +57,5 @@ def update_direction_json():
     
     with open("./Data/Direction.json", "w", encoding="utf-8") as f:
         f.write(json_str)
+
+update_direction_json()

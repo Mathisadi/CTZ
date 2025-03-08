@@ -100,3 +100,5 @@ def update_route_json():
 
     with open("./Data/Route.json", "w", encoding="utf-8") as f:
         f.write(json_str)
+
+update_route_json()
