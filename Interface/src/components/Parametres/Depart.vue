@@ -2,6 +2,7 @@
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
 import ClearButton from "../common/ClearButton.vue";
+import ErrorMessages from "../common/ErrorMessages.vue";
 
 import { departSettings } from "@/stores/departSettings";
 
@@ -9,7 +10,8 @@ export default {
   components: {
     Dropbox,
     Input,
-    ClearButton
+    ClearButton,
+    ErrorMessages
   },
   setup() {
     const departStore = departSettings();
@@ -83,6 +85,8 @@ export default {
       </div>
       <!-- bouton clear-->
       <ClearButton :type="'depart'" />
+      <!-- Erreurs -->
+      <ErrorMessages />
     </div>
   </div>
 </template>

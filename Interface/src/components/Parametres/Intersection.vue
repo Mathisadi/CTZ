@@ -1,11 +1,13 @@
 <script>
 import Input from "../common/Input.vue";
 import ClearButton from "../common/ClearButton.vue";
+import ErrorMessages from "../common/ErrorMessages.vue";
 
 export default {
   components: {
     Input,
-    ClearButton
+    ClearButton,
+    ErrorMessages
   },
 };
 </script>
@@ -24,6 +26,8 @@ export default {
       </div>
       <!-- bouton clear-->
       <ClearButton :type="'intersection'" />
+      <!-- Erreur message -->
+      <ErrorMessages />
     </div>
   </div>
 </template>

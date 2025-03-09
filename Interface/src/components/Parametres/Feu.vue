@@ -2,12 +2,14 @@
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
 import ClearButton from "../common/ClearButton.vue";
+import ErrorMessages from "../common/ErrorMessages.vue";
 
 export default {
   components: {
     Dropbox,
     Input,
-    ClearButton
+    ClearButton,
+    ErrorMessages
   },
 };
 </script>
@@ -68,6 +70,8 @@ export default {
       </div>
       <!-- bouton clear-->
       <ClearButton :type="'feu'" />
+      <!-- Erreurs -->
+      <ErrorMessages />
     </div>
   </div>
 </template>

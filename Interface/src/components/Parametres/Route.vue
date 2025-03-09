@@ -2,12 +2,14 @@
 import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
 import ClearButton from "../common/ClearButton.vue";
+import ErrorMessages from "../common/ErrorMessages.vue";
 
 export default {
   components: {
     Dropbox,
     Input,
-    ClearButton
+    ClearButton,
+    ErrorMessages,
   },
 };
 </script>
@@ -62,6 +64,8 @@ export default {
       </div>
       <!-- bouton clear-->
       <ClearButton :type="'route'" />
+      <!-- Erreurs -->
+      <ErrorMessages />
     </div>
   </div>
 </template>
@@ -95,7 +99,7 @@ export default {
 .parametre {
   display: flex;
   flex-direction: row;
-  align-items:end;
+  align-items: end;
   gap: 10px;
   border: none;
   padding-left: 6px;
@@ -108,5 +112,4 @@ export default {
   font-size: 12px;
   font-weight: 400;
 }
-
 </style>
