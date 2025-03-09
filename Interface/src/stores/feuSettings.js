@@ -19,10 +19,10 @@ export const feuSettings = defineStore(
       return (
         (nom.value != "") &
         (cycle.value != "") &
-        (proba_gauche.value +
-          proba_droite.value +
-          proba_bas.value +
-          proba_haut.value ==
+        (Number(proba_gauche.value) +
+          Number(proba_droite.value) +
+          Number(proba_bas.value) +
+          Number(proba_haut.value) ===
           1)
       );
     };
@@ -42,11 +42,11 @@ export const feuSettings = defineStore(
       return {
         "type": "Feu",
         "nom": nom.value,
-        "sens": sens_route.value,
-        "proba_g": proba_gauche.value,
-        "proba_d": proba_droite.value,
-        "proba_b": proba_bas.value,
-        "proba_h": proba_haut.value,
+        "sens": Number(sens_route.value),
+        "proba_g": Number(proba_gauche.value),
+        "proba_d": Number(proba_droite.value),
+        "proba_b": Number(proba_bas.value),
+        "proba_h": Number(proba_haut.value),
         "cycle": cycle.value,
         "etat": etat.value,
         "len": len.value

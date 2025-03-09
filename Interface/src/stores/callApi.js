@@ -30,7 +30,7 @@ export const callApi = defineStore("callApi", () => {
     } else if (typeStore.isFeuToogle) {
       return feuStore.getFeuSettings();
     } else if (typeStore.isPrioriteToogle) {
-      return prioriteStore.getPietonSettings();
+      return prioriteStore.getPrioriteSettings();
     } else if (typeStore.isPietonToogle) {
       return pietonStore.getPietonSettings();
     } else if (typeStore.isDepartToogle) {
@@ -55,10 +55,10 @@ export const callApi = defineStore("callApi", () => {
     } else if (typeStore.isPietonToogle) {
       return path + "/pieton";
     } else if (typeStore.isDepartToogle) {
-      if (departStore.type === "Voiture") {
+      if (departStore.type_depart === "Voiture") {
         return path + "/depart";
       } else {
-        return path + "/depart_pieton";
+        return path + "/departPieton";
       }
     } else if (typeStore.isFinToogle) {
       return path + "/fin";

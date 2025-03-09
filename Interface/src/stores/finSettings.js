@@ -22,7 +22,7 @@ export const finSettings = defineStore(
       return {
         "type": "Fin",
         "nom": nom.value,
-        "sens": sens_route.value,
+        "sens": Number(sens_route.value),
         "len": len.value
       };
     };

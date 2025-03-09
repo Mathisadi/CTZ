@@ -6,19 +6,19 @@ export const pietonSettings = defineStore(
   () => {
     // Liste des parametres d'une route
     const nom = ref("");
-    const sens_route = ref([0]);
+    const sens_route = ref([0,2]);
     const len = ref(1);
 
     const testFilled = () => {
       return (
         (nom.value != "") & 
-        (sens_route.value.length = 2)
+        (sens_route.value.length === 2)
       );
     };
 
     const clear = () => {
       nom.value = "";
-      sens_route.value = [0];
+      sens_route.value = [0,2];
     };
 
     const getPietonSettings = () => {

@@ -57,7 +57,7 @@ export const errorMessages = defineStore("errorMessages", () => {
         "Des données sont manquantes ou mal renseignées. Pour rappel la somme des probabilités doit-être égale à 1";
     } else if (storeToolbar.isPietonToogle && errorisToogle.value) {
       ErrorMessage.value =
-        "Des données sont manquantes ou mal renseignées. Pour rappel la somme des probabilités doit-être égale à 1";
+        "Des données sont manquantes ou mal renseignées.";
     } else if (storeToolbar.isDepartToogle && errorisToogle.value) {
       ErrorMessage.value = "Des données sont manquantes ou mal renseignées.";
     } else if (storeToolbar.isFinToogle && errorisToogle.value) {
