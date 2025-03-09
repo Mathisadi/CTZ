@@ -16,17 +16,15 @@ export default {
   },
   setup(props) {
     const isOpen = ref(false);
-
-    // Détermine si la sélection est unique
-    const isUniqueSelection = computed(
-      () =>
-        !(props.type === "pieton" && props.param === "sens")
-    );
-
     // Définition des listes initiales
     const initiale_dir = computed(() => {
       if (props.type === "depart" && props.param === "type") {
         return ["Voiture", "Piéton"];
+      } else if (props.type === "pieton" && props.param === "sens") {
+        return [
+          [0, 2],
+          [1, 3],
+        ];
       } else if (props.type === "depart" && props.param === "etat") {
         return [true, false];
       } else if (props.type === "feu" && props.param === "etat") {
@@ -39,6 +37,8 @@ export default {
     const nom_dir = computed(() => {
       if (props.type === "depart" && props.param === "type") {
         return ["Voiture", "Piéton"];
+      } else if (props.type === "pieton" && props.param === "sens") {
+        return ["Horizontale", "Verticale"]
       } else if (props.type === "depart" && props.param === "etat") {
         return ["Actif", "Inactif"];
       } else if (props.type === "feu" && props.param === "etat") {
@@ -97,10 +97,7 @@ export default {
         if (result === undefined || result === null) {
           result = isUniqueSelection.value ? "" : [];
         }
-        // Si la sélection est multiple, s'assurer que c'est un tableau
-        if (!isUniqueSelection.value && !Array.isArray(result)) {
-          result = [result];
-        }
+
         return result;
       },
       set(newValue) {
@@ -150,7 +147,6 @@ export default {
       isOpen,
       toggleDropdown,
       selectedValue,
-      isUniqueSelection,
     };
   },
 };
@@ -161,8 +157,7 @@ export default {
     <button @click="toggleDropdown" class="dropdown">
       <!-- Affichage : si sélection non vide, on affiche directement pour unique, sinon on joint le tableau -->
       {{
-        (selectedValue !== "" &&
-          (isUniqueSelection ? selectedValue : selectedValue.join(", ")))
+        (selectedValue !== "" ? selectedValue : "None")
       }}
       <IconFleche />
     </button>
@@ -171,10 +166,10 @@ export default {
       <li v-for="(item, index) in initiale_dir" :key="index">
         <label class="dropdown-item">
           <input
-            :type="isUniqueSelection ? 'radio' : 'checkbox'"
+            :type="'radio'"
             :value="item"
             v-model="selectedValue"
-            :name="isUniqueSelection ? 'selection' : ''"
+            :name="''"
           />
           {{ nom_dir[index] }}
         </label>
