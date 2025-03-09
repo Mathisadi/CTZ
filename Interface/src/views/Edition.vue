@@ -6,7 +6,7 @@ import Quadrillage from "@/components/Appli/Quadrillage.vue";
 import Ruler_left from "@/components/Appli/Ruler_left.vue";
 import Ruler_top from "@/components/Appli/Ruler_top.vue";
 import Info_route from "@/components/Parametres/Route.vue";
-import { grid } from "@/stores/grid.js";
+import { grid } from "@/stores/gridProps.js";
 import Swapper from "@/components/Parametres/Swapper.vue";
 
 export default {

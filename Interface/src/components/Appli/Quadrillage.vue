@@ -1,21 +1,20 @@
 <script>
 
-import { updateColorCell } from "@/stores/updateColorGrid";
-import { errorMessages } from "@/stores/ErrorMessages";
+import { grid } from "@/stores/gridProps.js";
+import { updateCell } from "@/stores/updateCell";
 import { mouvement } from "@/stores/mouvement.js";
-import { grid } from "@/stores/grid.js";
 
 export default {
   name: "Quadrillage",
   setup() {
     // Stores
     const storeGrid = grid();
-    const storeColor = updateColorCell();
-    const storeError = errorMessages();
+    const storeCell = updateCell();
 
     // Constante grille
     const cols = storeGrid.cols;
     const rows = storeGrid.rows;
+    const infoCell = storeGrid.infoCell;
 
     // Drag
     const dragStore = mouvement();
@@ -31,8 +30,8 @@ export default {
       startDrag,
       onDrag,
       endDrag,
-      storeColor,
-      storeError
+      storeCell,
+      infoCell
     };
   },
 };
@@ -52,9 +51,9 @@ export default {
     }"
   >
     <div
-      v-for="(cell, index) in storeColor.couleurs"
+      v-for="(cell, index) in infoCell"
       :key="index"
-      @click="storeColor.changeColor(cell)"
+      @click="storeCell.majCell(index)"
       :style="{ backgroundColor: cell.color }"
       class="cases"
     ></div>

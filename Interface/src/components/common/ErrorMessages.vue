@@ -1,5 +1,5 @@
 <script>
-import { errorMessages } from "@/stores/ErrorMessages";
+import { errorMessages } from "@/stores/errorMessages";
 
 export default {
   setup() {

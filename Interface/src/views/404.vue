@@ -12,6 +12,7 @@ import { ref } from "vue";
 const responseData = ref(null);
 
 const data = {
+  type: "route",
   nom: "test",
   sens: "test",
   proba_g: 0.5,
