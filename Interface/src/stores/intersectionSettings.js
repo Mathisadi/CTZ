@@ -27,7 +27,8 @@ export const intersectionSettings = defineStore(
     return {
       nom,
       clear,
-      getIntersectionSettings
+      getIntersectionSettings,
+      testFilled
     };
   },
   {
