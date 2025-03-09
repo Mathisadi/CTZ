@@ -1,12 +1,64 @@
 {
     "route": [
         {
-            "item_id": 3,
-            "value": ["Route", 1]
+            "item_id": 5405,
+            "value": ["Route", 2]
         },
         {
-            "item_id": 104,
-            "value": ["Route", 1]
+            "item_id": 5404,
+            "value": ["Depart", 2, 5.0]
+        },
+        {
+            "item_id": 5406,
+            "value": ["Intersection", [ false, false, false, false],
+                0
+            ]
+        },
+        {
+            "item_id": 5305,
+            "value": ["Intersection", [ false, false, false, false],
+                0
+            ]
+        },
+        {
+            "item_id": 5306,
+            "value": ["Intersection", [ false, false, false, false],
+                0
+            ]
+        },
+        {
+            "item_id": 5407,
+            "value": ["Intersection", [ false, false, false, false],
+                0
+            ]
+        },
+        {
+            "item_id": 5408,
+            "value": ["Fin", 2]
+        },
+        {
+            "item_id": 5304,
+            "value": ["Fin", 0]
+        },
+        {
+            "item_id": 5507,
+            "value": ["Fin", 1]
+        },
+        {
+            "item_id": 5508,
+            "value": ["Route", 3]
+        },
+        {
+            "item_id": 5307,
+            "value": ["Route", 0]
+        },
+        {
+            "item_id": 5609,
+            "value": ["Depart", 3, 5.0]
+        },
+        {
+            "item_id": 5308,
+            "value": ["Depart", 0, 5.0]
         }
     ]
 }

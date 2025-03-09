@@ -1,353 +1,88 @@
 {
     "data": [
         {
-            "item_id": 3,
+            "item_id": 5405,
             "info": {
-                "type": "route",
-                "nom": "test",
-                "sens": "test",
-                "proba_g": 0.5,
-                "proba_d": 0.5,
-                "proba_b": 0.5,
-                "proba_h": 0.5,
+                "type": "Route",
+                "nom": "Route",
+                "sens": 2,
+                "proba_g": 0.0,
+                "proba_d": 1.0,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
                 "len": 100.0
             }
         },
         {
-            "item_id": 104,
+            "item_id": 5404,
             "info": {
-                "type": "route",
-                "nom": "route",
-                "len": 100.0,
-                "sens": 1,
-                "proba_g": 0,
-                "proba_d": 1,
-                "proba_b": 0,
-                "proba_h": 0
-            }
-        },
-        {
-            "item_id": 5203,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
+                "type": "Depart",
+                "nom": "Départ",
+                "sens": 2,
+                "densite": 5.0,
                 "proba_g": 0.0,
-                "proba_d": 0.0,
+                "proba_d": 1.0,
                 "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5304,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 1,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5405,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "proba_h": 0.0,
                 "len": 1.0
             }
         },
         {
             "item_id": 5406,
             "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5507,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "type": "Intersection",
+                "nom": "Inter",
                 "len": 1.0
             }
         },
         {
             "item_id": 5305,
             "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5204,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 1,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "type": "Intersection",
+                "nom": "Inter",
                 "len": 1.0
             }
         },
         {
             "item_id": 5306,
             "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5307,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "type": "Intersection",
+                "nom": "Inter",
                 "len": 1.0
             }
         },
         {
             "item_id": 5407,
             "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "type": "Intersection",
+                "nom": "Inter",
                 "len": 1.0
             }
         },
         {
             "item_id": 5408,
             "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "type": "Fin",
+                "nom": "Fin",
+                "sens": 2,
                 "len": 1.0
             }
         },
         {
-            "item_id": 5509,
+            "item_id": 5304,
             "info": {
-                "type": "Route",
-                "nom": "qaz",
+                "type": "Fin",
+                "nom": "Fin",
                 "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
                 "len": 1.0
             }
         },
         {
-            "item_id": 5610,
+            "item_id": 5507,
             "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5611,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5409,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5607,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5708,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5609,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5506,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5505,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5404,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5303,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5608,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5606,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5202,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "type": "Fin",
+                "nom": "Fin",
+                "sens": 1,
                 "len": 1.0
             }
         },
@@ -355,47 +90,35 @@
             "item_id": 5508,
             "info": {
                 "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5205,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 2,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5206,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
+                "nom": "Route",
                 "sens": 3,
                 "proba_g": 0.0,
                 "proba_d": 0.0,
                 "proba_b": 0.0,
                 "proba_h": 1.0,
-                "len": 1.0
+                "len": 100.0
             }
         },
         {
-            "item_id": 5709,
+            "item_id": 5307,
             "info": {
                 "type": "Route",
-                "nom": "qaz",
+                "nom": "Route",
                 "sens": 0,
+                "proba_g": 1.0,
+                "proba_d": 0.0,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
+                "len": 100.0
+            }
+        },
+        {
+            "item_id": 5609,
+            "info": {
+                "type": "Depart",
+                "nom": "Départ",
+                "sens": 3,
+                "densite": 5.0,
                 "proba_g": 0.0,
                 "proba_d": 0.0,
                 "proba_b": 0.0,
@@ -404,314 +127,16 @@
             }
         },
         {
-            "item_id": 5810,
+            "item_id": 5308,
             "info": {
-                "type": "Route",
-                "nom": "qaz",
+                "type": "Depart",
+                "nom": "Départ",
                 "sens": 0,
-                "proba_g": 0.0,
+                "densite": 5.0,
+                "proba_g": 1.0,
                 "proba_d": 0.0,
                 "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5811,
-            "info": {
-                "type": "Route",
-                "nom": "q",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5812,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5710,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5909,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 6009,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 6106,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 6107,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 6209,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5707,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5808,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5809,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5711,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5510,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5712,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5813,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5912,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5913,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5914,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5911,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5910,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5605,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5915,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 1.0
-            }
-        },
-        {
-            "item_id": 5814,
-            "info": {
-                "type": "Route",
-                "nom": "qaz",
-                "sens": 0,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
+                "proba_h": 0.0,
                 "len": 1.0
             }
         }
