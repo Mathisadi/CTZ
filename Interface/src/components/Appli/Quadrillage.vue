@@ -4,8 +4,13 @@ import { grid } from "@/stores/gridProps.js";
 import { updateCell } from "@/stores/updateCell";
 import { mouvement } from "@/stores/mouvement.js";
 
+import Arrow_sens from "../Icons/Arrow_sens.vue";
+
 export default {
   name: "Quadrillage",
+  components: {
+    Arrow_sens
+  },
   setup() {
     // Stores
     const storeGrid = grid();
@@ -53,10 +58,10 @@ export default {
     <div
       v-for="(cell, index) in infoCell"
       :key="index"
-      @click="storeCell.majCell(index)"
+      @click="storeCell.majCell(index), console.log(cell.nom), console.log(cell.sens)"
       :style="{ backgroundColor: cell.color }"
       class="cases"
-    ></div>
+    > {{ cell.nom }} <Arrow_sens :sens="cell.sens" /></div>
   </div>
 </template>
 
@@ -68,6 +73,16 @@ export default {
 }
 
 .cases {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--color-text);
+  font-size: 10px;
+  font-weight: 400;
+  gap: 10px;
+
   border: 0.5px dashed var(--color-line);
   aspect-ratio: 1/1;
 }
