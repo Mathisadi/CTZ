@@ -17,10 +17,14 @@ export const routeSettigns = defineStore(
       return (
         (nom.value != "") &
         (longeur.value != 0) &
-        (Number(proba_gauche.value) +
-          Number(proba_droite.value) +
-          Number(proba_bas.value) +
-          Number(proba_haut.value) ===
+        (Math.round(
+          (Number(proba_gauche.value) +
+            Number(proba_droite.value) +
+            Number(proba_bas.value) +
+            Number(proba_haut.value)) *
+            100
+        ) /
+          100 ===
           1)
       );
     };
@@ -37,28 +41,28 @@ export const routeSettigns = defineStore(
 
     const getRouteSettings = () => {
       return {
-        "type": "Route",
-        "nom": nom.value,
-        "sens": sens_route.value,
-        "proba_g": proba_gauche.value,
-        "proba_d": proba_droite.value,
-        "proba_b": proba_bas.value,
-        "proba_h": proba_haut.value,
-        "len": longeur.value,
+        type: "Route",
+        nom: nom.value,
+        sens: sens_route.value,
+        proba_g: proba_gauche.value,
+        proba_d: proba_droite.value,
+        proba_b: proba_bas.value,
+        proba_h: proba_haut.value,
+        len: longeur.value,
       };
     };
 
     return {
       sens_route,
       proba_gauche,
-      proba_droite, 
+      proba_droite,
       proba_bas,
       proba_haut,
       longeur,
       nom,
       clear,
       getRouteSettings,
-      testFilled
+      testFilled,
     };
   },
   {

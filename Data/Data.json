@@ -3,21 +3,8 @@
         {
             "item_id": 5405,
             "info": {
-                "type": "Route",
-                "nom": "Route",
-                "sens": 2,
-                "proba_g": 0.0,
-                "proba_d": 1.0,
-                "proba_b": 0.0,
-                "proba_h": 0.0,
-                "len": 100.0
-            }
-        },
-        {
-            "item_id": 5404,
-            "info": {
                 "type": "Depart",
-                "nom": "Départ",
+                "nom": "Départ CG",
                 "sens": 2,
                 "densite": 5.0,
                 "proba_g": 0.0,
@@ -30,13 +17,18 @@
         {
             "item_id": 5406,
             "info": {
-                "type": "Intersection",
-                "nom": "Inter",
-                "len": 1.0
+                "type": "Route",
+                "nom": "Route CG",
+                "sens": 2,
+                "proba_g": 0.0,
+                "proba_d": 0.6,
+                "proba_b": 0.3,
+                "proba_h": 0.1,
+                "len": 20.0
             }
         },
         {
-            "item_id": 5305,
+            "item_id": 5407,
             "info": {
                 "type": "Intersection",
                 "nom": "Inter",
@@ -52,7 +44,7 @@
             }
         },
         {
-            "item_id": 5407,
+            "item_id": 5307,
             "info": {
                 "type": "Intersection",
                 "nom": "Inter",
@@ -62,14 +54,13 @@
         {
             "item_id": 5408,
             "info": {
-                "type": "Fin",
-                "nom": "Fin",
-                "sens": 2,
+                "type": "Intersection",
+                "nom": "Inter",
                 "len": 1.0
             }
         },
         {
-            "item_id": 5304,
+            "item_id": 5305,
             "info": {
                 "type": "Fin",
                 "nom": "Fin",
@@ -78,7 +69,7 @@
             }
         },
         {
-            "item_id": 5507,
+            "item_id": 5508,
             "info": {
                 "type": "Fin",
                 "nom": "Fin",
@@ -87,36 +78,68 @@
             }
         },
         {
-            "item_id": 5508,
+            "item_id": 5409,
             "info": {
-                "type": "Route",
-                "nom": "Route",
+                "type": "Fin",
+                "nom": "Fin",
+                "sens": 2,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5206,
+            "info": {
+                "type": "Fin",
+                "nom": "Fin",
                 "sens": 3,
-                "proba_g": 0.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
-                "proba_h": 1.0,
-                "len": 100.0
+                "len": 1.0
             }
         },
         {
-            "item_id": 5307,
+            "item_id": 5205,
             "info": {
                 "type": "Route",
-                "nom": "Route",
-                "sens": 0,
-                "proba_g": 1.0,
-                "proba_d": 0.0,
-                "proba_b": 0.0,
+                "nom": "Route Résidence",
+                "sens": 1,
+                "proba_g": 0.4,
+                "proba_d": 0.4,
+                "proba_b": 0.2,
                 "proba_h": 0.0,
-                "len": 100.0
+                "len": 20.0
             }
         },
         {
-            "item_id": 5609,
+            "item_id": 5104,
             "info": {
                 "type": "Depart",
-                "nom": "Départ",
+                "nom": "Départ Résidence",
+                "sens": 1,
+                "densite": 5.0,
+                "proba_g": 0.0,
+                "proba_d": 0.0,
+                "proba_b": 1.0,
+                "proba_h": 0.0,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5509,
+            "info": {
+                "type": "Route",
+                "nom": "Route Ecole",
+                "sens": 3,
+                "proba_g": 0.4,
+                "proba_d": 0.4,
+                "proba_b": 0.0,
+                "proba_h": 0.2,
+                "len": 20.0
+            }
+        },
+        {
+            "item_id": 5610,
+            "info": {
+                "type": "Depart",
+                "nom": "Départ Ecole",
                 "sens": 3,
                 "densite": 5.0,
                 "proba_g": 0.0,
@@ -129,8 +152,21 @@
         {
             "item_id": 5308,
             "info": {
+                "type": "Priorité",
+                "nom": "Priorité Allauch",
+                "sens": 0,
+                "proba_g": 0.8,
+                "proba_d": 0.0,
+                "proba_b": 0.1,
+                "proba_h": 0.1,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5309,
+            "info": {
                 "type": "Depart",
-                "nom": "Départ",
+                "nom": "Départ Allauch",
                 "sens": 0,
                 "densite": 5.0,
                 "proba_g": 1.0,

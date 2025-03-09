@@ -29,7 +29,6 @@ def update_direction(route, direction):
                 if (
                     route[x][y][0] != "Fin"
                     and route[x][y][0] != "Intersection"
-                    and route[x][y][0] != "Depart"
                     and route[x][y][0] != "Depart_pieton"
                 ):
                     # Mise à jour aléatoire de la direction en fonction des poids fournis

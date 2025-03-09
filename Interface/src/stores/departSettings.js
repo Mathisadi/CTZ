@@ -22,17 +22,19 @@ export const departSettings = defineStore(
         return (
           (nom.value != "") &
           (Number(densite.value) != 0) &
-          (Number(proba_gauche.value) +
-            Number(proba_droite.value) +
-            Number(proba_bas.value) +
-            Number(proba_haut.value) ===
+          (Math.round(
+            (Number(proba_gauche.value) +
+              Number(proba_droite.value) +
+              Number(proba_bas.value) +
+              Number(proba_haut.value)) *
+              100
+          ) /
+            100 ===
             1)
         );
       } else {
         return (
-          (nom.value != "") &
-          (Number(densite.value) != 0) &
-          (cycle.value != "")
+          (nom.value != "") & (Number(densite.value) != 0) & (cycle.value != "")
         );
       }
     };

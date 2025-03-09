@@ -19,10 +19,14 @@ export const feuSettings = defineStore(
       return (
         (nom.value != "") &
         (cycle.value != "") &
-        (Number(proba_gauche.value) +
-          Number(proba_droite.value) +
-          Number(proba_bas.value) +
-          Number(proba_haut.value) ===
+        (Math.round(
+          (Number(proba_gauche.value) +
+            Number(proba_droite.value) +
+            Number(proba_bas.value) +
+            Number(proba_haut.value)) *
+            100
+        ) /
+          100 ===
           1)
       );
     };
@@ -40,16 +44,16 @@ export const feuSettings = defineStore(
 
     const getFeuSettings = () => {
       return {
-        "type": "Feu",
-        "nom": nom.value,
-        "sens": Number(sens_route.value),
-        "proba_g": Number(proba_gauche.value),
-        "proba_d": Number(proba_droite.value),
-        "proba_b": Number(proba_bas.value),
-        "proba_h": Number(proba_haut.value),
-        "cycle": cycle.value,
-        "etat": etat.value,
-        "len": len.value
+        type: "Feu",
+        nom: nom.value,
+        sens: Number(sens_route.value),
+        proba_g: Number(proba_gauche.value),
+        proba_d: Number(proba_droite.value),
+        proba_b: Number(proba_bas.value),
+        proba_h: Number(proba_haut.value),
+        cycle: cycle.value,
+        etat: etat.value,
+        len: len.value,
       };
     };
 
@@ -64,7 +68,7 @@ export const feuSettings = defineStore(
       etat,
       clear,
       getFeuSettings,
-      testFilled
+      testFilled,
     };
   },
   {

@@ -16,10 +16,14 @@ export const prioriteSettings = defineStore(
     const testFilled = () => {
       return (
         (nom.value != "") &
-        (Number(proba_gauche.value) +
-          Number(proba_droite.value) +
-          Number(proba_bas.value) +
-          Number(proba_haut.value) ===
+        (Math.round(
+          (Number(proba_gauche.value) +
+            Number(proba_droite.value) +
+            Number(proba_bas.value) +
+            Number(proba_haut.value)) *
+            100
+        ) /
+          100 ===
           1)
       );
     };
@@ -35,14 +39,14 @@ export const prioriteSettings = defineStore(
 
     const getPrioriteSettings = () => {
       return {
-        "type": "Priorité",
-        "nom": nom.value,
-        "sens": sens_route.value,
-        "proba_g": Number(proba_gauche.value),
-        "proba_d": Number(proba_droite.value),
-        "proba_b": Number(proba_bas.value),
-        "proba_h": Number(proba_haut.value),
-        "len": len.value
+        type: "Priorité",
+        nom: nom.value,
+        sens: sens_route.value,
+        proba_g: Number(proba_gauche.value),
+        proba_d: Number(proba_droite.value),
+        proba_b: Number(proba_bas.value),
+        proba_h: Number(proba_haut.value),
+        len: len.value,
       };
     };
 
@@ -55,7 +59,7 @@ export const prioriteSettings = defineStore(
       proba_haut,
       clear,
       getPrioriteSettings,
-      testFilled
+      testFilled,
     };
   },
   {

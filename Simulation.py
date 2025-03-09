@@ -128,7 +128,7 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                 )
 
             # Si c'est une priorité
-            elif elm[0] == "Priorite":
+            elif elm[0] == "Priorité":
                 # Pleine
                 if value == [1]:
                     ax.add_patch(
@@ -155,7 +155,8 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                     )
 
                     ax.text(
-                        (j + 1 / 8, n_rows - 1 - i + 1 / 2),
+                        j + 1 / 8,
+                         n_rows - 1 - i + 1 / 2,
                         "STOP",
                         horizontalalignment="center",
                         verticalalignment="center",
@@ -172,7 +173,8 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                     )
 
                     ax.text(
-                        (j + 1 / 2, n_rows - 1 - i + 1 / 8),
+                        j + 1 / 2,
+                        n_rows - 1 - i + 1 / 8,
                         "STOP",
                         horizontalalignment="center",
                         verticalalignment="center",
@@ -193,7 +195,8 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                     )
 
                     ax.text(
-                        (j + 7 / 8, n_rows - 1 - i + 1 / 2),
+                        j + 7 / 8,
+                        n_rows - 1 - i + 1 / 2,
                         "STOP",
                         horizontalalignment="center",
                         verticalalignment="center",
@@ -214,13 +217,14 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                     )
 
                     ax.text(
-                        (j + 1 / 2, n_rows - 1 - i + 7 / 8),
+                        j + 1 / 2,
+                        n_rows - 1 - i + 7 / 8,
                         "STOP",
                         horizontalalignment="center",
                         verticalalignment="center",
                         fontsize=10,
                         color="white",
-                      rotation=0,
+                        rotation=0,
                     )
 
             # Si c'est un feu rouge
@@ -336,6 +340,7 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
 def update(frame, ax, route, direction, trafic):
     # Simuler le mouvement des véhicules (fonction fictive)
     r = mouvement(route, direction, trafic, frame)
+    
     route, direction, trafic = r[0], r[1], r[2]
 
     # Taille de la matrice
@@ -344,6 +349,7 @@ def update(frame, ax, route, direction, trafic):
 
     # Appeler la fonction de simulation pour mettre à jour le graphique
     simulation(frame, ax, route, direction, trafic, n_rows, n_cols)
+
 
 # Initialisation de la simulation
 fig, ax = plt.subplots()
