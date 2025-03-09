@@ -3,7 +3,7 @@ from pydantic import BaseModel
 class RouteModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: int
     proba_g: float
     proba_d: float
     proba_b: float
@@ -18,7 +18,7 @@ class IntersectionModel(BaseModel):
 class FeuModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: int
     proba_g: float
     proba_d: float
     proba_b: float
@@ -29,7 +29,7 @@ class FeuModel(BaseModel):
 class PrioriteModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: int
     proba_g: float
     proba_d: float
     proba_b: float
@@ -39,13 +39,13 @@ class PrioriteModel(BaseModel):
 class PietonModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: list
     len: float
 
 class DepartModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: int
     densite: float
     proba_g: float
     proba_d: float
@@ -56,7 +56,7 @@ class DepartModel(BaseModel):
 class DepartPietonModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: int
     densite: float
     cycle: str
     etat: bool
@@ -65,5 +65,5 @@ class DepartPietonModel(BaseModel):
 class FinModel(BaseModel):
     type: str
     nom: str
-    sens: str
+    sens: int
     len: float
