@@ -12,9 +12,18 @@ export const intersectionSettings = defineStore(
       nom.value = "";
     };
 
+    const getIntersectionSettings = () => {
+      return {
+        "type": "Intersection",
+        "nom": nom.value,
+        "len": len.value
+      };
+    };
+
     return {
       nom,
-      clear
+      clear,
+      getIntersectionSettings
     };
   },
   {

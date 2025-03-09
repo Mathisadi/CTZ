@@ -27,6 +27,10 @@ export const routeSettigns = defineStore(
       return {
         "nom": nom.value,
         "sens": sens_route.value,
+        "proba_g": proba_gauche.value,
+        "proba_d": proba_droite.value,
+        "proba_b": proba_bas.value,
+        "proba_h": proba_haut.value,
         "len": longeur.value,
       };
     };

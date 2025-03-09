@@ -14,10 +14,20 @@ export const pietonSettings = defineStore(
       sens_route.value = "";
     };
 
+    const getPietonSettings = () => {
+      return {
+        "type": "Pieton",
+        "nom": nom.value,
+        "sens": sens_route.value,
+        "len": len.value
+      };
+    };
+
     return {
       sens_route,
       nom,
-      clear
+      clear,
+      getPietonSettings
     };
   },
   {

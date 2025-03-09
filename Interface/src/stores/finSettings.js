@@ -14,10 +14,20 @@ export const finSettings = defineStore(
       sens_route.value = 0;
     };
 
+    const getFinSettings = () => {
+      return {
+        "type": "Fin",
+        "nom": nom.value,
+        "sens": sens_route.value,
+        "len": len.value
+      };
+    };
+
     return {
       nom,
       sens_route,
-      clear
+      clear,
+      getFinSettings
     };
   },
   {

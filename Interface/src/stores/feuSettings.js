@@ -26,6 +26,21 @@ export const feuSettings = defineStore(
       etat.value = true;
     };
 
+    const getFeuSettings = () => {
+      return {
+        "type": "Feu",
+        "nom": nom.value,
+        "sens": sens_route.value,
+        "proba_g": proba_gauche.value,
+        "proba_d": proba_droite.value,
+        "proba_b": proba_bas.value,
+        "proba_h": proba_haut.value,
+        "cycle": cycle.value,
+        "etat": etat.value,
+        "len": len.value
+      };
+    };
+
     return {
       sens_route,
       cycle,
@@ -35,7 +50,8 @@ export const feuSettings = defineStore(
       proba_bas,
       proba_haut,
       etat,
-      clear
+      clear,
+      getFeuSettings
     };
   },
   {

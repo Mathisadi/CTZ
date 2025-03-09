@@ -22,6 +22,18 @@ export const prioriteSettings = defineStore(
       proba_haut.value = 0;
     };
 
+    const getPrioriteSettings = () => {
+      return {
+        "type": "Priorite",
+        "nom": nom.value,
+        "sens": sens_route.value,
+        "proba_g": proba_gauche.value,
+        "proba_d": proba_droite.value,
+        "proba_b": proba_bas.value,
+        "proba_h": proba_haut.value,
+      };
+    };
+
     return {
       sens_route,
       nom,
@@ -29,7 +41,8 @@ export const prioriteSettings = defineStore(
       proba_droite,
       proba_bas,
       proba_haut,
-      clear
+      clear,
+      getPrioriteSettings
     };
   },
   {
