@@ -8,7 +8,7 @@ def create_value(element):
     info = element["info"]
     type = info["type"]
 
-    if type == "route":
+    if type == "Route":
         return [0] * round(info["len"] / 4)
     else:
         return [0]
@@ -40,5 +40,3 @@ def update_trafic_json():
 
     with open("./Data/Trafic.json", "w", encoding="utf-8") as f:
         f.write(json_str)
-
-update_trafic_json()

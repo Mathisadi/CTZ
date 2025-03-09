@@ -8,7 +8,7 @@ def create_value(element):
     info = element["info"]
     type = info["type"]
 
-    if type in ["route", "priorite", "feu", "depart"]:
+    if type in ["Route", "Priorite", "Feu", "Depart"]:
         t = [
             info["proba_g"],
             info["proba_b"],
@@ -57,5 +57,3 @@ def update_direction_json():
     
     with open("./Data/Direction.json", "w", encoding="utf-8") as f:
         f.write(json_str)
-
-update_direction_json()

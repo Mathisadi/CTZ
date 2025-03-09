@@ -11,7 +11,7 @@ def create_route_value(element):
 # On crée un fonction qui crée la value de l'intersection à partir d'un element de data
 def create_intersection_value(element):
     # Direction possible et numéro de l'intersection
-    return ["Intersection", [True, True, True, True], 0]
+    return ["Intersection", [False, False, False, False], 0]
 
 # On crée un fonction qui crée la value du feu à partir d'un element de data
 def create_feu_value(element):
@@ -32,7 +32,7 @@ def create_depart_value(element):
     # On récupère les infos
     info = element["info"]
 
-    if info["type"] == "depart_voiture":
+    if info["type"] == "Depart":
         return ["Depart", info["sens"], info["densite"]]
     else:
         return ["Depart_pieton", info["sens"], info["densite"], info["cycle"], info["etat"]]
@@ -57,21 +57,21 @@ def create_value(element):
     info = element["info"]
     type = info["type"]
 
-    if type == "route":
+    if type == "Route":
         return create_route_value(element)
-    elif type == "intersection":
+    elif type == "Intersection":
         return create_intersection_value(element)
-    elif type == "feux":
+    elif type == "Feux":
         return create_feu_value(element)
-    elif type == "priorité":
+    elif type == "Priorité":
         return create_priorite_value(element)
-    elif type == "depart_voiture":
+    elif type == "Depart":
         return create_depart_value(element)
-    elif type == "piéton":
+    elif type == "Pieton":
         return create_pieton_value(element)
-    elif type == "depart_pieton":
+    elif type == "Depart_pieton":
         return create_depart_value(element)
-    elif type == "fin":
+    elif type == "Fin":
         return create_arrivee_value(element)
 
 # On à pour but de créer les json route trafic et direction
@@ -100,5 +100,3 @@ def update_route_json():
 
     with open("./Data/Route.json", "w", encoding="utf-8") as f:
         f.write(json_str)
-
-update_route_json()

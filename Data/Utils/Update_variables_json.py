@@ -130,5 +130,3 @@ def update_variables_json():
     with open("./Data/Variables.json", "w", encoding="utf-8") as f:
         f.write(formatted_json)
 
-
-update_variables_json()
