@@ -9,6 +9,10 @@ export const finSettings = defineStore(
     const sens_route = ref(0);
     const len = ref(1);
 
+    const testFilled = () => {
+      return (nom.value != "");
+    };
+
     const clear = () => {
       nom.value = "";
       sens_route.value = 0;
@@ -27,7 +31,8 @@ export const finSettings = defineStore(
       nom,
       sens_route,
       clear,
-      getFinSettings
+      getFinSettings,
+      testFilled
     };
   },
   {

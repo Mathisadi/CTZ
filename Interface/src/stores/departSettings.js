@@ -8,7 +8,7 @@ export const departSettings = defineStore(
     const nom = ref("");
     const sens_route = ref(0);
     const type_depart = ref("Voiture");
-    const densite = ref(0)
+    const densite = ref(0);
     const etat = ref(true);
     const cycle = ref("");
     const proba_gauche = ref(0);
@@ -16,6 +16,27 @@ export const departSettings = defineStore(
     const proba_bas = ref(0);
     const proba_haut = ref(0);
     const len = ref(1);
+
+    const testFilled = () => {
+      if (type_depart.value == "Voiture") {
+        return (
+          (nom.value != "") &
+          (densite.value != 0) &
+          (proba_gauche.value +
+            proba_droite.value +
+            proba_bas.value +
+            proba_haut.value ==
+            1)
+        );
+      } else {
+        return (
+          (nom.value != "") &
+          (sens_route.value != 0) &
+          (densite.value != 0) &
+          (cycle.value != "")
+        );
+      }
+    };
 
     const clear = () => {
       nom.value = "";
@@ -28,31 +49,32 @@ export const departSettings = defineStore(
       proba_droite.value = 0;
       proba_bas.value = 0;
       proba_haut.value = 0;
-    }
-    
+    };
+
     const getDepartSettings = () => {
       if (type_depart.value == "Voiture") {
         return {
-          "type": "Depart",
-          "nom": nom.value,
-          "sens": sens_route.value,
-          "densite": densite.value,
-          "proba_g": proba_gauche.value,
-          "proba_d": proba_droite.value,
-          "proba_b": proba_bas.value,
-          "proba_h": proba_haut.value,
+          type: "Depart",
+          nom: nom.value,
+          sens: sens_route.value,
+          densite: densite.value,
+          proba_g: proba_gauche.value,
+          proba_d: proba_droite.value,
+          proba_b: proba_bas.value,
+          proba_h: proba_haut.value,
+          len: len.value,
         };
       } else {
         return {
-          "type": "Depart_pieton",
-          "nom": nom.value,
-          "sens": sens_route.value,
-          "densite": densite.value,
-          "etat": etat.value,
-          "cycle": cycle.value
+          type: "Depart_pieton",
+          nom: nom.value,
+          sens: sens_route.value,
+          densite: densite.value,
+          etat: etat.value,
+          cycle: cycle.value,
+          len: len.value,
         };
       }
-      
     };
 
     return {
@@ -67,7 +89,8 @@ export const departSettings = defineStore(
       densite,
       etat,
       clear,
-      getDepartSettings
+      getDepartSettings,
+      testFilled
     };
   },
   {

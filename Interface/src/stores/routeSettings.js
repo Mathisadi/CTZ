@@ -13,6 +13,18 @@ export const routeSettigns = defineStore(
     const proba_haut = ref(0);
     const longeur = ref(0);
 
+    const testFilled = () => {
+      return (
+        (nom.value != "") &
+        (longeur.value != 0) &
+        (proba_gauche.value +
+          proba_droite.value +
+          proba_bas.value +
+          proba_haut.value ==
+          1)
+      );
+    };
+
     const clear = () => {
       nom.value = "";
       sens_route.value = 0;
@@ -44,7 +56,8 @@ export const routeSettigns = defineStore(
       longeur,
       nom,
       clear,
-      getRouteSettings
+      getRouteSettings,
+      testFilled
     };
   },
   {

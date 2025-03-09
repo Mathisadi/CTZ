@@ -15,6 +15,18 @@ export const feuSettings = defineStore(
     const etat = ref(true);
     const len = ref(1);
 
+    const testFilled = () => {
+      return (
+        (nom.value != "") &
+        (cycle.value != "") &
+        (proba_gauche.value +
+          proba_droite.value +
+          proba_bas.value +
+          proba_haut.value ==
+          1)
+      );
+    };
+
     const clear = () => {
       nom.value = "";
       sens_route.value = 0;
@@ -51,7 +63,8 @@ export const feuSettings = defineStore(
       proba_haut,
       etat,
       clear,
-      getFeuSettings
+      getFeuSettings,
+      testFilled
     };
   },
   {
