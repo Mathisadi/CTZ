@@ -20,9 +20,7 @@ export default {
     // Détermine si la sélection est unique
     const isUniqueSelection = computed(
       () =>
-        (props.type === "depart" && props.param === "type") ||
-        (props.type === "feu" && props.param === "etat") ||
-        (props.type === "depart" && props.param === "etat")
+        !(props.type === "pieton" && props.param === "sens")
     );
 
     // Définition des listes initiales
