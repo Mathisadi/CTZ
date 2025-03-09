@@ -77,6 +77,8 @@ export default {
             return storeDepart.nom;
           } else if (props.param === "cycle") {
             return storeDepart.cycle;
+          } else if (props.param === "densite") {
+            return storeDepart.densite;
           } else if (props.param === "proba-gauche") {
             return storeDepart.proba_gauche;
           } else if (props.param === "proba-droite") {
@@ -148,6 +150,8 @@ export default {
             storeDepart.nom = newValue;
           } else if (props.param === "cycle") {
             storeDepart.cycle = newValue;
+          } else if (props.param === "densite") {
+            storeDepart.densite = newValue;
           } else if (props.param === "proba-gauche") {
             storeDepart.proba_gauche = newValue;
           } else if (props.param === "proba-droite") {

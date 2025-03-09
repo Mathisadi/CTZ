@@ -15,7 +15,6 @@ export default {
   },
   setup() {
     const departStore = departSettings();
-    console.log(departStore.type);
     return {
       departStore
     };
@@ -47,38 +46,44 @@ export default {
         <!-- Dropdown -->
         <Dropbox :type="'depart'" :param="'type'" />
       </div>
+      <!-- Densite -->
+      <div class="parametre">
+        <p class="nom-parametre">Densité</p>
+        <!-- Input -->
+        <Input :type="'depart'" :param="'densite'" />
+      </div>
       <!-- Proba de touner à gauche  -->
-      <div v-if="departStore.type === 'Voiture'" class="parametre">
+      <div v-if="departStore.type_depart === 'Voiture'" class="parametre">
         <p class="nom-parametre">Proba dir gauche</p>
         <!-- Input -->
         <Input :type="'depart'" :param="'proba-gauche'" />
       </div>
       <!-- Proba de touner à droite  -->
-      <div v-if="departStore.type === 'Voiture'" class="parametre">
+      <div v-if="departStore.type_depart === 'Voiture'" class="parametre">
         <p class="nom-parametre">Proba dir droite</p>
         <!-- Input -->
         <Input :type="'depart'" :param="'proba-droite'" />
       </div>
       <!-- Proba de tourner en bas -->
-      <div v-if="departStore.type === 'Voiture'" class="parametre">
+      <div v-if="departStore.type_depart === 'Voiture'" class="parametre">
         <p class="nom-parametre">Proba dir bas</p>
         <!-- Input -->
         <Input :type="'depart'" :param="'proba-bas'" />
       </div>
       <!-- Proba de tourner en haut -->
-      <div v-if="departStore.type === 'Voiture'" class="parametre">
+      <div v-if="departStore.type_depart === 'Voiture'" class="parametre">
         <p class="nom-parametre">Proba dir haut</p>
         <!-- Input -->
         <Input :type="'depart'" :param="'proba-haut'" />
       </div>
       <!-- Cycle si piéton  -->
-      <div v-if="departStore.type === 'Piéton'" class="parametre">
+      <div v-if="departStore.type_depart === 'Piéton'" class="parametre">
         <p class="nom-parametre">Cycle</p>
         <!-- Input -->
         <Input :type="'depart'" :param="'cycle'" />
       </div>
       <!-- Etat si piéton -->
-      <div class="parametre">
+      <div v-if="departStore.type_depart === 'Piéton'" class="parametre">
         <p class="nom-parametre">Etat initial</p>
         <!-- Dropdown -->
         <Dropbox :type="'depart'" :param="'etat'" />

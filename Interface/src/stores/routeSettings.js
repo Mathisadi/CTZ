@@ -17,10 +17,10 @@ export const routeSettigns = defineStore(
       return (
         (nom.value != "") &
         (longeur.value != 0) &
-        (proba_gauche.value +
-          proba_droite.value +
-          proba_bas.value +
-          proba_haut.value ==
+        (Number(proba_gauche.value) +
+          Number(proba_droite.value) +
+          Number(proba_bas.value) +
+          Number(proba_haut.value) ===
           1)
       );
     };

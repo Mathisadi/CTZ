@@ -58,7 +58,7 @@ export default {
     <div
       v-for="(cell, index) in infoCell"
       :key="index"
-      @click="storeCell.majCell(index), console.log(cell.nom), console.log(cell.sens)"
+      @click="storeCell.majCell(index)"
       :style="{ backgroundColor: cell.color }"
       class="cases"
     > {{ cell.nom }} <Arrow_sens :sens="cell.sens" /></div>
