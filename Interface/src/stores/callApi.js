@@ -68,12 +68,10 @@ export const callApi = defineStore("callApi", () => {
   async function callApi(index) {
     // Le path
     const path = apiRoutes(index);
-    console.log(path);
     // La data
     const data = cellInfo();
 
     const responseData = ref(null);
-    console.log(data)
     try {
       const response = await fetch(path, {
         method: "POST",
