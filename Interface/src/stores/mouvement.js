@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { grid } from "./grid";
+import { grid } from "./gridProps";
 
 export const mouvement = defineStore("mouvement", () => {
   // store

@@ -37,6 +37,7 @@ export const routeSettigns = defineStore(
 
     const getRouteSettings = () => {
       return {
+        "type": "route",
         "nom": nom.value,
         "sens": sens_route.value,
         "proba_g": proba_gauche.value,
