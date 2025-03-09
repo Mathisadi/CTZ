@@ -3,13 +3,16 @@
     <button @click="getResponse">Obtenir la réponse</button>
     <!-- Affiche la réponse formatée -->
     <pre>{{ responseData }}</pre>
+    <button @click="clear">Maj</button>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { grid } from "@/stores/gridProps.js";
 
 const responseData = ref(null);
+const storeCell = grid()
 
 const data = {
   type: "route",
@@ -38,4 +41,7 @@ const getResponse = async () => {
   }
 };
 
+const clear = () => {
+  storeCell.clear();
+}
 </script>

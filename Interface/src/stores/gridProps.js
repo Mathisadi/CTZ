@@ -21,11 +21,20 @@ export const grid = defineStore("grid", () => {
     Array.from({ length: rows.value * cols.value }, () => ({
       color: "#222831",
       nom: "",
-      dir: "",
+      sens: "",
     }))
   );
 
-  return { cols, rows, width_grid, height_grid, updateTaille, infoCell };
+  // clear le tableau
+  const clear = () => {
+    infoCell.value = Array.from({ length: rows.value * cols.value }, () => ({
+      color: "#222831",
+      nom: "",
+      sens: "",
+    }));
+  };
+
+  return { cols, rows, width_grid, height_grid, updateTaille, infoCell, clear };
 },
 {
   persist: true,
