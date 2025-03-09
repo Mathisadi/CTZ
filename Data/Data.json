@@ -4,13 +4,13 @@
             "item_id": 3,
             "info": {
                 "type": "route",
-                "nom": "route",
-                "len": 100.0,
-                "sens": 1,
-                "proba_g": 0,
-                "proba_d": 1,
-                "proba_b": 0,
-                "proba_h": 0
+                "nom": "test",
+                "sens": "test",
+                "proba_g": 0.5,
+                "proba_d": 0.5,
+                "proba_b": 0.5,
+                "proba_h": 0.5,
+                "len": 100.0
             }
         },
         {
@@ -24,6 +24,19 @@
                 "proba_d": 1,
                 "proba_b": 0,
                 "proba_h": 0
+            }
+        },
+        {
+            "item_id": 5203,
+            "info": {
+                "type": "route",
+                "nom": "a",
+                "sens": 1,
+                "proba_g": 0.0,
+                "proba_d": 0.0,
+                "proba_b": 0.0,
+                "proba_h": 1.0,
+                "len": 1.0
             }
         }
     ]
