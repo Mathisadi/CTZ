@@ -15,7 +15,7 @@ def test_est_dans_data(item_id, chemin_fichier):
 
 
 # Fonction qui édite le fichier data.json
-def update_data(item_id, info, chemin_fichier="./Var/Data.json"):
+def update_data(item_id, info, chemin_fichier="../Data/Data.json"):
     # Si l'élément est dans le fichier json on le modifie
     if test_est_dans_data(item_id, chemin_fichier):
         with open(chemin_fichier, "r", encoding="utf-8") as f:
