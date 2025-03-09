@@ -26,4 +26,8 @@ export const grid = defineStore("grid", () => {
   );
 
   return { cols, rows, width_grid, height_grid, updateTaille, infoCell };
-});
+},
+{
+  persist: true,
+}
+);
