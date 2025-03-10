@@ -365,6 +365,4 @@ ani = FuncAnimation(
     repeat=False,
 )
 
-
-# Afficher l'animation
-plt.show()
+ani.save("./Interface/src/res/animation.mp4", writer="ffmpeg", fps=4)
