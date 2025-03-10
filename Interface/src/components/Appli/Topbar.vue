@@ -3,6 +3,8 @@ import { useRoute } from "vue-router";
 import More from "../Icons/More.vue";
 import Choix_mode from "./Choix_mode.vue";
 import { toogleChoix } from "@/stores/toogleChoix";
+import { paramSettings } from "@/stores/paramSettings";
+import { toRef } from "vue";
 
 export default {
   components: {
@@ -10,12 +12,19 @@ export default {
     Choix_mode,
   },
   setup() {
+    // On exporte le store
     const buttonName = useRoute().name;
     const store = toogleChoix();
 
+    // On trouve le nom du projet
+    const storeParam = paramSettings();
+    const nom_projet = toRef(storeParam, "nom_projet");
+
+
     return { 
       buttonName,
-      store
+      store,
+      nom_projet
     };
   }
 }
@@ -24,7 +33,7 @@ export default {
 <template>
   <div class="topbar">
     <h1>CTZ</h1>
-    <h2>| ... Project path</h2>
+    <h2>| {{ nom_projet }}</h2>
     <button class="mode" @click="store.toggle">{{ buttonName }}<More /></button>
   </div>
   <Choix_mode v-if="store.choixVisible"/>
