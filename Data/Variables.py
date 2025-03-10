@@ -13,4 +13,4 @@ def lecture_variables():
 # Variables globales
 route_etude, trafic_etude, direction_etude = lecture_variables()
 
-duree = 1000
+duree = 300
