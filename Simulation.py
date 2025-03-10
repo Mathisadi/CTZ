@@ -365,4 +365,4 @@ ani = FuncAnimation(
     repeat=False,
 )
 
-ani.save("./Interface/src/res/animation.mp4", writer="ffmpeg", fps=4)
+ani.save("/Interface/src/res/animation.mp4", writer="ffmpeg", fps=4)

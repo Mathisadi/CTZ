@@ -262,7 +262,7 @@ def update_direction_intersection():
     route_etude = direction_intersection(route_etude)
     data["route"] = route_etude
     
-    res = {"variables": {"route": route_etude, "trafic": data["trafic"], "direction": data["direction"]}}
+    res = {"variables": {"route": route_etude, "trafic": data["trafic"], "direction": data["direction"], "isSimu":False}}
         
     formatted_json = custom_json_dumps(res, current_indent=0, indent_step=4)
 
