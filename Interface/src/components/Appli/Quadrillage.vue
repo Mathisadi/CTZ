@@ -3,6 +3,8 @@
 import { grid } from "@/stores/gridProps.js";
 import { updateCell } from "@/stores/updateCell";
 import { mouvement } from "@/stores/mouvement.js";
+import { useRoute } from "vue-router";
+import { computed } from "vue";
 
 import Arrow_sens from "../Icons/Arrow_sens.vue";
 
@@ -16,6 +18,11 @@ export default {
     const storeGrid = grid();
     const storeCell = updateCell();
 
+    // Récupérer la route courante
+    const route = useRoute();
+    // Vérifier si nous sommes sur la page édition (adaptez la condition selon votre configuration de routes)
+    const isEditionPage = computed(() => route.name === "Edition");
+
     // Constante grille
     const cols = storeGrid.cols;
     const rows = storeGrid.rows;
@@ -27,6 +34,14 @@ export default {
     const onDrag = dragStore.onDrag;
     const endDrag = dragStore.endDrag;
     const offset = dragStore.offset;
+
+    // Mise à jour des cellules
+    const handleMajCell = (index) => {
+      if (isEditionPage.value) {
+        storeCell.majCell(index);
+      }
+    };
+
     
     return {
       cols,
@@ -36,7 +51,8 @@ export default {
       onDrag,
       endDrag,
       storeCell,
-      infoCell
+      infoCell,
+      handleMajCell
     };
   },
 };
@@ -58,7 +74,7 @@ export default {
     <div
       v-for="(cell, index) in infoCell"
       :key="index"
-      @click="storeCell.majCell(index)"
+      @click="handleMajCell(index)"
       :style="{ backgroundColor: cell.color }"
       class="cases"
     > {{ cell.nom }} <Arrow_sens :sens="cell.sens" /></div>
