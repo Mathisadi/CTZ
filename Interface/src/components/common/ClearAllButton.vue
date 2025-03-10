@@ -1,4 +1,5 @@
 <script>
+import { grid } from "@/stores/gridProps.js";
 import { routeSettigns } from "@/stores/routeSettings";
 import { intersectionSettings } from "@/stores/intersectionSettings";
 import { feuSettings } from "@/stores/feuSettings";
@@ -8,9 +9,9 @@ import { departSettings } from "@/stores/departSettings";
 import { finSettings } from "@/stores/finSettings";
 
 export default {
-  props: ["type"],
-  setup(props) {
+  setup() {
     // Stores
+    const storeGrid = grid();
     const storeRoute = routeSettigns();
     const storeIntersection = intersectionSettings();
     const storeFeu = feuSettings();
@@ -20,21 +21,14 @@ export default {
     const storeFin = finSettings();
 
     const clear = () => {
-      if (props.type === "route") {
-        storeRoute.clear();
-      } else if (props.type === "intersection") {
-        storeIntersection.clear();
-      } else if (props.type === "feu") {
-        storeFeu.clear();
-      } else if (props.type === "priorite") {
-        storePriorite.clear();
-      } else if (props.type === "pieton") {
-        storePieton.clear();
-      } else if (props.type === "depart") {
-        storeDepart.clear();
-      } else if (props.type === "fin") {
-        storeFin.clear();
-      }
+      storeGrid.clear();
+      storeRoute.clear();
+      storeIntersection.clear();
+      storeFeu.clear();
+      storePriorite.clear();
+      storePieton.clear();
+      storeDepart.clear();
+      storeFin.clear();
     }
 
     return {
@@ -45,7 +39,7 @@ export default {
 </script>
 
 <template>
-  <button class="button-clear" @click="clear"> Clear </button>
+  <button class="button-clear" @click="clear"> Clear All</button>
 </template>
 
 <style scoped>
@@ -55,7 +49,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 30px;
-  background-color: var(--color-title);
+  background-color: #AE7676;
   color: var(--color-text);
   font-size: 12px;
   font-weight: 400;
