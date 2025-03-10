@@ -1,11 +1,11 @@
 <script>
-import Dropbox from "../common/Dropbox.vue";
 import Input from "../common/Input.vue";
+import ClearAllButton from "../common/ClearAllButton.vue";
 
 export default {
   components: {
-    Dropbox,
-    Input
+    Input,
+    ClearAllButton
   },
 };
 </script>
@@ -13,51 +13,17 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <p>Paramètres Route</p>
+      <p>Paramètres Projet</p>
     </div>
     <div class="parametre-container">
       <!-- Nom de la route -->
       <div class="parametre">
         <p class="nom-parametre">Nom</p>
         <!-- Input -->
-        <Input :type="'route'" :param="'nom'" />
+        <Input :type="'param'" :param="'nom'" />
       </div>
-      <!-- Sens de la route -->
-      <div class="parametre">
-        <p class="nom-parametre">Sens</p>
-        <!-- Dropdown -->
-        <Dropbox :type="'route'" :param="'sens'" />
-      </div>
-      <!-- Proba de touner à gauche  -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir gauche</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-gauche'" />
-      </div>
-      <!-- Proba de touner à droite  -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir droite</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-droite'" />
-      </div>
-      <!-- Proba de tourner en bas -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir bas</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-bas'" />
-      </div>
-      <!-- Proba de tourner en haut -->
-      <div class="parametre">
-        <p class="nom-parametre">Proba dir haut</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'proba-haut'" />
-      </div>
-      <!-- Longeur de la route -->
-      <div class="parametre">
-        <p class="nom-parametre">Longueur de la route</p>
-        <!-- Input -->
-        <Input :type="'route'" :param="'len'" />
-      </div>
+      <!-- Bouton clear -->
+      <ClearAllButton />
     </div>
   </div>
 </template>

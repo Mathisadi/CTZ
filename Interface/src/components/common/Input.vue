@@ -6,6 +6,7 @@ import { prioriteSettings } from "@/stores/prioriteSettings";
 import { pietonSettings } from "@/stores/pietonSettings";
 import { departSettings } from "@/stores/departSettings";
 import { finSettings } from "@/stores/finSettings";
+import { paramSettings } from "@/stores/paramSettings";
 
 import { computed } from "vue";
 
@@ -20,6 +21,7 @@ export default {
     const storePieton = pietonSettings();
     const storeDepart = departSettings();
     const storeFin = finSettings();
+    const storeParam = paramSettings();
 
     // Fonction qui renvoie le bon élément en fonction des props
     const selectedValue = computed({
@@ -91,6 +93,10 @@ export default {
         } else if (props.type === "fin") {
           if (props.param === "nom") {
             return storeFin.nom;
+          }
+        } else if (props.type === "param") {
+          if (props.param === "nom") {
+            return storeParam.nom_projet;
           }
         }
 
@@ -164,6 +170,10 @@ export default {
         } else if (props.type === "fin") {
           if (props.param === "nom") {
             storeFin.nom = newValue;
+          }
+        } else if (props.type === "param") {
+          if (props.param === "nom") {
+            storeParam.nom_projet = newValue;
           }
         }
       },
