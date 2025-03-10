@@ -4,7 +4,7 @@ import { grid } from "@/stores/gridProps.js";
 import { updateCell } from "@/stores/updateCell";
 import { mouvement } from "@/stores/mouvement.js";
 import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { computed, toRefs } from "vue";
 
 import Arrow_sens from "../Icons/Arrow_sens.vue";
 
@@ -24,9 +24,7 @@ export default {
     const isEditionPage = computed(() => route.name === "Edition");
 
     // Constante grille
-    const cols = storeGrid.cols;
-    const rows = storeGrid.rows;
-    const infoCell = storeGrid.infoCell;
+    const { cols, rows, infoCell } = toRefs(storeGrid);
 
     // Drag
     const dragStore = mouvement();
