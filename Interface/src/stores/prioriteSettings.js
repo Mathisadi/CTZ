@@ -39,7 +39,7 @@ export const prioriteSettings = defineStore(
 
     const getPrioriteSettings = () => {
       return {
-        type: "Priorité",
+        type: "Priorite",
         nom: nom.value,
         sens: sens_route.value,
         proba_g: Number(proba_gauche.value),

@@ -353,7 +353,7 @@ def regle_circulation(route, direction, trafic, x, y):
         return regle_intersection(route, direction, trafic, x, y)
     elif type_route == "Feu":
         return regle_feu(route, trafic, x, y)
-    elif type_route == "Priorité":
+    elif type_route == "Priorite":
         return regle_priorite(route, direction, x, y)
 
 def changement_bloc(route, direction, trafic):

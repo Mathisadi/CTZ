@@ -8,7 +8,7 @@ def create_value(element):
     info = element["info"]
     type = info["type"]
 
-    if type in ["Route", "Priorité", "Feu", "Depart"]:
+    if type in ["Route", "Priorite", "Feu", "Depart"]:
         t = [
             info["proba_g"],
             info["proba_b"],

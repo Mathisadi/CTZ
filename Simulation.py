@@ -128,7 +128,7 @@ def simulation(frame, ax, route, direction, trafic, n_rows, n_cols):
                 )
 
             # Si c'est une priorité
-            elif elm[0] == "Priorité":
+            elif elm[0] == "Priorite":
                 # Pleine
                 if value == [1]:
                     ax.add_patch(
@@ -364,6 +364,7 @@ ani = FuncAnimation(
     fargs=(ax, route_etude, direction_etude, trafic_etude),
     repeat=False,
 )
+
 
 # Afficher l'animation
 plt.show()

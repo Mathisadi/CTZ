@@ -25,7 +25,7 @@ def create_priorite_value(element):
     # On récupère les infos
     info = element["info"]
 
-    return ["Priorité", info["sens"]]
+    return ["Priorite", info["sens"]]
 
 # On crée un fonction qui crée la value du départ à partir d'un element de data
 def create_depart_value(element):
@@ -63,7 +63,7 @@ def create_value(element):
         return create_intersection_value(element)
     elif type == "Feux":
         return create_feu_value(element)
-    elif type == "Priorité":
+    elif type == "Priorite":
         return create_priorite_value(element)
     elif type == "Depart":
         return create_depart_value(element)
