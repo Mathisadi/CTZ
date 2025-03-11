@@ -16,7 +16,7 @@ def clear_data():
     init_route = {"route" : []}
     init_trafic = {"trafic" : []}
     init_direction = {"direction" : []}
-    init_variable = {"variables" : []}
+    init_variable = {"variables" : {"route":[],"trafic":[],"direction":[]}}
     
     # On écrit ça dans chaque JSON
     with open(data_path, "w", encoding="utf-8") as f:
@@ -44,4 +44,5 @@ def clear_res():
         os.remove(res_path)
 
         
-        
+clear_data()
+clear_res()
