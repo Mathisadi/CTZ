@@ -23,9 +23,9 @@ export default {
 
 <template>
     <div class="choix_mode">
-        <RouterLink to ="/appli/edition" class="mode" @click="modeStore.toggle"><Edit />Edition</RouterLink>
-        <RouterLink to ="/appli/simulation" class="mode" @click="modeStore.toggle"><Start />Simulation</RouterLink>
-        <RouterLink to ="/appli/lecture" class="mode" @click="modeStore.toggle"><Eye />Lecture</RouterLink>
+        <RouterLink to ="/edition" class="mode" @click="modeStore.toggle"><Edit />Edition</RouterLink>
+        <RouterLink to ="/simulation" class="mode" @click="modeStore.toggle"><Start />Simulation</RouterLink>
+        <RouterLink to ="/lecture" class="mode" @click="modeStore.toggle"><Eye />Lecture</RouterLink>
     </div>
 </template>
 
