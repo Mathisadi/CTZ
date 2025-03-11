@@ -24,7 +24,8 @@ export default {
     const isEditionPage = computed(() => route.name === "Edition");
 
     // Constante grille
-    const { cols, rows, infoCell } = toRefs(storeGrid);
+    const  { cols, rows } = toRefs(storeGrid);
+    const { infoCell } = toRefs(storeGrid);
 
     // Drag
     const dragStore = mouvement();

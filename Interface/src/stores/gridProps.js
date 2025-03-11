@@ -25,6 +25,15 @@ export const grid = defineStore("grid", () => {
     }))
   );
 
+  function clear_info(){
+    // On clear le tableau de la page
+    infoCell.value = Array.from({ length: rows.value * cols.value }, () => ({
+      color: "#222831",
+      nom: "",
+      sens: "",
+    }));
+  }
+
   // clear le tableau
   async function clear() {
     // Le path
@@ -38,12 +47,7 @@ export const grid = defineStore("grid", () => {
       // Réponse
       const result = await response.json();
       
-      // On clear le tableau de la page
-      infoCell.value = Array.from({ length: rows.value * cols.value }, () => ({
-        color: "#222831",
-        nom: "",
-        sens: "",
-      }));
+      clear_info()
 
     } catch (error) {
       console.error("Erreur:", error);

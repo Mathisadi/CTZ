@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { toRef } from "vue"
 
 import { callApi } from "./callApi";
 import { errorMessages } from "./errorMessages";
@@ -29,31 +30,30 @@ export const updateCell = defineStore("updateCell", () => {
   const toolbarStore = toolbarInteraction();
 
   // Constante de la grille
-  const cells = storeGrid.infoCell;
+  const cells = toRef(storeGrid, "infoCell");
 
   const change_name_sens = (index) => {
     if (toolbarStore.isRouteToogle) {
-      cells[index].nom = storeRoute.nom;
-      cells[index].sens = storeRoute.sens_route;
-      console.log(storeRoute.nom);
+      cells.value[index].nom = storeRoute.nom;
+      cells.value[index].sens = storeRoute.sens_route;
     } else if (toolbarStore.isIntersectionToogle) {
-      cells[index].nom = storeIntersection.nom;
-      cells[index].sens = storeIntersection.sens_route;
+      cells.value[index].nom = storeIntersection.nom;
+      cells.value[index].sens = storeIntersection.sens_route;
     } else if (toolbarStore.isFeuToogle) {
-      cells[index].nom = storeFeu.nom;
-      cells[index].sens = storeFeu.sens_route;
+      cells.value[index].nom = storeFeu.nom;
+      cells.value[index].sens = storeFeu.sens_route;
     } else if (toolbarStore.isPrioriteToogle) {
-      cells[index].nom = storePriorite.nom;
-      cells[index].sens = storePriorite.sens_route;
+      cells.value[index].nom = storePriorite.nom;
+      cells.value[index].sens = storePriorite.sens_route;
     } else if (toolbarStore.isDepartToogle) {
-      cells[index].nom = storeDepart.nom;
-      cells[index].sens = storeDepart.sens_route;
+      cells.value[index].nom = storeDepart.nom;
+      cells.value[index].sens = storeDepart.sens_route;
     } else if (toolbarStore.isFinToogle) {
-      cells[index].nom = storeFin.nom;
-      cells[index].sens = storeFin.sens_route;
+      cells.value[index].nom = storeFin.nom;
+      cells.value[index].sens = storeFin.sens_route;
     } else if (toolbarStore.isPietonToogle) {
-      cells[index].nom = storePieton.nom;
-      cells[index].sens = storePieton.sens_route;
+      cells.value[index].nom = storePieton.nom;
+      cells.value[index].sens = storePieton.sens_route;
     }
   };
 
@@ -68,31 +68,31 @@ export const updateCell = defineStore("updateCell", () => {
 
   const change_color = (index) => {
     if (toolbarStore.isRouteToogle) {
-      cells[index].color = color_route;
+      cells.value[index].color = color_route;
     }
 
     if (toolbarStore.isIntersectionToogle) {
-      cells[index].color = color_intersection;
+      cells.value[index].color = color_intersection;
     }
 
     if (toolbarStore.isFeuToogle) {
-      cells[index].color = color_feu;
+      cells.value[index].color = color_feu;
     }
 
     if (toolbarStore.isPrioriteToogle) {
-      cells[index].color = color_priorite;
+      cells.value[index].color = color_priorite;
     }
 
     if (toolbarStore.isDepartToogle) {
-      cells[index].color = color_depart;
+      cells.value[index].color = color_depart;
     }
 
     if (toolbarStore.isFinToogle) {
-      cells[index].color = color_fin;
+      cells.value[index].color = color_fin;
     }
 
     if (toolbarStore.isPietonToogle) {
-      cells[index].color = color_pieton;
+      cells.value[index].color = color_pieton;
     }
   };
 
