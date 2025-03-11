@@ -1,18 +1,30 @@
 <script>
 import { defineComponent } from "vue";
 import Topbar from "@/components/Appli/Topbar.vue";
-import Video from "@/components/common/Video.vue";
+import Video from "@/components/Simu/Video.vue";
+import Generate from "@/components/Simu/Generate.vue";
+
+import { simulation } from "@/stores/simulation";
 
 export default defineComponent({
   components: {
     Topbar,
     Video,
+    Generate
+  },
+  setup() {
+    return {
+      store: simulation(),
+    };
   },
 });
 </script>
 
 <template>
-  <div class="main_container"><Video /></div>
+  <div class="main_container">
+    <Video v-if="store.isSimu" />
+    <Generate v-else />
+  </div>
   <div class="topbar-container"><Topbar /></div>
 </template>
 
