@@ -26,14 +26,30 @@ export const grid = defineStore("grid", () => {
   );
 
   // clear le tableau
-  const clear = () => {
-    infoCell.value = Array.from({ length: rows.value * cols.value }, () => ({
-      color: "#222831",
-      nom: "",
-      sens: "",
-    }));
-  };
+  async function clear() {
+    // Le path
+    const path = "/api/clearData";
 
+    try {
+      const response = await fetch(path, {
+        method: "post",
+      });
+
+      // Réponse
+      const result = await response.json();
+      
+      // On clear le tableau de la page
+      infoCell.value = Array.from({ length: rows.value * cols.value }, () => ({
+        color: "#222831",
+        nom: "",
+        sens: "",
+      }));
+
+    } catch (error) {
+      console.error("Erreur:", error);
+    }
+  }
+  
   return { cols, rows, width_grid, height_grid, updateTaille, infoCell, clear };
 },
 {
