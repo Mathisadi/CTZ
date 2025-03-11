@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.animation import FuncAnimation
 import numpy as np
+import os
 
 # Objectif : Faire une simulation
 
@@ -350,19 +351,23 @@ def update(frame, ax, route, direction, trafic):
     # Appeler la fonction de simulation pour mettre à jour le graphique
     simulation(frame, ax, route, direction, trafic, n_rows, n_cols)
 
+def create_animation(route=route_etude, direction=direction_etude, trafic=trafic_etude, temps=duree):
+    # Initialisation de la simulation
+    fig, ax = plt.subplots()
 
-# Initialisation de la simulation
-fig, ax = plt.subplots()
-n_rows = len(trafic_etude)
-n_cols = len(trafic_etude[0])
+    # Créer l'animation
+    ani = FuncAnimation(
+        fig,
+        update,
+        frames=range(1, temps + 1),
+        fargs=(ax, route_etude, direction_etude, trafic_etude),
+        repeat=False,
+    )
+    
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    res_path = os.path.abspath(os.path.join(current_dir, "..", "Interface", "src", "res", "animation.mp4"))
+    
+    ani.save(res_path, writer="ffmpeg", fps=4)
 
-# Créer l'animation
-ani = FuncAnimation(
-    fig,
-    update,
-    frames=range(1, duree + 1),
-    fargs=(ax, route_etude, direction_etude, trafic_etude),
-    repeat=False,
-)
-
-ani.save("/Interface/src/res/animation.mp4", writer="ffmpeg", fps=4)
