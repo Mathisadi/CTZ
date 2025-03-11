@@ -1,5 +1,8 @@
 # Ce fichier à pour but de répertorier toute les fonctions utiles pour le main
 import json
+import os
+
+
 
 
 # Fonction qui vérifie que l'on a pas déjà l'élément dans le fichier json
@@ -15,7 +18,12 @@ def test_est_dans_data(item_id, chemin_fichier):
 
 
 # Fonction qui édite le fichier data.json
-def update_data(item_id, info, chemin_fichier="../Data/Data.json"):
+def update_data(item_id, info):
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    chemin_fichier = os.path.abspath(os.path.join(current_dir, "..", "Data", "Data.json"))
+    
     # Si l'élément est dans le fichier json on le modifie
     if test_est_dans_data(item_id, chemin_fichier):
         with open(chemin_fichier, "r", encoding="utf-8") as f:

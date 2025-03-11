@@ -3,6 +3,7 @@
 
 import copy
 import json
+import os
 
 def dfs(route, pos_i, pos_j, visited, inter):
 
@@ -255,7 +256,12 @@ def custom_json_dumps(obj, current_indent=0, indent_step=4):
         return json.dumps(obj)
 
 def update_direction_intersection():
-    with open("./Data/Variables.json", "r") as f:
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    variable_path = os.path.abspath(os.path.join(current_dir, "..", "Variables.json"))
+    
+    with open(variable_path, "r") as f:
         data = json.load(f)["variables"]
         
     route_etude = data["route"]
@@ -266,5 +272,5 @@ def update_direction_intersection():
         
     formatted_json = custom_json_dumps(res, current_indent=0, indent_step=4)
 
-    with open("./Data/Variables.json", "w", encoding="utf-8") as f:
+    with open(variable_path, "w", encoding="utf-8") as f:
         f.write(formatted_json)

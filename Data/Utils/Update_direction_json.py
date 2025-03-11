@@ -1,6 +1,6 @@
 import json
 import re
-
+import os
 
 # On crée une fonction qui prend un élément et qui crée la value
 def create_value(element):
@@ -23,15 +23,20 @@ def create_value(element):
 
 # On à pour but de créer les json route trafic et direction
 def update_direction_json():
-    with open("./Data/Data.json", "r", encoding="utf-8") as f:
+    # Path
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
+    direction_path = os.path.abspath(os.path.join(current_dir, "..", "Direction.json"))
+    
+    with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    res = {"route": []}
+    res = {"direction": []}
 
     for item in data["data"]:
         item_id = item["item_id"]
         value = create_value(item)
-        res["route"].append({"item_id": item_id, "value": value})
+        res["direction"].append({"item_id": item_id, "value": value})
 
     # Sérialiser avec indentation
     json_str = json.dumps(res, ensure_ascii=False, indent=4)
@@ -55,5 +60,5 @@ def update_direction_json():
     # Appliquer le remplacement sur l'ensemble du JSON sérialisé
     json_str = pattern.sub(repl, json_str)
     
-    with open("./Data/Direction.json", "w", encoding="utf-8") as f:
+    with open(direction_path, "w", encoding="utf-8") as f:
         f.write(json_str)

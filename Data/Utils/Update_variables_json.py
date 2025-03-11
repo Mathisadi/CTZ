@@ -1,5 +1,5 @@
 import json
-import re
+import os
 
 def trouve_pos_index(data):
     
@@ -34,16 +34,23 @@ def trouve_dimension(dict):
 
 # On écrit une fonction qui crée la matrice de la route
 def create_matrice(data):
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    route_path = os.path.abspath(os.path.join(current_dir, "..", "Route.json"))
+    trafic_path = os.path.abspath(os.path.join(current_dir, "..", "Trafic.json"))
+    direction_path = os.path.abspath(os.path.join(current_dir, "..", "Direction.json"))
+    
     # On lit les datas de la route
-    with open("./Data/Route.json", "r", encoding="utf-8") as f:
+    with open(route_path, "r", encoding="utf-8") as f:
         data_route = json.load(f)
     
     # On lit les datas du trafic
-    with open("./Data/Trafic.json", "r", encoding="utf-8") as f:
+    with open(trafic_path, "r", encoding="utf-8") as f:
         data_trafic = json.load(f)
     
     # On lit les datas de la direction
-    with open("./Data/Direction.json", "r", encoding="utf-8") as f:
+    with open(direction_path, "r", encoding="utf-8") as f:
         data_direction = json.load(f)      
     
     # On trouve les pos des index
@@ -64,11 +71,11 @@ def create_matrice(data):
             if elm["item_id"] == key:
                 route[pos[key][0]][pos[key][1]] = elm["value"]
 
-        for elm in data_trafic["route"]:
+        for elm in data_trafic["trafic"]:
             if elm["item_id"] == key:
                 trafic[pos[key][0]][pos[key][1]] = elm["value"]
 
-        for elm in data_direction["route"]:
+        for elm in data_direction["direction"]:
             if elm["item_id"] == key:
                 direction[pos[key][0]][pos[key][1]] = elm["value"]
              
@@ -118,7 +125,13 @@ def custom_json_dumps(obj, current_indent=0, indent_step=4):
         return json.dumps(obj)
 
 def update_variables_json():
-    with open("./Data/Data.json", "r", encoding="utf-8") as f:
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
+    variable_path = os.path.abspath(os.path.join(current_dir, "..", "Variables.json"))
+    
+    with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     # La fonction create_matrice doit retourner trois matrices : route, trafic, direction
@@ -127,5 +140,5 @@ def update_variables_json():
 
     formatted_json = custom_json_dumps(res, current_indent=0, indent_step=4)
 
-    with open("./Data/Variables.json", "w", encoding="utf-8") as f:
+    with open(variable_path, "w", encoding="utf-8") as f:
         f.write(formatted_json)

@@ -1,6 +1,6 @@
 import json
 import re
-
+import os
 
 # On crée une fonction qui prend un élément et qui crée la value
 def create_value(element):
@@ -16,15 +16,21 @@ def create_value(element):
 
 # On à pour but de créer les json route trafic et direction
 def update_trafic_json():
-    with open("./Data/Data.json", "r", encoding="utf-8") as f:
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
+    trafic_path = os.path.abspath(os.path.join(current_dir, "..", "Trafic.json"))
+
+    with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    res = {"route": []}
+    res = {"trafic": []}
 
     for item in data["data"]:
         item_id = item["item_id"]
         value = create_value(item)
-        res["route"].append({"item_id": item_id, "value": value})
+        res["trafic"].append({"item_id": item_id, "value": value})
         
     # Sérialisation avec indentation pour une bonne lisibilité
     json_str = json.dumps(res, ensure_ascii=False, indent=4)
@@ -38,5 +44,5 @@ def update_trafic_json():
         flags=re.DOTALL
     )
 
-    with open("./Data/Trafic.json", "w", encoding="utf-8") as f:
+    with open(trafic_path, "w", encoding="utf-8") as f:
         f.write(json_str)

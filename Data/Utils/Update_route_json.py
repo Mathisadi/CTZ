@@ -1,4 +1,5 @@
 import json
+import os
 import re
 
 # On crée un fonction qui crée la value de la route à partir d'un element de data
@@ -76,7 +77,13 @@ def create_value(element):
 
 # On à pour but de créer les json route trafic et direction
 def update_route_json():
-    with open("./Data/Data.json", "r", encoding="utf-8") as f:
+    # Obtenir le dossier courant du fichier
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
+    route_path = os.path.abspath(os.path.join(current_dir, "..", "Route.json"))
+
+    with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     
     res = {"route" :[]}
@@ -98,5 +105,5 @@ def update_route_json():
         flags=re.DOTALL
     )
 
-    with open("./Data/Route.json", "w", encoding="utf-8") as f:
+    with open(route_path, "w", encoding="utf-8") as f:
         f.write(json_str)
