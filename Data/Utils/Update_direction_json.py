@@ -22,14 +22,10 @@ def create_value(element):
 
 
 # On à pour but de créer les json route trafic et direction
-def update_direction_json():
+def update_direction_json(data):
     # Path
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
     direction_path = os.path.abspath(os.path.join(current_dir, "..", "Direction.json"))
-    
-    with open(data_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
 
     res = {"direction": []}
 

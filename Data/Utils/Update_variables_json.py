@@ -124,15 +124,11 @@ def custom_json_dumps(obj, current_indent=0, indent_step=4):
     else:
         return json.dumps(obj)
 
-def update_variables_json():
+def update_variables_json(data):
     # Obtenir le dossier courant du fichier
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # Construire le chemin absolu vers le fichier Variables.json situé dans Data
-    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
     variable_path = os.path.abspath(os.path.join(current_dir, "..", "Variables.json"))
-    
-    with open(data_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
 
     # La fonction create_matrice doit retourner trois matrices : route, trafic, direction
     route, trafic, direction = create_matrice(data)

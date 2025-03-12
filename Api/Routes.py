@@ -10,6 +10,7 @@ from Simulation import *
 
 router = APIRouter()
 
+
 @router.post("/build/{item_id}/route")
 def build_route(item_id: int, data: RouteModel):
     # On récupère les infos du front
@@ -119,21 +120,42 @@ def is_simu():
 
 @router.post("/simulation/launch")
 def launch_simu():
+    # On lit les datas
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data", "Data.json"))
+    with open(data_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
     # On crée le json Variable
-    init_variables_json()
+    init_variables_json(data)
+
+    # On lit les datas pour les remettre à jour
+    # Construire le chemin absolu vers le fichier Variables.json situé dans Data
+    variables_path = os.path.abspath(
+        os.path.join(current_dir, "..", "Data", "Variables.json")
+    )
+
+    with open(variables_path, "r") as f:
+        variables = json.load(f)
+
+    route_etude = variables["variables"]["route"]
+    trafic_etude = variables["variables"]["trafic"]
+    direction_etude = variables["variables"]["direction"]
 
     # On enregistre la simu
-    create_animation()
+    create_animation(route_etude, direction_etude, trafic_etude, 300)
 
     # On modifie la variable isSimu
     # Obtenir le dossier courant du fichier
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # Construire le chemin absolu vers le fichier Variables.json situé dans Data
-    variable_path = os.path.abspath(os.path.join(current_dir, "..", "Data", "Variables.json"))
+    variable_path = os.path.abspath(
+        os.path.join(current_dir, "..", "Data", "Variables.json")
+    )
 
     with open(variable_path, "r") as f:
         data = json.load(f)["variables"]
-    
+
     res = {
         "variables": {
             "route": data["route"],
@@ -150,10 +172,10 @@ def launch_simu():
 
     return {"status": "ok"}
 
+
 @router.post("/clearData")
 def clear_data_back():
     # On lance la fonction
     clear_data()
-    
-    return {"status": "ok"}
 
+    return {"status": "ok"}

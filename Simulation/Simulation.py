@@ -351,7 +351,7 @@ def update(frame, ax, route, direction, trafic):
     # Appeler la fonction de simulation pour mettre à jour le graphique
     simulation(frame, ax, route, direction, trafic, n_rows, n_cols)
 
-def create_animation(route=route_etude, direction=direction_etude, trafic=trafic_etude, temps=duree):
+def create_animation(route_etude, direction_etude, trafic_etude, duree):
     # Initialisation de la simulation
     fig, ax = plt.subplots()
 
@@ -359,7 +359,7 @@ def create_animation(route=route_etude, direction=direction_etude, trafic=trafic
     ani = FuncAnimation(
         fig,
         update,
-        frames=range(1, temps + 1),
+        frames=range(1, duree + 1),
         fargs=(ax, route_etude, direction_etude, trafic_etude),
         repeat=False,
     )
@@ -370,4 +370,3 @@ def create_animation(route=route_etude, direction=direction_etude, trafic=trafic
     res_path = os.path.abspath(os.path.join(current_dir, "..", "Interface", "src", "res", "animation.mp4"))
     
     ani.save(res_path, writer="ffmpeg", fps=4)
-

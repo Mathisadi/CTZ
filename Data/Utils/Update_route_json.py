@@ -18,8 +18,12 @@ def create_intersection_value(element):
 def create_feu_value(element):
     # On récupère les infos
     info = element["info"]
+    
+    # On crée le cycle
+    cycle = info["cycle"]
+    cycle = [int(x) for x in cycle.split("/")]
 
-    return ["Feu", info["sens"], info["cycle"], info["etat"]]
+    return ["Feu", info["sens"], cycle, info["etat"]]
 
 # On crée un fonction qui crée la value de la priorité à partir d'un element de data
 def create_priorite_value(element):
@@ -36,7 +40,11 @@ def create_depart_value(element):
     if info["type"] == "Depart":
         return ["Depart", info["sens"], info["densite"]]
     else:
-        return ["Depart_pieton", info["sens"], info["densite"], info["cycle"], info["etat"]]
+        # On crée le cycle
+        cycle = info["cycle"]
+        cycle = [int(x) for x in cycle.split("/")]
+        
+        return ["Depart_pieton", info["sens"], info["densite"], cycle, info["etat"]]
     
 # On crée une fonction qui crée la value du piéton à partir d'un element de data
 def create_pieton_value(element):
@@ -62,7 +70,7 @@ def create_value(element):
         return create_route_value(element)
     elif type == "Intersection":
         return create_intersection_value(element)
-    elif type == "Feux":
+    elif type == "Feu":
         return create_feu_value(element)
     elif type == "Priorite":
         return create_priorite_value(element)
@@ -76,15 +84,12 @@ def create_value(element):
         return create_arrivee_value(element)
 
 # On à pour but de créer les json route trafic et direction
-def update_route_json():
+def update_route_json(data):
     # Obtenir le dossier courant du fichier
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # Construire le chemin absolu vers le fichier Variables.json situé dans Data
-    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
     route_path = os.path.abspath(os.path.join(current_dir, "..", "Route.json"))
 
-    with open(data_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
     
     res = {"route" :[]}
 

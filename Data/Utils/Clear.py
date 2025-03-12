@@ -42,7 +42,3 @@ def clear_res():
     
     if os.path.exists(res_path):
         os.remove(res_path)
-
-        
-clear_data()
-clear_res()

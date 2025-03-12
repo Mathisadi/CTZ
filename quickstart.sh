@@ -21,15 +21,11 @@ else
 fi
 
 # Construire le chemin complet vers le fichier Python dans le sous-dossier "src"
-PYTHON_FILE="$SCRIPT_DIR/Data/Utils/Clear.py"
+cd "$SCRIPT_DIR"
 
 # Vérifier que le fichier existe
-if [ -f "$PYTHON_FILE" ]; then
-    echo "Lancement du programme Python ($PYTHON_FILE)..."
-    python "$PYTHON_FILE"
-else
-    echo "Erreur : le fichier $PYTHON_FILE n'existe pas."
-fi
+python -c "from Data import *; clear_res()"
+python -c "from Data import *; clear_data()"
 
 # On lance l'API
 cd "$SCRIPT_DIR/Api/"

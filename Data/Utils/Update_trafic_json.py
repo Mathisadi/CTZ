@@ -15,15 +15,11 @@ def create_value(element):
 
 
 # On à pour but de créer les json route trafic et direction
-def update_trafic_json():
+def update_trafic_json(data):
     # Obtenir le dossier courant du fichier
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # Construire le chemin absolu vers le fichier Variables.json situé dans Data
-    data_path = os.path.abspath(os.path.join(current_dir, "..", "Data.json"))
     trafic_path = os.path.abspath(os.path.join(current_dir, "..", "Trafic.json"))
-
-    with open(data_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
 
     res = {"trafic": []}
 
