@@ -1,3 +1,260 @@
 {
-    "data": []
+    "data": [
+        {
+            "item_id": 5406,
+            "info": {
+                "type": "Route",
+                "nom": "aaa",
+                "sens": 2,
+                "proba_g": 0.0,
+                "proba_d": 1.0,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
+                "len": 100.0
+            }
+        },
+        {
+            "item_id": 5405,
+            "info": {
+                "type": "Depart",
+                "nom": "XX",
+                "sens": 2,
+                "densite": 12.0,
+                "proba_g": 0.0,
+                "proba_d": 1.0,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5407,
+            "info": {
+                "type": "Feu",
+                "nom": "11",
+                "sens": 2,
+                "proba_g": 0.0,
+                "proba_d": 0.5,
+                "proba_b": 0.5,
+                "proba_h": 0.0,
+                "cycle": "30",
+                "etat": true
+            }
+        },
+        {
+            "item_id": 5408,
+            "info": {
+                "type": "Intersection",
+                "nom": "QQ",
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5307,
+            "info": {
+                "type": "Intersection",
+                "nom": "QQ",
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5308,
+            "info": {
+                "type": "Intersection",
+                "nom": "QQ",
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5409,
+            "info": {
+                "type": "Intersection",
+                "nom": "QQ",
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5509,
+            "info": {
+                "type": "Route",
+                "nom": "QQ",
+                "sens": 1,
+                "proba_g": 0.0,
+                "proba_d": 0.0,
+                "proba_b": 1.0,
+                "proba_h": 0.0,
+                "len": 4.0
+            }
+        },
+        {
+            "item_id": 5510,
+            "info": {
+                "type": "Feu",
+                "nom": "DD",
+                "sens": 3,
+                "proba_g": 0.5,
+                "proba_d": 0.5,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
+                "cycle": "30",
+                "etat": false
+            }
+        },
+        {
+            "item_id": 5611,
+            "info": {
+                "type": "Route",
+                "nom": "DDD",
+                "sens": 3,
+                "proba_g": 0.0,
+                "proba_d": 0.0,
+                "proba_b": 0.0,
+                "proba_h": 1.0,
+                "len": 50.0
+            }
+        },
+        {
+            "item_id": 5610,
+            "info": {
+                "type": "Route",
+                "nom": "11",
+                "sens": 1,
+                "proba_g": 0.0,
+                "proba_d": 0.0,
+                "proba_b": 1.0,
+                "proba_h": 0.0,
+                "len": 50.0
+            }
+        },
+        {
+            "item_id": 5711,
+            "info": {
+                "type": "Pieton",
+                "nom": "DD",
+                "sens": [
+                    0,
+                    2
+                ],
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5712,
+            "info": {
+                "type": "Pieton",
+                "nom": "DD",
+                "sens": [
+                    0,
+                    2
+                ],
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5710,
+            "info": {
+                "type": "Depart_pieton",
+                "nom": "AAA",
+                "sens": 2,
+                "densite": 10.0,
+                "cycle": "99999",
+                "etat": true,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5713,
+            "info": {
+                "type": "Depart_pieton",
+                "nom": "GGG",
+                "sens": 0,
+                "densite": 12.0,
+                "cycle": "9999",
+                "etat": true,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5812,
+            "info": {
+                "type": "Fin",
+                "nom": "FF",
+                "sens": 1,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5813,
+            "info": {
+                "type": "Depart",
+                "nom": "SSS",
+                "sens": 3,
+                "densite": 12.0,
+                "proba_g": 0.0,
+                "proba_d": 0.0,
+                "proba_b": 0.0,
+                "proba_h": 1.0,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5410,
+            "info": {
+                "type": "Fin",
+                "nom": "FF",
+                "sens": 2,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5306,
+            "info": {
+                "type": "Fin",
+                "nom": "GG",
+                "sens": 0,
+                "len": 1.0
+            }
+        },
+        {
+            "item_id": 5309,
+            "info": {
+                "type": "Feu",
+                "nom": "CDD",
+                "sens": 0,
+                "proba_g": 0.5,
+                "proba_d": 0.0,
+                "proba_b": 0.5,
+                "proba_h": 0.0,
+                "cycle": "30",
+                "etat": true
+            }
+        },
+        {
+            "item_id": 5310,
+            "info": {
+                "type": "Route",
+                "nom": "SS",
+                "sens": 0,
+                "proba_g": 1.0,
+                "proba_d": 0.0,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
+                "len": 100.0
+            }
+        },
+        {
+            "item_id": 5311,
+            "info": {
+                "type": "Depart",
+                "nom": "ff",
+                "sens": 0,
+                "densite": 12.0,
+                "proba_g": 1.0,
+                "proba_d": 0.0,
+                "proba_b": 0.0,
+                "proba_h": 0.0,
+                "len": 1.0
+            }
+        }
+    ]
 }

@@ -68,3 +68,6 @@ dist/
 mypy_cache/
 coverage/
 scrapy_doctests.*
+
+# Tous les fichier json
+*.json
